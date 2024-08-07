@@ -1,3 +1,7 @@
+using MauiApp1.Scripts;
+using Microsoft.Maui.ApplicationModel;
+using System.Text;
+
 namespace MauiApp1;
 
 public partial class PhotoPage : ContentPage, IFlowButtonHolder
@@ -19,25 +23,15 @@ public partial class PhotoPage : ContentPage, IFlowButtonHolder
 
     private async void OnTakePhotoClick(object sender, EventArgs e)
     {
-        await TakePhoto();
-    }
-
-    private async Task TakePhoto()
-    {
         try
         {
-            var photo = await MediaPicker.CapturePhotoAsync();
-
-            if (photo != null)
-            {
-                var stream = await photo.OpenReadAsync();
-                photoResultImage.Source = ImageSource.FromStream(() => stream);
-                Console.WriteLine(photo.FileName);
-            }
+#if ANDROID
+            await MainApplication.TakePhoto();
+#endif
         }
-        catch (Exception ex)
+        catch(Exception) 
         {
-            await DisplayAlert("Error", $"Can't take photo: {ex.Message}", "OK");
+            await DisplayAlert("Error", $"Nie mo¿na wykonaæ zdjêcia! Upewnij siê czy aplikacja ma uprawnienia do robienia zdjêæ", "OK");
         }
     }
 }
