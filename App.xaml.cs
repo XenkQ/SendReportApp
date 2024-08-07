@@ -1,4 +1,6 @@
-﻿namespace MauiApp1;
+﻿using System.Reflection;
+
+namespace MauiApp1;
 
 public partial class App : Application
 {
@@ -6,6 +8,20 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new AppShell();
+        MainPage = new MainPage();
+    }
+
+    public void LoadPage(Pages page)
+    {
+        var pageTypeFullName = GetType().Namespace + $".{page.GetPageName()}";
+        var pageType = Assembly.GetExecutingAssembly().GetType(pageTypeFullName);
+
+        if (pageType == null)
+            throw new NullReferenceException($"Page type {pageType} is not exisitng");
+
+        var newPage = (Page)Activator.CreateInstance(pageType)!;
+
+        if(newPage != null)
+            MainPage = newPage;
     }
 }

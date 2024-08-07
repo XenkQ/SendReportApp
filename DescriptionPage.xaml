@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp1.DescriptionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="DescriptionPage">
+
+    <ScrollView VerticalOptions="Fill">
+        <Grid RowSpacing="15" VerticalOptions="Fill">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                BackgroundColor="{StaticResource My_DarkBlue}"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Zgłoszenie"
+                TextColor="White"
+                WidthRequest="-1" />
+
+            <Frame
+                Grid.Row="1"
+                Margin="8,0"
+                BorderColor="{StaticResource My_Orange}">
+                <Label Text="(Opcjonalne) Możesz dodać opis zgłoszenia, który pomoże w sprawnej definicji problemu i przyśpieszy jego realizację. Twój opis nie może mieć więcej niż 1000 znaków." TextColor="{StaticResource My_Orange}" />
+            </Frame>
+
+            <Editor
+                Grid.Row="2"
+                Margin="8,0"
+                AutoSize="TextChanges"
+                HorizontalOptions="FillAndExpand"
+                MaxLength="1000"
+                Placeholder="(kliknij na ten napis aby zacząć pisać)"
+                VerticalOptions="FillAndExpand" />
+
+            <Button
+                x:Name="SendBtn"
+                Grid.Row="3"
+                Margin="8,0"
+                BackgroundColor="{StaticResource My_Orange}"
+                Clicked="OnSendButtonClick"
+                FontAttributes="Bold"
+                FontSize="16"
+                SemanticProperties.Hint="Sending data to api after verification"
+                Text="Wyślij Zgłoszenie" />
+
+            <HorizontalStackLayout
+                Grid.Row="4"
+                Margin="5"
+                HorizontalOptions="Center"
+                Spacing="10">
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+            </HorizontalStackLayout>
+
+
+            <Grid
+                Grid.Row="5"
+                Margin="8,0,8,10"
+                ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Name="BackBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Clicked="OnBackButtonClick"
+                    SemanticProperties.Hint="Going Back To Last Page"
+                    Style="{StaticResource FlowButton}"
+                    Text="Cofnij" />
+
+                <Button
+                    x:Name="NextBtn"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    IsEnabled="False"
+                    SemanticProperties.Hint="Next Page if exists"
+                    Style="{StaticResource FlowButton}"
+                    Text="Dalej" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

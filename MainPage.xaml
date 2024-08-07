@@ -1,153 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.MainPage">
+<ContentPage
+    x:Class="MauiApp1.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <ScrollView>
         <VerticalStackLayout Spacing="15">
 
             <Label
-                Text="Zgłoszenie"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" 
                 BackgroundColor="{StaticResource My_DarkBlue}"
-                TextColor="White"
-                HorizontalTextAlignment="Center"
                 HeightRequest="50"
-                WidthRequest="-1"
-                HorizontalOptions="FillAndExpand"/>
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Zgłoszenie"
+                TextColor="White"
+                WidthRequest="-1" />
 
-            <VerticalStackLayout
-                Margin="5, 0"
-                Spacing="15">
+            <VerticalStackLayout Margin="5,0" Spacing="15">
 
-                <Frame 
-                    BorderColor="{StaticResource My_Orange}"
-                    Margin="25, 0, 25, 0">
-                    <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia"
-                           TextColor="{StaticResource My_Orange}"/>
+                <Frame Margin="8,0" BorderColor="{StaticResource My_Orange}">
+                    <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
                 </Frame>
 
                 <VerticalStackLayout>
-                    <Frame
-                        Style="{StaticResource CategoryFrame}">
-                        <Label
-                            Text="Infrastruktura"
-                            Style="{StaticResource CategoryLabel}"/>
+                    <Frame Style="{StaticResource CategoryFrame}">
+                        <Label Style="{StaticResource CategoryLabel}" Text="Infrastruktura" />
                     </Frame>
-                    <Frame
-                        Margin="30,0">
+                    <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Uszkodzonie infrastruktury" GroupName="Kategoria"/>
-                            <RadioButton Content="Złe znaki drogowe" GroupName="Kategoria"/>
-                            <RadioButton Content="Uszkodzona jezdnia" GroupName="Kategoria"/>
-                            <RadioButton Content="Wandalizm" GroupName="Kategoria"/>
+                            <RadioButton Content="Uszkodzonie infrastruktury" GroupName="Kategoria" />
+                            <RadioButton Content="Złe znaki drogowe" GroupName="Kategoria" />
+                            <RadioButton Content="Uszkodzona jezdnia" GroupName="Kategoria" />
+                            <RadioButton Content="Wandalizm" GroupName="Kategoria" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
-                    <Frame
-                        Style="{StaticResource CategoryFrame}">
-                        <Label
-                            Text="Bezpieczeństwo"
-                            Style="{StaticResource CategoryLabel}"/>
+                    <Frame Style="{StaticResource CategoryFrame}">
+                        <Label Style="{StaticResource CategoryLabel}" Text="Bezpieczeństwo" />
                     </Frame>
-                    <Frame
-                        Margin="30,0">
+                    <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Niezabezpieczone otoczenie" GroupName="Kategoria"/>
-                            <RadioButton Content="Niebezpieczeństwo dla osób niepełnosprawnych" GroupName="Kategoria"/>
-                            <RadioButton Content="Inne niebezpieczeństwa" GroupName="Kategoria"/>
+                            <RadioButton Content="Niezabezpieczone otoczenie" GroupName="Kategoria" />
+                            <RadioButton Content="Niebezpieczeństwo dla osób niepełnosprawnych" GroupName="Kategoria" />
+                            <RadioButton Content="Inne niebezpieczeństwa" GroupName="Kategoria" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout>
-                    <Frame
-                        Style="{StaticResource CategoryFrame}">
-                        <Label
-                            Text="Przyroda"
-                            Style="{StaticResource CategoryLabel}"/>
+                    <Frame Style="{StaticResource CategoryFrame}">
+                        <Label Style="{StaticResource CategoryLabel}" Text="Przyroda" />
                     </Frame>
-                    <Frame
-                        Margin="30,0">
+                    <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Martwe zwierzę" GroupName="Kategoria"/>
-                            <RadioButton Content="Porzucone śmieci" GroupName="Kategoria"/>
-                            <RadioButton Content="Spalanie śmieci" GroupName="Kategoria"/>
-                            <RadioButton Content="Dewastacja przyrody" GroupName="Kategoria"/>
+                            <RadioButton Content="Martwe zwierzę" GroupName="Kategoria" />
+                            <RadioButton Content="Porzucone śmieci" GroupName="Kategoria" />
+                            <RadioButton Content="Spalanie śmieci" GroupName="Kategoria" />
+                            <RadioButton Content="Dewastacja przyrody" GroupName="Kategoria" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout
-                    Spacing="10"
                     Margin="5"
-                    HorizontalOptions="Center">
-                    <Frame Style="{StaticResource CircleFrame}" Background="{StaticResource My_Yellow}"/>
+                    HorizontalOptions="Center"
+                    Spacing="10">
+                    <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                     <Frame Style="{StaticResource CircleFrame}" />
                     <Frame Style="{StaticResource CircleFrame}" />
                 </HorizontalStackLayout>
 
-                <Grid
-                    ColumnSpacing="10"
-                    Margin="8,0,8,10">
+                <Grid Margin="8,0,8,10" ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button
                         x:Name="BackBtn"
-                        Text="Cofnij"
-                        SemanticProperties.Hint="Sending data after verification"
-                        Clicked="OnNextButtonClick"
-                        FontSize="16"
-                        FontAttributes="Bold"
                         Grid.Column="0"
-                        BackgroundColor="{StaticResource My_DarkBlue}"/>
+                        IsEnabled="False"
+                        SemanticProperties.Hint="Going Back To Last Page"
+                        Style="{StaticResource FlowButton}"
+                        Text="Cofnij" />
 
                     <Button
-                        x:Name="SendBtn"
-                        Text="Dalej"
-                        SemanticProperties.Hint="Sending data after verification"
-                        Clicked="OnNextButtonClick"
-                        FontSize="16"
-                        HorizontalOptions="FillAndExpand"
-                        FontAttributes="Bold"
+                        x:Name="NextBtn"
                         Grid.Column="1"
-                        BackgroundColor="{StaticResource My_DarkBlue}"/>
+                        Clicked="OnNextButtonClick"
+                        SemanticProperties.Hint="Next Page if exists"
+                        Style="{StaticResource FlowButton}"
+                        Text="Dalej" />
                 </Grid>
-
-
             </VerticalStackLayout>
-
-            <!--<Editor Placeholder="Maksymalnie 500 znaków"
-        AutoSize="TextChanges"
-        VerticalOptions="FillAndExpand"
-        MaxLength="500"
-        HorizontalOptions="FillAndExpand"
-        HeightRequest="200"/>
-
-    <Image x:Name="photoResultImage"
-        WidthRequest="300"
-        HeightRequest="300"
-        Aspect="AspectFill" />
-
-    <Button
-        x:Name="TakePhotoBtn"
-        Text="Zrób Zdjęcie"
-        SemanticProperties.Hint="Opening camera to take a photo"
-        Clicked="OnTakePhotoClick"
-        HorizontalOptions="Fill" />
-
-    <Button
-        x:Name="SendBtn"
-        Text="Wyślij Zgłoszenie"
-        SemanticProperties.Hint="Sending data after verification"
-        Clicked="OnSendButtonClick"
-        HorizontalOptions="Fill" />-->
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

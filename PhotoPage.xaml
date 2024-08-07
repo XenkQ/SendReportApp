@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp1.PhotoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="PhotoPage">
+
+    <ScrollView VerticalOptions="Fill">
+        <Grid RowSpacing="15" VerticalOptions="Fill">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label
+                Grid.Row="0"
+                BackgroundColor="{StaticResource My_DarkBlue}"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Zgłoszenie"
+                TextColor="White"
+                WidthRequest="-1" />
+
+            <Frame
+                Grid.Row="1"
+                Margin="8,0"
+                BorderColor="{StaticResource My_Orange}">
+                <Label Text="Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację." TextColor="{StaticResource My_Orange}" />
+            </Frame>
+
+            <Image
+                x:Name="photoResultImage"
+                Grid.Row="2"
+                Margin="8,0"
+                Aspect="AspectFill" />
+
+            <Button
+                x:Name="TakePhotoBtn"
+                Grid.Row="3"
+                Margin="8,0"
+                BackgroundColor="{StaticResource My_Green}"
+                Clicked="OnTakePhotoClick"
+                FontAttributes="Bold"
+                FontSize="16"
+                SemanticProperties.Hint="Opening camera to take a photo"
+                Text="Zrób Zdjęcie" />
+
+            <HorizontalStackLayout
+                Grid.Row="4"
+                Margin="5"
+                HorizontalOptions="Center"
+                Spacing="10">
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
+            </HorizontalStackLayout>
+
+
+            <Grid
+                Grid.Row="5"
+                Margin="8,0,8,10"
+                ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Name="BackBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Clicked="OnBackButtonClick"
+                    SemanticProperties.Hint="Going Back To Last Page"
+                    Style="{StaticResource FlowButton}"
+                    Text="Cofnij" />
+
+                <Button
+                    x:Name="NextBtn"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="OnNextButtonClick"
+                    SemanticProperties.Hint="Next Page if exists"
+                    Style="{StaticResource FlowButton}"
+                    Text="Dalej" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>
