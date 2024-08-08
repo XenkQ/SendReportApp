@@ -1,4 +1,4 @@
-﻿namespace MauiApp1
+﻿namespace MauiApp1.Scripts
 {
     internal interface IFlowNextButtonHolder
     {

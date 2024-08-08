@@ -1,6 +1,4 @@
 using MauiApp1.Scripts;
-using Microsoft.Maui.ApplicationModel;
-using System.Text;
 
 #if ANDROID
 using Android.Graphics;
@@ -44,7 +42,7 @@ public partial class PhotoPage : ContentPage, IFlowButtonHolder, IMustPrepareAft
                 featuredPhotoPath = photoFile.FullPath;
                 SetFeaturePhoto(featuredPhotoPath);
 #if ANDROID
-                string base64image = await Platforms.Android.ImageManipulator.GetImageAsBase64(photoFile, Bitmap.CompressFormat.Webp, 100);
+                string base64image = await Platforms.Android.ImageManipulator.GetImageAsBase64(featuredPhotoPath, Bitmap.CompressFormat.Webp, 100);
                 Console.WriteLine(base64image);
 #endif
             }

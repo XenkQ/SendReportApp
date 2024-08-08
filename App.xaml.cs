@@ -6,6 +6,7 @@ namespace MauiApp1;
 public partial class App : Application
 {
     private Dictionary<Pages, Page> _pages;
+    public ISendDataHoldable UserDataToSend;
 
     public App()
     {
@@ -14,6 +15,8 @@ public partial class App : Application
         _pages = new Dictionary<Pages, Page>();
 
         CreatePagesOnStart();
+
+        UserDataToSend = new SendDataHolder();
 
         MainPage = new MainPage();
     }

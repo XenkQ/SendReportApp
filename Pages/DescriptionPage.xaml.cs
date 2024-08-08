@@ -1,4 +1,3 @@
-
 using MauiApp1.Scripts;
 
 namespace MauiApp1;
