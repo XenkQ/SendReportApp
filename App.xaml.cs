@@ -1,17 +1,30 @@
-﻿using System.Reflection;
+﻿using MauiApp1.Scripts;
+using System.Reflection;
 
 namespace MauiApp1;
 
 public partial class App : Application
 {
+    private Dictionary<Pages, Page> _pages;
+
     public App()
     {
         InitializeComponent();
 
+        _pages = new Dictionary<Pages, Page>();
+
+        CreatePagesOnStart();
+
         MainPage = new MainPage();
     }
 
-    public void LoadPage(Pages page)
+    private void CreatePagesOnStart()
+    {
+        foreach (Pages page in Enum.GetValues(typeof(Pages)))
+            _pages.Add(page, CreatePage(page)!);
+    }
+
+    private Page? CreatePage(Pages page)
     {
         var pageTypeFullName = GetType().Namespace + $".{page.GetPageName()}";
         var pageType = Assembly.GetExecutingAssembly().GetType(pageTypeFullName);
@@ -19,9 +32,14 @@ public partial class App : Application
         if (pageType == null)
             throw new NullReferenceException($"Page type {pageType} is not exisitng");
 
-        var newPage = (Page)Activator.CreateInstance(pageType)!;
+        return (Page)Activator.CreateInstance(pageType)!;
+    }
 
-        if(newPage != null)
-            MainPage = newPage;
+    public void LoadPage(Pages page)
+    {
+        MainPage = _pages[page];
+
+        if(MainPage is IMustPrepareAfterLoad)
+            ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
     }
 }

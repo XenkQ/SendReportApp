@@ -12,7 +12,7 @@ public partial class DescriptionPage : ContentPage, IFlowBackButtonsHolder
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        ((App)Application.Current).LoadPage(Pages.PhotoPage);
+        ((App)Application.Current!).LoadPage(Pages.PhotoPage);
     }
 
     private void OnSendButtonClick(object sender, EventArgs e)
