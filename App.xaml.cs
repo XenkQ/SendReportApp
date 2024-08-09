@@ -3,12 +3,13 @@ using System.Reflection;
 
 namespace MauiApp1;
 
-public partial class App : Application
+public partial class App : Application, IApp
 {
     private Dictionary<Pages, Page> _pages;
-    public ISendDataHoldable UserDataToSend;
 
-    public App()
+    public ISendDataHoldable UserDataToSend { get; private set; }
+
+    public App(ISendDataHoldable userDataToSend)
     {
         InitializeComponent();
 
@@ -16,9 +17,9 @@ public partial class App : Application
 
         CreatePagesOnStart();
 
-        UserDataToSend = new SendDataHolder();
+        UserDataToSend = userDataToSend;
 
-        MainPage = new MainPage();
+        MainPage = CreatePage(Pages.MainPage);
     }
 
     private void CreatePagesOnStart()
@@ -35,14 +36,14 @@ public partial class App : Application
         if (pageType == null)
             throw new NullReferenceException($"Page type {pageType} is not exisitng");
 
-        return (Page)Activator.CreateInstance(pageType)!;
+        return (Page)Activator.CreateInstance(pageType, this)!;
     }
 
     public void LoadPage(Pages page)
     {
         MainPage = _pages[page];
 
-        if(MainPage is IMustPrepareAfterLoad)
+        if (MainPage is IMustPrepareAfterLoad)
             ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
     }
 }

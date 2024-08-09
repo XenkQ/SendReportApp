@@ -8,27 +8,31 @@ namespace MauiApp1;
 
 public partial class PhotoPage : ContentPage, IFlowButtonHolder, IMustPrepareAfterLoad
 {
-    private static string? featuredPhotoPath = null;
+    private readonly IApp _app;
+    private static string? _featuredPhotoPath = null;
+    private string _base64Image;
 
-	public PhotoPage()
+	public PhotoPage(IApp app)
 	{
 		InitializeComponent();
+        _app = app;
 	}
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        ((App)Application.Current!).LoadPage(Pages.MainPage);
+        _app.LoadPage(Pages.MainPage);
     }
 
     public void OnNextButtonClick(object sender, EventArgs e)
     {
-        ((App)Application.Current!).LoadPage(Pages.DescriptionPage);
+        _app.UserDataToSend.Base64Image = _base64Image;
+        _app.LoadPage(Pages.DescriptionPage);
     }
 
     public void PrepareAfterLoad()
     {
-        if(featuredPhotoPath != null)
-            SetFeaturePhoto(featuredPhotoPath);
+        if(_featuredPhotoPath != null)
+            SetFeaturePhoto(_featuredPhotoPath);
     }
 
     private async void OnTakePhotoClick(object sender, EventArgs e)
@@ -39,11 +43,11 @@ public partial class PhotoPage : ContentPage, IFlowButtonHolder, IMustPrepareAft
 
             if (photoFile != null)
             {
-                featuredPhotoPath = photoFile.FullPath;
-                SetFeaturePhoto(featuredPhotoPath);
+                _featuredPhotoPath = photoFile.FullPath;
+                SetFeaturePhoto(_featuredPhotoPath);
 #if ANDROID
-                string base64image = await Platforms.Android.ImageManipulator.GetImageAsBase64(featuredPhotoPath, Bitmap.CompressFormat.Webp, 100);
-                Console.WriteLine(base64image);
+                _base64Image = await Platforms.Android.ImageManipulator.GetImageResizedImageAsBase64(
+                    _featuredPhotoPath, Bitmap.CompressFormat.Webp, 100);
 #endif
             }
         }

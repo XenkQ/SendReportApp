@@ -4,18 +4,20 @@ namespace MauiApp1;
 
 public partial class DescriptionPage : ContentPage, IFlowBackButtonsHolder
 {
-	public DescriptionPage()
+    private readonly IApp _app;
+    public DescriptionPage(IApp app)
 	{
 		InitializeComponent();
+        _app = app;
 	}
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        ((App)Application.Current!).LoadPage(Pages.PhotoPage);
+        _app.LoadPage(Pages.PhotoPage);
     }
 
     private void OnSendButtonClick(object sender, EventArgs e)
     {
-
+        
     }
 }

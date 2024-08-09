@@ -4,13 +4,16 @@ namespace MauiApp1;
 
 public partial class MainPage : ContentPage, IFlowNextButtonHolder
 {
-    public MainPage()
+    private readonly IApp _app;
+
+    public MainPage(IApp app)
     {
         InitializeComponent();
+        _app = app;
     }
 
     public void OnNextButtonClick(object sender, EventArgs e)
     {
-        ((App)Application.Current!).LoadPage(Pages.PhotoPage);
+        _app.LoadPage(Pages.PhotoPage);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiApp1.Scripts;
+using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
 
@@ -7,8 +8,9 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
         builder
-            .UseMauiApp<App>()
+            .UseMauiApp(serviceProvider => new App(new SendDataHolder()))
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

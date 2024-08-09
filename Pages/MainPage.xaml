@@ -30,7 +30,10 @@
                     </Frame>
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Uszkodzonie infrastruktury" GroupName="Kategoria" />
+                            <RadioButton
+                                Content="Uszkodzonie infrastruktury"
+                                GroupName="Kategoria"
+                                Style="{StaticResource }" />
                             <RadioButton Content="Złe znaki drogowe" GroupName="Kategoria" />
                             <RadioButton Content="Uszkodzona jezdnia" GroupName="Kategoria" />
                             <RadioButton Content="Wandalizm" GroupName="Kategoria" />

@@ -9,7 +9,7 @@ namespace MauiApp1.Platforms.Android
 
         public static async Task<string> GetImageAsBase64(string path, Bitmap.CompressFormat compression, int quality = 100)
         {
-            var bitmap = await BitmapFactory.DecodeFileAsync(path);
+            var bitmap = await GetBitmapFromPath(path);
 
             return GetCompressedBitmapInBase64(bitmap, compression, quality);
         }
