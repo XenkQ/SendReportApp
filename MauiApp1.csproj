@@ -100,8 +100,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\MainPage.xaml.cs">
-	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  <Compile Update="Pages\CategoryPage.xaml.cs">
+	    <DependentUpon>CategoryPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

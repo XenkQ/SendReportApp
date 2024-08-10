@@ -6,7 +6,7 @@ using Android.Graphics;
 
 namespace MauiApp1;
 
-public partial class PhotoPage : ContentPage, IFlowButtonHolder, IMustPrepareAfterLoad
+public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepareAfterLoad
 {
     private readonly IApp _app;
     private static string? _featuredPhotoPath = null;
@@ -18,15 +18,10 @@ public partial class PhotoPage : ContentPage, IFlowButtonHolder, IMustPrepareAft
         _app = app;
 	}
 
-    public void OnBackButtonClick(object sender, EventArgs e)
-    {
-        _app.LoadPage(Pages.MainPage);
-    }
-
     public void OnNextButtonClick(object sender, EventArgs e)
     {
         _app.UserDataToSend.Base64Image = _base64Image;
-        _app.LoadPage(Pages.DescriptionPage);
+        _app.LoadPage(Pages.CategoryPage);
     }
 
     public void PrepareAfterLoad()

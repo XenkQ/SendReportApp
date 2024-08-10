@@ -62,7 +62,7 @@
                 HorizontalOptions="Center"
                 Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
                 <Frame Style="{StaticResource CircleFrame}" />
             </HorizontalStackLayout>
 
@@ -80,8 +80,8 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Clicked="OnBackButtonClick"
                     SemanticProperties.Hint="Going Back To Last Page"
+                    IsEnabled="False"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.MainPage"
+    x:Class="MauiApp1.CategoryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -73,7 +73,7 @@
                     HorizontalOptions="Center"
                     Spacing="10">
                     <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                    <Frame Style="{StaticResource CircleFrame}" />
+                    <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                     <Frame Style="{StaticResource CircleFrame}" />
                 </HorizontalStackLayout>
 
@@ -85,8 +85,9 @@
 
                     <Button
                         x:Name="BackBtn"
+                        Grid.Row="0"
                         Grid.Column="0"
-                        IsEnabled="False"
+                        Clicked="OnBackButtonClick"
                         SemanticProperties.Hint="Going Back To Last Page"
                         Style="{StaticResource FlowButton}"
                         Text="Cofnij" />

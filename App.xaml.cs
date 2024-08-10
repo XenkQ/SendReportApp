@@ -19,7 +19,7 @@ public partial class App : Application, IApp
 
         UserDataToSend = userDataToSend;
 
-        MainPage = CreatePage(Pages.MainPage);
+        MainPage = CreatePage(Pages.PhotoPage);
     }
 
     private void CreatePagesOnStart()
@@ -30,7 +30,7 @@ public partial class App : Application, IApp
 
     private Page? CreatePage(Pages page)
     {
-        var pageTypeFullName = GetType().Namespace + $".{page.GetPageName()}";
+        var pageTypeFullName = GetType().Namespace + $".{page}";
         var pageType = Assembly.GetExecutingAssembly().GetType(pageTypeFullName);
 
         if (pageType == null)
