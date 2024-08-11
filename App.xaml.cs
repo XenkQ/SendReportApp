@@ -16,6 +16,10 @@ public partial class App : Application, IApp
         IDataSender dataSender)
     {
         InitializeComponent();
+
+        //Currently only light theme available
+        UserAppTheme = AppTheme.Light;
+
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
         _startPageCreator = startPageCreator;
