@@ -1,4 +1,4 @@
-﻿namespace MauiApp1;
+﻿namespace MauiApp1.AppPages;
 
 public enum Pages
 {

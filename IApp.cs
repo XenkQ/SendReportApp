@@ -1,10 +1,11 @@
-﻿using MauiApp1.Scripts;
+﻿using MauiApp1.AppPages;
+using MauiApp1.Data.Storing;
 
 namespace MauiApp1
 {
     public interface IApp
     {
-        void LoadPage(Pages page);
         ISendDataHoldable UserDataToSend { get; }
+        void LoadPage(Pages page);
     }
 }

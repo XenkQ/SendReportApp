@@ -1,4 +1,6 @@
-﻿using MauiApp1.Scripts;
+﻿using MauiApp1.AppPages;
+using MauiApp1.Data.Sending;
+using MauiApp1.Data.Storing;
 using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
@@ -10,7 +12,11 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
 
         builder
-            .UseMauiApp(serviceProvider => new App(new SendDataHolder()))
+            .UseMauiApp(serviceProvider => new App(
+                new PageCreator(),
+                new SendDataHolder(),
+                new DataSender()
+            ))
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -18,7 +24,7 @@ public static class MauiProgram
             });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

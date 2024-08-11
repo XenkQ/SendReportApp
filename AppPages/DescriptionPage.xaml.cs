@@ -1,10 +1,12 @@
-using MauiApp1.Scripts;
+using MauiApp1.AppPages;
+using MauiApp1.GUI.FlowButtons;
 
 namespace MauiApp1;
 
 public partial class DescriptionPage : ContentPage, IFlowBackButtonsHolder
 {
     private readonly IApp _app;
+
     public DescriptionPage(IApp app)
 	{
 		InitializeComponent();

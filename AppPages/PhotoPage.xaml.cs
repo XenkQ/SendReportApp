@@ -1,4 +1,7 @@
-using MauiApp1.Scripts;
+using MauiApp1.GUI.FlowButtons;
+using MauiApp1.AppPages;
+
+
 
 #if ANDROID
 using Android.Graphics;
@@ -9,8 +12,8 @@ namespace MauiApp1;
 public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepareAfterLoad
 {
     private readonly IApp _app;
-    private static string? _featuredPhotoPath = null;
-    private string _base64Image;
+    private string _featuredPhotoPath = "";
+    private string _base64Image = "";
 
 	public PhotoPage(IApp app)
 	{
@@ -26,7 +29,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
 
     public void PrepareAfterLoad()
     {
-        if(_featuredPhotoPath != null)
+        if(_featuredPhotoPath != "")
             SetFeaturePhoto(_featuredPhotoPath);
     }
 

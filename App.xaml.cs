@@ -1,42 +1,27 @@
-﻿using MauiApp1.Scripts;
-using System.Reflection;
+﻿using MauiApp1.AppPages;
+using MauiApp1.Data.Sending;
+using MauiApp1.Data.Storing;
+using System.Collections.ObjectModel;
 
 namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
-    private Dictionary<Pages, Page> _pages;
-
+    private ReadOnlyDictionary<Pages, Page> _pages;
     public ISendDataHoldable UserDataToSend { get; private set; }
+    private readonly IDataSender _dataSender;
+    private readonly IStartPageCreator _startPageCreator;
 
-    public App(ISendDataHoldable userDataToSend)
+    public App(IStartPageCreator startPageCreator, ISendDataHoldable userDataToSend,
+        IDataSender dataSender)
     {
         InitializeComponent();
-
-        _pages = new Dictionary<Pages, Page>();
-
-        CreatePagesOnStart();
-
         UserDataToSend = userDataToSend;
+        _dataSender = dataSender;
+        _startPageCreator = startPageCreator;
 
-        MainPage = CreatePage(Pages.PhotoPage);
-    }
-
-    private void CreatePagesOnStart()
-    {
-        foreach (Pages page in Enum.GetValues(typeof(Pages)))
-            _pages.Add(page, CreatePage(page)!);
-    }
-
-    private Page? CreatePage(Pages page)
-    {
-        var pageTypeFullName = GetType().Namespace + $".{page}";
-        var pageType = Assembly.GetExecutingAssembly().GetType(pageTypeFullName);
-
-        if (pageType == null)
-            throw new NullReferenceException($"Page type {pageType} is not exisitng");
-
-        return (Page)Activator.CreateInstance(pageType, this)!;
+        _pages = _startPageCreator.CreatePagesOnStart(this);
+        MainPage = _pages[Pages.PhotoPage];
     }
 
     public void LoadPage(Pages page)

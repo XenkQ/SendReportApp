@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.Scripts
+﻿namespace MauiApp1.Data.Storing
 {
     internal class SendDataHolder : ISendDataHoldable
     {
@@ -15,7 +15,8 @@
             Base64Image = "";
         }
 
-        public SendDataHolder(string imei, string wiadomosc, string localization, string base64Image)
+        public SendDataHolder(string imei, string wiadomosc,
+            string localization, string base64Image)
         {
             IMEI = imei;
             Message = wiadomosc;

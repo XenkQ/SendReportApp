@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.Scripts
+﻿namespace MauiApp1.Data.Storing
 {
     public interface ISendDataHoldable
     {
