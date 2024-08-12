@@ -1,7 +1,5 @@
 ﻿using MauiApp1.AppPages;
 using MauiApp1.GUI.FlowButtons;
-using static Android.Graphics.Paint;
-using static Android.Provider.MediaStore.Audio;
 
 namespace MauiApp1;
 
@@ -9,6 +7,7 @@ namespace MauiApp1;
 public partial class CategoryPage : ContentPage, IFlowButtonHolder
 {
     private readonly IApp _app;
+    private Categories? _userCategorChoice;
 
     public CategoryPage(IApp app)
     {
@@ -18,11 +17,32 @@ public partial class CategoryPage : ContentPage, IFlowButtonHolder
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
+        
         _app.LoadPage(Pages.PhotoPage);
     }
 
-    public void OnNextButtonClick(object sender, EventArgs e)
+    public async void OnNextButtonClick(object sender, EventArgs e)
     {
-        _app.LoadPage(Pages.DescriptionPage);
+        if(_userCategorChoice != null)
+        {
+            _app.UserDataToSend.Category = (int)_userCategorChoice;
+            _app.LoadPage(Pages.DescriptionPage);
+        }
+        else
+        {
+            await DisplayAlert("Nie wybrano kategorii!", "Wybierz kategorię najlepiej pasującą do zgłoszenia.", "OK");
+        }
+    }
+
+    private void OnCategoryChange(object sender, EventArgs e)
+    {
+        var radioButton = sender as RadioButton;
+
+        if (radioButton == null) 
+            throw new ArgumentException("Sender is not of object type");
+
+        int categoryAsInt = int.Parse(radioButton.Value.ToString()!);
+
+        _userCategorChoice = (Categories)categoryAsInt;
     }
 }

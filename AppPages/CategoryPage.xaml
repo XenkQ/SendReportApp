@@ -31,20 +31,24 @@
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Uszkodzonie infrastruktury"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="1" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Złe znaki drogowe"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="2" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Uszkodzona jezdnia"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="3" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Wandalizm"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="4" />
                         </VerticalStackLayout>
                     </Frame>
@@ -57,16 +61,19 @@
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Niezabezpieczone otoczenie"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="5" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Niebezpieczeństwo dla osób niepełnosprawnych"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="6" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Inne niebezpieczeństwa"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="7" />
                         </VerticalStackLayout>
                     </Frame>
@@ -79,20 +86,24 @@
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Martwe zwierzę"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="8" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Porzucone śmieci"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="9" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Spalanie śmieci"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="10" />
                             <RadioButton
+                                CheckedChanged="OnCategoryChange"
                                 Content="Dewastacja przyrody"
-                                GroupName="Kategoria"
+                                GroupName="CategoryChoices"
                                 Value="11" />
                         </VerticalStackLayout>
                     </Frame>

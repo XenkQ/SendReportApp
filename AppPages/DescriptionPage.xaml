@@ -40,6 +40,7 @@
             </Frame>
 
             <Editor
+                x:Name="DescriptionField"
                 Grid.Row="2"
                 Margin="8,0"
                 AutoSize="TextChanges"

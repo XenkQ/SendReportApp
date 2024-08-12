@@ -1,7 +1,5 @@
-using MauiApp1.GUI.FlowButtons;
+﻿using MauiApp1.GUI.FlowButtons;
 using MauiApp1.AppPages;
-
-
 
 #if ANDROID
 using Android.Graphics;
@@ -12,8 +10,8 @@ namespace MauiApp1;
 public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepareAfterLoad
 {
     private readonly IApp _app;
-    private string _featuredPhotoPath = "";
-    private string _base64Image = "";
+    private string _featuredPhotoPath = string.Empty;
+    private string _base64Image = string.Empty;
 
 	public PhotoPage(IApp app)
 	{
@@ -21,15 +19,25 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
         _app = app;
 	}
 
-    public void OnNextButtonClick(object sender, EventArgs e)
+    public async void OnNextButtonClick(object sender, EventArgs e)
     {
         _app.UserDataToSend.Base64Image = _base64Image;
         _app.LoadPage(Pages.CategoryPage);
+
+        //if(_base64Image != string.Empty)
+        //{
+        //    _app.UserDataToSend.Base64Image = _base64Image;
+        //    _app.LoadPage(Pages.CategoryPage);
+        //}
+        //else
+        //{
+        //    await DisplayAlert("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
+        //}
     }
 
     public void PrepareAfterLoad()
     {
-        if(_featuredPhotoPath != "")
+        if(_featuredPhotoPath != string.Empty)
             SetFeaturePhoto(_featuredPhotoPath);
     }
 
@@ -51,7 +59,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
         }
         catch(Exception)
         {
-            await DisplayAlert("Error", $"Nie mo�na wykona� zdj�cia! Upewnij si� czy aplikacja ma uprawnienia do robienia zdj��", "OK");
+            await DisplayAlert("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
         }
     }
 

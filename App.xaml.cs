@@ -7,8 +7,8 @@ namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
-    private ReadOnlyDictionary<Pages, Page> _pages;
     public ISendDataHoldable UserDataToSend { get; private set; }
+    private ReadOnlyDictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
     private readonly IStartPageCreator _startPageCreator;
 
