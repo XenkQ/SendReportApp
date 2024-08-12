@@ -80,8 +80,8 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    SemanticProperties.Hint="Going Back To Last Page"
                     IsEnabled="False"
+                    SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
 

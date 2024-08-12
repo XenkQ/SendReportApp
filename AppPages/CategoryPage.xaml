@@ -33,10 +33,19 @@
                             <RadioButton
                                 Content="Uszkodzonie infrastruktury"
                                 GroupName="Kategoria"
-                                Style="{StaticResource }" />
-                            <RadioButton Content="Złe znaki drogowe" GroupName="Kategoria" />
-                            <RadioButton Content="Uszkodzona jezdnia" GroupName="Kategoria" />
-                            <RadioButton Content="Wandalizm" GroupName="Kategoria" />
+                                Value="1" />
+                            <RadioButton
+                                Content="Złe znaki drogowe"
+                                GroupName="Kategoria"
+                                Value="2" />
+                            <RadioButton
+                                Content="Uszkodzona jezdnia"
+                                GroupName="Kategoria"
+                                Value="3" />
+                            <RadioButton
+                                Content="Wandalizm"
+                                GroupName="Kategoria"
+                                Value="4" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
@@ -47,9 +56,18 @@
                     </Frame>
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Niezabezpieczone otoczenie" GroupName="Kategoria" />
-                            <RadioButton Content="Niebezpieczeństwo dla osób niepełnosprawnych" GroupName="Kategoria" />
-                            <RadioButton Content="Inne niebezpieczeństwa" GroupName="Kategoria" />
+                            <RadioButton
+                                Content="Niezabezpieczone otoczenie"
+                                GroupName="Kategoria"
+                                Value="5" />
+                            <RadioButton
+                                Content="Niebezpieczeństwo dla osób niepełnosprawnych"
+                                GroupName="Kategoria"
+                                Value="6" />
+                            <RadioButton
+                                Content="Inne niebezpieczeństwa"
+                                GroupName="Kategoria"
+                                Value="7" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
@@ -60,10 +78,22 @@
                     </Frame>
                     <Frame Margin="30,0">
                         <VerticalStackLayout>
-                            <RadioButton Content="Martwe zwierzę" GroupName="Kategoria" />
-                            <RadioButton Content="Porzucone śmieci" GroupName="Kategoria" />
-                            <RadioButton Content="Spalanie śmieci" GroupName="Kategoria" />
-                            <RadioButton Content="Dewastacja przyrody" GroupName="Kategoria" />
+                            <RadioButton
+                                Content="Martwe zwierzę"
+                                GroupName="Kategoria"
+                                Value="8" />
+                            <RadioButton
+                                Content="Porzucone śmieci"
+                                GroupName="Kategoria"
+                                Value="9" />
+                            <RadioButton
+                                Content="Spalanie śmieci"
+                                GroupName="Kategoria"
+                                Value="10" />
+                            <RadioButton
+                                Content="Dewastacja przyrody"
+                                GroupName="Kategoria"
+                                Value="11" />
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
