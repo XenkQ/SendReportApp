@@ -17,8 +17,13 @@
         <Setter Property="StrokeThickness" Value="1" />
     </Style>
 
-    <Style TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+    <Style x:Key="InfoBorder" TargetType="Border">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Stroke" Value="{StaticResource My_Orange}" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="StrokeShape">
+            <RoundRectangle CornerRadius="16" />
+        </Setter>
     </Style>
 
     <Style TargetType="Button">
@@ -52,6 +57,14 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="BackgroundColor" Value="{StaticResource My_DarkBlue}" />
+        <Setter Property="HeightRequest" Value="60" />
+    </Style>
+
+    <Style x:Key="WideButton" TargetType="Button">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
 
     <Style TargetType="CheckBox">
@@ -169,7 +182,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -202,7 +215,6 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-
     <Style x:Key="CategoryFrame" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource My_LightBlue}" />
         <Setter Property="Padding" Value="10" />
@@ -220,8 +232,8 @@
     </Style>
 
     <Style x:Key="CircleFrame" TargetType="Frame">
-        <Setter Property="WidthRequest" Value="20" />
-        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="WidthRequest" Value="22" />
+        <Setter Property="HeightRequest" Value="22" />
         <Setter Property="CornerRadius" Value="75" />
         <Setter Property="BorderColor" Value="White" />
         <Setter Property="BackgroundColor" Value="{StaticResource Gray100}" />
@@ -276,9 +288,9 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Key=White}, Light={StaticResource Key=Black}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="MinimumHeightRequest" Value="44" />
-        <Setter Property="MinimumWidthRequest" Value="44" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="MinimumWidthRequest" Value="40" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CheckedStates">
@@ -287,9 +299,10 @@
                             <Setter Property="TextColor" Value="White" />
                             <Setter Property="BorderColor" Value="{StaticResource My_Orange}" />
                             <Setter Property="BackgroundColor" Value="{StaticResource My_Orange}" />
-                            <Setter Property="CornerRadius" Value="15" />
+                            <Setter Property="CornerRadius" Value="16" />
                             <Setter Property="FontAttributes" Value="Bold" />
-                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontSize" Value="18" />
+                            <Setter Property="Padding" Value="8" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Unchecked">

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp1.SendingCompletedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SendingCompletedPage">
+    <ScrollView VerticalOptions="Fill">
+        <Grid RowSpacing="15" VerticalOptions="Fill">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Spacing="25" VerticalOptions="CenterAndExpand">
+                <Label
+                    Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="Zgłoszenie zostało wysłane!"
+                    TextColor="Black" />
+
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="200"
+                    Source="check_circle"
+                    WidthRequest="200" />
+            </VerticalStackLayout>
+
+            <Grid
+                Grid.Row="1"
+                Margin="8,0,8,10"
+                ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Name="ExitBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Clicked="OnExitButtonClick"
+                    SemanticProperties.Hint="Going Back To Last Page"
+                    Style="{StaticResource FlowButton}"
+                    Text="Wyjdź" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -8,21 +8,21 @@
         <VerticalStackLayout Spacing="15">
 
             <Label
+                Padding="8"
                 BackgroundColor="{StaticResource My_DarkBlue}"
-                HeightRequest="50"
                 HorizontalOptions="FillAndExpand"
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Zgłoszenie"
+                Text="Kategoria"
                 TextColor="White"
                 WidthRequest="-1" />
 
             <VerticalStackLayout Margin="5,0" Spacing="15">
 
-                <Frame Margin="8,0" BorderColor="{StaticResource My_Orange}">
+                <Border Margin="8,0" Style="{StaticResource InfoBorder}">
                     <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
-                </Frame>
+                </Border>
 
                 <VerticalStackLayout>
                     <Frame Style="{StaticResource CategoryFrame}">

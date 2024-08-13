@@ -4,5 +4,6 @@ public enum Pages
 {
     PhotoPage,
     CategoryPage,
-    DescriptionPage
+    DescriptionPage,
+    SendingCompletedPage
 }

@@ -23,21 +23,22 @@
 
             <Label
                 Grid.Row="0"
+                Padding="8"
                 BackgroundColor="{StaticResource My_DarkBlue}"
                 HorizontalOptions="FillAndExpand"
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Zgłoszenie"
+                Text="Zdjęcie"
                 TextColor="White"
                 WidthRequest="-1" />
 
-            <Frame
+            <Border
                 Grid.Row="1"
                 Margin="8,0"
-                BorderColor="{StaticResource My_Orange}">
+                Style="{StaticResource InfoBorder}">
                 <Label Text="Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację." TextColor="{StaticResource My_Orange}" />
-            </Frame>
+            </Border>
 
             <Image
                 x:Name="photoResultImage"
@@ -45,19 +46,8 @@
                 Margin="8,0"
                 Aspect="AspectFill" />
 
-            <Button
-                x:Name="TakePhotoBtn"
-                Grid.Row="3"
-                Margin="8,0"
-                BackgroundColor="{StaticResource My_Green}"
-                Clicked="OnTakePhotoClick"
-                FontAttributes="Bold"
-                FontSize="16"
-                SemanticProperties.Hint="Opening camera to take a photo"
-                Text="Zrób Zdjęcie" />
-
             <HorizontalStackLayout
-                Grid.Row="4"
+                Grid.Row="3"
                 Margin="5"
                 HorizontalOptions="Center"
                 Spacing="10">
@@ -66,6 +56,15 @@
                 <Frame Style="{StaticResource CircleFrame}" />
             </HorizontalStackLayout>
 
+            <Button
+                x:Name="TakePhotoBtn"
+                Grid.Row="4"
+                Margin="8,0"
+                BackgroundColor="{StaticResource My_Green}"
+                Clicked="OnTakePhotoClick"
+                SemanticProperties.Hint="Opening camera to take a photo"
+                Style="{StaticResource WideButton}"
+                Text="Zrób Zdjęcie" />
 
             <Grid
                 Grid.Row="5"

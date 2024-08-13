@@ -38,6 +38,8 @@ public partial class DescriptionPage : ContentPage, IFlowBackButtonsHolder
 
                 if (DescriptionField.Text != string.Empty)
                     _app.UserDataToSend.Message = DescriptionField.Text;
+
+                _app.LoadPage(Pages.SendingCompletedPage);
             }
         }
         else
