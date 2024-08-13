@@ -110,7 +110,7 @@
                 </VerticalStackLayout>
 
                 <HorizontalStackLayout
-                    Margin="5"
+                    Margin="5,5,5,0"
                     HorizontalOptions="Center"
                     Spacing="10">
                     <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />

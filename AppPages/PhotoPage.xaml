@@ -40,15 +40,35 @@
                 <Label Text="Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację." TextColor="{StaticResource My_Orange}" />
             </Border>
 
+            <!--  Style for rounding images  -->
+            <!--<Border
+                Grid.Row="2"
+                Margin="8,0"
+                Padding="0"
+                HorizontalOptions="Fill"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 35,35,35,35"
+                StrokeThickness="14">
+
+                <Image
+                    x:Name="photoResultImage"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Fill"
+                    SemanticProperties.Description="Image that will be send in report"
+                    Source="question_mark"
+                    VerticalOptions="Fill" />
+            </Border>-->
+
             <Image
                 x:Name="photoResultImage"
                 Grid.Row="2"
                 Margin="8,0"
-                Aspect="AspectFill" />
+                Aspect="AspectFill"
+                Source="question_mark" />
 
             <HorizontalStackLayout
                 Grid.Row="3"
-                Margin="5"
+                Margin="5,5,5,0"
                 HorizontalOptions="Center"
                 Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />

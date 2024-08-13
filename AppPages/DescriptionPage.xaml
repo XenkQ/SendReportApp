@@ -46,6 +46,7 @@
                 Grid.Row="2"
                 Margin="8,0"
                 AutoSize="TextChanges"
+                FontSize="16"
                 HorizontalOptions="FillAndExpand"
                 MaxLength="1000"
                 Placeholder="(kliknij na ten napis aby zacząć pisać)"
@@ -53,7 +54,7 @@
 
             <HorizontalStackLayout
                 Grid.Row="3"
-                Margin="5"
+                Margin="5,5,5,0"
                 HorizontalOptions="Center"
                 Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
@@ -68,9 +69,8 @@
                 Margin="8,0"
                 BackgroundColor="{StaticResource My_Orange}"
                 Clicked="OnSendButtonClick"
-                FontAttributes="Bold"
-                FontSize="16"
                 SemanticProperties.Hint="Sending data to api after verification"
+                Style="{StaticResource WideButton}"
                 Text="Wyślij Zgłoszenie" />
 
 

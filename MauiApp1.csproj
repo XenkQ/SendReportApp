@@ -78,6 +78,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\check_circle.svg" BaseSize="200,200" />
+		<MauiImage Include="Resources\Images\question_mark.svg" BaseSize="300,300" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />

@@ -1,10 +1,9 @@
 ﻿using MauiApp1.GUI.FlowButtons;
 using MauiApp1.AppPages;
-using MauiApp1.Platforms.Android;
-
 
 #if ANDROID
 using Android.Graphics;
+using MauiApp1.Platforms.Android;
 #endif
 
 namespace MauiApp1;
@@ -23,7 +22,9 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
 
     public async void OnNextButtonClick(object sender, EventArgs e)
     {
-        _app.UserDataToSend.Base64Image = _base64Image;
+        if (_base64Image != string.Empty)
+        {
+            _app.UserDataToSend.Base64Image = _base64Image;
 #if ANDROID
         var (latitude, logitude) = ImageLocator.GetImageLocation(_featuredPhotoPath);
         if(latitude != null && logitude != null)
@@ -32,17 +33,12 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
             _app.UserDataToSend.Longitude = (double)logitude;
         }
 #endif
-        _app.LoadPage(Pages.CategoryPage);
-
-        //if(_base64Image != string.Empty)
-        //{
-        //    _app.UserDataToSend.Base64Image = _base64Image;
-        //    _app.LoadPage(Pages.CategoryPage);
-        //}
-        //else
-        //{
-        //    await DisplayAlert("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
-        //}
+            _app.LoadPage(Pages.CategoryPage);
+        }
+        else
+        {
+            await DisplayAlert("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
+        }
     }
 
     public void PrepareAfterLoad()
@@ -63,7 +59,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder, IMustPrepar
                 SetFeaturePhoto(_featuredPhotoPath);
 #if ANDROID
                 _base64Image = await ImageManipulator.GetImageResizedImageAsBase64(
-                    _featuredPhotoPath, Bitmap.CompressFormat.Webp, 100);
+                    _featuredPhotoPath, Bitmap.CompressFormat.WebpLossless!, 100);
 #endif
             }
         }
