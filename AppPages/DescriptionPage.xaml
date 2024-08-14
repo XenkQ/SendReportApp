@@ -18,7 +18,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label
@@ -60,22 +59,12 @@
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
             </HorizontalStackLayout>
 
 
-            <Button
-                x:Name="SendBtn"
-                Grid.Row="4"
-                Margin="8,0"
-                BackgroundColor="{StaticResource My_Orange}"
-                Clicked="OnSendButtonClick"
-                SemanticProperties.Hint="Sending data to api after verification"
-                Style="{StaticResource WideButton}"
-                Text="Wyślij Zgłoszenie" />
-
-
             <Grid
-                Grid.Row="5"
+                Grid.Row="4"
                 Margin="8,0,8,10"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -94,9 +83,8 @@
 
                 <Button
                     x:Name="NextBtn"
-                    Grid.Row="0"
                     Grid.Column="1"
-                    IsEnabled="False"
+                    Clicked="OnNextButtonClick"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
                     Text="Dalej" />

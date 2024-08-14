@@ -2,6 +2,7 @@
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MauiApp1;
 
@@ -17,6 +18,7 @@ public static class MauiProgram
                 new SendDataHolder(),
                 new DataSender()
             ))
+            .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

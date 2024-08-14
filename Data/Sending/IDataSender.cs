@@ -4,5 +4,5 @@ namespace MauiApp1.Data.Sending;
 
 public interface IDataSender
 {
-    void SendData(ISendDataHoldable dataHolder);
+    Task<string> SendDataAsync(ISendDataHoldable dataHolder);
 }

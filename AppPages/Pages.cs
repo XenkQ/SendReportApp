@@ -5,5 +5,6 @@ public enum Pages
     PhotoPage,
     CategoryPage,
     DescriptionPage,
+    LocalizationPage,
     SendingCompletedPage
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.PhotoPage"
+    x:Class="MauiApp1.LocalizationPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="PhotoPage">
+    Title="LocalizationPage">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
@@ -29,7 +29,7 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Zdjęcie"
+                Text="Opis"
                 TextColor="White"
                 WidthRequest="-1" />
 
@@ -37,34 +37,16 @@
                 Grid.Row="1"
                 Margin="8,0"
                 Style="{StaticResource InfoBorder}">
-                <Label Text="Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację." TextColor="{StaticResource My_Orange}" />
+
+                <Label Text="Zgłoszenie wymaga twojej lokalizacji. Wciśnij przycisk udostępnij lokalizację i wybierz opcję precyzyjną." TextColor="{StaticResource My_Orange}" />
             </Border>
 
-            <!--  Style for rounding images  -->
-            <!--<Border
+            <ContentView
+                x:Name="LocalizationMap"
                 Grid.Row="2"
                 Margin="8,0"
-                Padding="0"
                 HorizontalOptions="Fill"
-                Stroke="Transparent"
-                StrokeShape="RoundRectangle 35,35,35,35"
-                StrokeThickness="14">
-
-                <Image
-                    x:Name="photoResultImage"
-                    Aspect="AspectFit"
-                    HorizontalOptions="Fill"
-                    SemanticProperties.Description="Image that will be send in report"
-                    Source="no_photo"
-                    VerticalOptions="Fill" />
-            </Border>-->
-
-            <Image
-                x:Name="photoResultImage"
-                Grid.Row="2"
-                Margin="8,0"
-                Aspect="AspectFill"
-                Source="no_photo" />
+                VerticalOptions="Fill" />
 
             <HorizontalStackLayout
                 Grid.Row="3"
@@ -72,20 +54,20 @@
                 HorizontalOptions="Center"
                 Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Style="{StaticResource CircleFrame}" />
-                <Frame Style="{StaticResource CircleFrame}" />
-                <Frame Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
             </HorizontalStackLayout>
 
             <Button
-                x:Name="TakePhotoBtn"
+                x:Name="GetLocalizationBtn"
                 Grid.Row="4"
                 Margin="8,0"
                 BackgroundColor="{StaticResource My_Green}"
-                Clicked="OnTakePhotoClick"
-                SemanticProperties.Hint="Opening camera to take a photo"
+                Clicked="OnGetLocalizationBtnClick"
+                SemanticProperties.Hint="Getting user localization and inserting it into map."
                 Style="{StaticResource WideButton}"
-                Text="Zrób Zdjęcie" />
+                Text="Udostępnij lokalizację" />
 
             <Grid
                 Grid.Row="5"
@@ -100,14 +82,13 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    IsEnabled="False"
+                    Clicked="OnBackButtonClick"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
 
                 <Button
                     x:Name="NextBtn"
-                    Grid.Row="0"
                     Grid.Column="1"
                     Clicked="OnNextButtonClick"
                     SemanticProperties.Hint="Next Page if exists"

@@ -116,6 +116,7 @@
                     <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                     <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
                     <Frame Style="{StaticResource CircleFrame}" />
+                    <Frame Style="{StaticResource CircleFrame}" />
                 </HorizontalStackLayout>
 
                 <Grid Margin="8,0,8,10" ColumnSpacing="10">
