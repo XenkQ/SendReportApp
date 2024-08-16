@@ -1,18 +1,25 @@
 ﻿using MauiApp1.AppPages;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
-using System.Collections.ObjectModel;
+using MauiApp1.Data.Waiting;
 
 namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
     public ISendDataHoldable UserDataToSend { get; private set; }
-    private ReadOnlyDictionary<Pages, Page> _pages;
+    private readonly IPagesCreator _pagesCreator;
+    private readonly Pages[] simplePages = [
+        Pages.CategoryPage,
+        Pages.DescriptionPage,
+        Pages.LocalizationPage,
+        Pages.SendingCompletedPage
+    ];
+    private Dictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
-    private readonly IStartPageCreator _startPageCreator;
+    private IWaitForData<string> _base64ImageDataWaiter;
 
-    public App(IStartPageCreator startPageCreator, ISendDataHoldable userDataToSend,
+    public App(IPagesCreator pagesCreator, ISendDataHoldable userDataToSend,
         IDataSender dataSender)
     {
         InitializeComponent();
@@ -22,9 +29,14 @@ public partial class App : Application, IApp
 
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
-        _startPageCreator = startPageCreator;
+        _pagesCreator = pagesCreator;
 
-        _pages = _startPageCreator.CreatePagesOnStart(this);
+        _base64ImageDataWaiter = new DataWaiter<string>(UserDataToSend.Base64Image);
+
+        _pages = _pagesCreator.CreateSimplePages(simplePages, this);
+        var photoPage = _pagesCreator.CreateComplexPage(Pages.PhotoPage, this, _base64ImageDataWaiter);
+        _pages.Add(photoPage.Key, photoPage.Value);
+
         MainPage = _pages[Pages.PhotoPage];
     }
 

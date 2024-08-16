@@ -14,7 +14,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp(serviceProvider => new App(
-                new PageCreator(),
+                new PagesCreator(),
                 new SendDataHolder(),
                 new DataSender()
             ))

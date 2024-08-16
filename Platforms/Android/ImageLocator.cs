@@ -13,12 +13,12 @@ namespace MauiApp1.Platforms.Android
                 Console.WriteLine($"Latitude: {exifInterface.GetAttribute(ExifInterface.TagGpsLatitude)}" +
                     $"\nLongitude: {exifInterface.GetAttribute(ExifInterface.TagGpsLongitude)}");
 
-                //if (double.TryParse(exifInterface.GetAttribute(ExifInterface.TagGpsLatitude), out double latitude)
-                //&& double.TryParse(exifInterface.GetAttribute(ExifInterface.TagGpsLongitude), out double longitude))
-                //{
-                //    Console.WriteLine($"Latitude: {latitude}\nLongitude: {longitude}");
-                //    return (latitude, longitude);
-                //}
+                if (double.TryParse(exifInterface.GetAttribute(ExifInterface.TagGpsLatitude), out double latitude)
+                && double.TryParse(exifInterface.GetAttribute(ExifInterface.TagGpsLongitude), out double longitude))
+                {
+                    Console.WriteLine($"Latitude: {latitude}\nLongitude: {longitude}");
+                    return (latitude, longitude);
+                }
             }
             catch (Exception ex)
             {
