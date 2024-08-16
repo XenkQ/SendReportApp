@@ -2,6 +2,7 @@
 
 public enum Pages
 {
+    NoInternetConnectionPage,
     PhotoPage,
     CategoryPage,
     DescriptionPage,

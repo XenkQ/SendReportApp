@@ -7,5 +7,6 @@ namespace MauiApp1
     {
         ISendDataHoldable UserDataToSend { get; }
         void LoadPage(Pages page);
+        void LoadAppContent();
     }
 }

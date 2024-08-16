@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MauiApp1.AppPages;
+﻿namespace MauiApp1.AppPages;
 
 /*
  * In this app in terms of simple pages I mean pages with only one constructor argument that is IApp.
@@ -9,14 +7,6 @@ namespace MauiApp1.AppPages;
 
 internal class PagesCreator : IPagesCreator
 {
-    public KeyValuePair<Pages, Page?> CreateComplexPage(Pages pageToCreate, IApp app, params object?[]? args)
-    {
-        if (args.Length < 0)
-            return new KeyValuePair<Pages, Page?>(pageToCreate, CreatePage(pageToCreate, app));
-        else
-            return new KeyValuePair<Pages, Page?>(pageToCreate, CreatePage(pageToCreate, app, args));
-    }
-
     public Dictionary<Pages, Page> CreateSimplePages(IEnumerable<Pages> simplePagesToCreate, IApp app)
     {
         var simplePages = new Dictionary<Pages, Page>();
@@ -26,6 +16,12 @@ internal class PagesCreator : IPagesCreator
 
         return simplePages;
     }
+
+    public KeyValuePair<Pages, Page?> CreateSimplePage(Pages pageToCreate, IApp app)
+        => new KeyValuePair<Pages, Page?>(pageToCreate, CreatePage(pageToCreate, app));
+
+    public KeyValuePair<Pages, Page?> CreateComplexPage(Pages pageToCreate, IApp app, params object?[]? args)
+        => new KeyValuePair<Pages, Page?>(pageToCreate, CreatePage(pageToCreate, app, args));
 
     private Page? CreatePage(Pages page, IApp app)
         => (Page)Activator.CreateInstance(page.ToPageType(app)!, app)!;

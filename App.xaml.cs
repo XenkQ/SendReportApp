@@ -33,11 +33,7 @@ public partial class App : Application, IApp
 
         _base64ImageDataWaiter = new DataWaiter<string>(UserDataToSend.Base64Image);
 
-        _pages = _pagesCreator.CreateSimplePages(simplePages, this);
-        var photoPage = _pagesCreator.CreateComplexPage(Pages.PhotoPage, this, _base64ImageDataWaiter);
-        _pages.Add(photoPage.Key, photoPage.Value);
-
-        MainPage = _pages[Pages.PhotoPage];
+        LoadAppContent();
     }
 
     public void LoadPage(Pages page)
@@ -46,5 +42,26 @@ public partial class App : Application, IApp
 
         if (MainPage is IMustPrepareAfterLoad)
             ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
+    }
+
+    public void LoadAppContent()
+    {
+        if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+        {
+            InitializePages();
+            MainPage = _pages[Pages.PhotoPage];
+        }
+        else
+        {
+            var noInternetConnectionPage = _pagesCreator.CreateSimplePage(Pages.NoInternetConnectionPage, this);
+            MainPage = noInternetConnectionPage.Value;
+        }
+    }
+
+    private void InitializePages()
+    {
+        _pages = _pagesCreator.CreateSimplePages(simplePages, this);
+        var photoPage = _pagesCreator.CreateComplexPage(Pages.PhotoPage, this, _base64ImageDataWaiter);
+        _pages.Add(photoPage.Key, photoPage.Value);
     }
 }

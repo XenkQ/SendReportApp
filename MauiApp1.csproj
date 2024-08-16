@@ -78,6 +78,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\check_circle.svg" BaseSize="200,200" />
+		<MauiImage Include="Resources\Images\wifi_off.svg" BaseSize="200,200" />
 		<MauiImage Include="Resources\Images\no_photo.svg" BaseSize="300,300" />
 
 		<!-- Custom Fonts -->
@@ -108,6 +109,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppPages\LocalizationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AppPages\NoInternetConnectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppPages\PhotoPage.xaml">
