@@ -11,7 +11,7 @@ using MauiApp1.AppPages;
 
 namespace MauiApp1;
 
-public partial class LocalizationPage : ContentPage, IFlowButtonHolder
+public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISubmitButtonHolder
 {
     private const double STARTING_LATITUDE = 54.75851040001975;
     private const double STARTING_LONGITUDE = 17.55495071411133;
@@ -39,12 +39,13 @@ public partial class LocalizationPage : ContentPage, IFlowButtonHolder
         _app.LoadPage(Pages.DescriptionPage);
     }
 
-    public async void OnNextButtonClick(object sender, EventArgs e)
+    public async void OnSubmitButtonClick(object sender, EventArgs e)
     {
         if(_app.UserDataToSend.Longitude != default
             && _app.UserDataToSend.Latitude != default)
         {
-            _app.LoadPage(Pages.SendingCompletedPage);
+            _app.AddTask(Task.Delay(2000));
+            _app.LoadPage(Pages.LoadingPage);
         }
         else
         {

@@ -1,40 +1,6 @@
 ﻿using MauiApp1.GUI.FlowButtons;
-
-/* Unmerged change from project 'MauiApp1 (net8.0-ios)'
-Before:
 using MauiApp1.AppPages;
-After:
-using MauiApp1.AppPages;
-using MauiApp1.Data.Storing;
-*/
-
-/* Unmerged change from project 'MauiApp1 (net8.0-maccatalyst)'
-Before:
-using MauiApp1.AppPages;
-After:
-using MauiApp1.AppPages;
-using MauiApp1.Data.Storing;
-*/
-using MauiApp1.AppPages;
-
-/* Unmerged change from project 'MauiApp1 (net8.0-ios)'
-Before:
-using MauiApp1.Data.Storing;
-After:
-using MauiApp1.Data.Storing;
 using MauiApp1.Data.Waiting;
-*/
-
-/* Unmerged change from project 'MauiApp1 (net8.0-maccatalyst)'
-Before:
-using MauiApp1.Data.Storing;
-After:
-using MauiApp1.Data.Storing;
-using MauiApp1.Data.Waiting;
-*/
-using MauiApp1.Data.Waiting;
-
-
 
 #if ANDROID
 using Android.Graphics;
@@ -56,7 +22,6 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 		InitializeComponent();
         _app = app;
         _dataWaiter = dataWaiter;
-
     }
 
     public void NotifyAfterDataProcesing<T>(T processedData, IWaitForData<T> dataWaiter)
@@ -91,9 +56,8 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
                 _featuredPhotoPath = photoFile.FullPath;
                 SetFeaturePhoto(_featuredPhotoPath);
 #if ANDROID
-                Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
-                    Bitmap.CompressFormat.WebpLossless!, 100)
-                .ContinueWith(task => NotifyAfterDataProcesing(task.Result, _dataWaiter)));
+                _app.AddTask(Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
+                    Bitmap.CompressFormat.WebpLossless!, 100)));
 #endif
             }
         }

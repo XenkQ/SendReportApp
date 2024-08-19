@@ -1,6 +1,6 @@
 ﻿namespace MauiApp1.GUI.FlowButtons
 {
-    public interface IFlowBackButtonsHolder
+    public interface IFlowBackButtonHolder
     {
         void OnBackButtonClick(object sender, EventArgs e);
     }

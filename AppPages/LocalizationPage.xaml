@@ -29,7 +29,7 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Opis"
+                Text="Lokalizacja"
                 TextColor="White"
                 WidthRequest="-1" />
 
@@ -88,12 +88,13 @@
                     Text="Cofnij" />
 
                 <Button
-                    x:Name="NextBtn"
+                    x:Name="SubmitButton"
                     Grid.Column="1"
-                    Clicked="OnNextButtonClick"
+                    Background="{StaticResource My_Orange}"
+                    Clicked="OnSubmitButtonClick"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
-                    Text="Dalej" />
+                    Text="Wyślij" />
             </Grid>
         </Grid>
     </ScrollView>

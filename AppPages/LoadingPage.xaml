@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiApp1.LoadingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="LoadingPage">
+
+    <VerticalStackLayout
+        Margin="8,0"
+        Spacing="25"
+        VerticalOptions="CenterAndExpand">
+        <Label
+            Grid.Row="0"
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            SemanticProperties.HeadingLevel="Level1"
+            Style="{StaticResource Headline}"
+            Text="Wysyłanie zgłoszenia"
+            TextColor="Black" />
+
+        <ActivityIndicator
+            HeightRequest="80"
+            IsRunning="True"
+            IsVisible="True"
+            WidthRequest="80"
+            Color="{StaticResource My_DarkBlue}" />
+    </VerticalStackLayout>
+
+</ContentPage>

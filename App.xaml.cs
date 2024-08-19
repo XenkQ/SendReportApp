@@ -13,10 +13,12 @@ public partial class App : Application, IApp
         Pages.CategoryPage,
         Pages.DescriptionPage,
         Pages.LocalizationPage,
+        Pages.LoadingPage,
         Pages.SendingCompletedPage
     ];
     private Dictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
+    private List<Task> _tasks = new();
     private IWaitForData<string> _base64ImageDataWaiter;
 
     public App(IPagesCreator pagesCreator, ISendDataHoldable userDataToSend,
@@ -64,4 +66,10 @@ public partial class App : Application, IApp
         var photoPage = _pagesCreator.CreateComplexPage(Pages.PhotoPage, this, _base64ImageDataWaiter);
         _pages.Add(photoPage.Key, photoPage.Value);
     }
+
+    public IEnumerable<Task> GetTasks()
+        => _tasks;
+
+    public void AddTask(Task task)
+        => _tasks.Add(task);
 }
