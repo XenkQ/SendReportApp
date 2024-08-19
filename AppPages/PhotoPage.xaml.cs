@@ -1,5 +1,23 @@
 ﻿using MauiApp1.GUI.FlowButtons;
+
+/* Unmerged change from project 'MauiApp1 (net8.0-ios)'
+Before:
 using MauiApp1.AppPages;
+After:
+using MauiApp1.AppPages;
+using MauiApp1.Data.Processors;
+*/
+
+/* Unmerged change from project 'MauiApp1 (net8.0-maccatalyst)'
+Before:
+using MauiApp1.AppPages;
+After:
+using MauiApp1.AppPages;
+using MauiApp1.Data.Processors;
+*/
+using MauiApp1.AppPages;
+using MauiApp1.Data.Processors;
+
 
 #if ANDROID
 using Android.Graphics;

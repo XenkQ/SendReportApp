@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.AppPages;
+﻿namespace MauiApp1.Data.Processors;
 
 internal interface IProcessDataInBackground
 {
