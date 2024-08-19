@@ -1,7 +1,6 @@
 ﻿using MauiApp1.AppPages;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
-using MauiApp1.Data.Waiting;
 
 namespace MauiApp1;
 
@@ -10,6 +9,7 @@ public partial class App : Application, IApp
     public ISendDataHoldable UserDataToSend { get; private set; }
     private readonly IPagesCreator _pagesCreator;
     private readonly Pages[] simplePages = [
+        Pages.PhotoPage,
         Pages.CategoryPage,
         Pages.DescriptionPage,
         Pages.LocalizationPage,
@@ -19,7 +19,6 @@ public partial class App : Application, IApp
     private Dictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
     private List<Task> _tasks = new();
-    private IWaitForData<string> _base64ImageDataWaiter;
 
     public App(IPagesCreator pagesCreator, ISendDataHoldable userDataToSend,
         IDataSender dataSender)
@@ -32,8 +31,6 @@ public partial class App : Application, IApp
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
         _pagesCreator = pagesCreator;
-
-        _base64ImageDataWaiter = new DataWaiter<string>(UserDataToSend.Base64Image);
 
         LoadAppContent();
     }
@@ -50,7 +47,7 @@ public partial class App : Application, IApp
     {
         if (Connectivity.NetworkAccess == NetworkAccess.Internet)
         {
-            InitializePages();
+            _pages = _pagesCreator.CreateSimplePages(simplePages, this);
             MainPage = _pages[Pages.PhotoPage];
         }
         else
@@ -60,16 +57,16 @@ public partial class App : Application, IApp
         }
     }
 
-    private void InitializePages()
+    public IEnumerable<Task> GetPagesTasks()
     {
-        _pages = _pagesCreator.CreateSimplePages(simplePages, this);
-        var photoPage = _pagesCreator.CreateComplexPage(Pages.PhotoPage, this, _base64ImageDataWaiter);
-        _pages.Add(photoPage.Key, photoPage.Value);
+        var tasks = new List<Task>();
+        foreach(var page in _pages)
+        {
+            var dataProcessor = page.Value as IProcessDataInBackground;
+            if(dataProcessor != null)
+                tasks.Add(dataProcessor.GetProcessedTask());
+        }
+
+        return tasks;
     }
-
-    public IEnumerable<Task> GetTasks()
-        => _tasks;
-
-    public void AddTask(Task task)
-        => _tasks.Add(task);
 }

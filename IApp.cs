@@ -5,8 +5,7 @@ namespace MauiApp1
 {
     public interface IApp
     {
-        IEnumerable<Task> GetTasks();
-        void AddTask(Task task);
+        IEnumerable<Task> GetPagesTasks();
         ISendDataHoldable UserDataToSend { get; }
         void LoadPage(Pages page);
         void LoadAppContent();

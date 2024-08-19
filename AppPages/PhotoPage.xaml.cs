@@ -1,6 +1,5 @@
 ﻿using MauiApp1.GUI.FlowButtons;
 using MauiApp1.AppPages;
-using MauiApp1.Data.Waiting;
 
 #if ANDROID
 using Android.Graphics;
@@ -15,17 +14,13 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
     private readonly IApp _app;
     private string _featuredPhotoPath = string.Empty;
     private string _base64Image = string.Empty;
-    private IWaitForData<string> _dataWaiter;
+    public Task<string> _processingTask { get; private set; }
 
-    public PhotoPage(IApp app, IWaitForData<string> dataWaiter)
+    public PhotoPage(IApp app)
 	{
 		InitializeComponent();
         _app = app;
-        _dataWaiter = dataWaiter;
     }
-
-    public void NotifyAfterDataProcesing<T>(T processedData, IWaitForData<T> dataWaiter)
-        => dataWaiter.OnNotification(processedData);
 
     public async void OnNextButtonClick(object sender, EventArgs e)
     {
@@ -47,28 +42,40 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 
     private async void OnTakePhotoClick(object sender, EventArgs e)
     {
-        try
-        {
-            var photoFile = await MediaPicker.CapturePhotoAsync();
+        var photoFile = await TakePhoto();
 
-            if (photoFile != null)
-            {
-                _featuredPhotoPath = photoFile.FullPath;
-                SetFeaturePhoto(_featuredPhotoPath);
-#if ANDROID
-                _app.AddTask(Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
-                    Bitmap.CompressFormat.WebpLossless!, 100)));
-#endif
-            }
-        }
-        catch(Exception)
+        if (photoFile != null)
         {
-            await DisplayAlert("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
+            _featuredPhotoPath = photoFile.FullPath;
+            SetFeaturePhoto(_featuredPhotoPath);
+            StartProcessingDataInBackground();
         }
     }
 
-    private void SetFeaturePhoto(string path)
+    private async Task<FileResult?> TakePhoto()
     {
-        photoResultImage.Source = ImageSource.FromFile(path);
+        try
+        {
+            return await MediaPicker.CapturePhotoAsync();
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
+        }
+
+        return null;
+    }
+
+    private void SetFeaturePhoto(string path)
+       => photoResultImage.Source = ImageSource.FromFile(path);
+
+    public Task GetProcessedTask() => _processingTask;
+
+    public void StartProcessingDataInBackground()
+    {
+#if ANDROID
+        _processingTask = Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
+                Bitmap.CompressFormat.WebpLossless!, 100));
+#endif
     }
 }
