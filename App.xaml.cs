@@ -1,26 +1,17 @@
 ﻿using MauiApp1.AppPages;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
+using System.Collections.ObjectModel;
 
 namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
     public ISendDataHoldable UserDataToSend { get; private set; }
-    private readonly IPagesCreator _pagesCreator;
-    private readonly Pages[] simplePages = [
-        Pages.PhotoPage,
-        Pages.CategoryPage,
-        Pages.DescriptionPage,
-        Pages.LocalizationPage,
-        Pages.LoadingPage,
-        Pages.SendingCompletedPage
-    ];
-    private Dictionary<Pages, Page> _pages;
+    private ReadOnlyDictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
-    private List<Task> _tasks = new();
 
-    public App(IPagesCreator pagesCreator, ISendDataHoldable userDataToSend,
+    public App(IPagesPooler pagesPooler, ISendDataHoldable userDataToSend,
         IDataSender dataSender)
     {
         InitializeComponent();
@@ -30,7 +21,8 @@ public partial class App : Application, IApp
 
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
-        _pagesCreator = pagesCreator;
+
+        _pages = pagesPooler.PoolAllPages(this);
 
         LoadAppContent();
     }
@@ -47,13 +39,11 @@ public partial class App : Application, IApp
     {
         if (Connectivity.NetworkAccess == NetworkAccess.Internet)
         {
-            _pages = _pagesCreator.CreateSimplePages(simplePages, this);
             MainPage = _pages[Pages.PhotoPage];
         }
         else
         {
-            var noInternetConnectionPage = _pagesCreator.CreateSimplePage(Pages.NoInternetConnectionPage, this);
-            MainPage = noInternetConnectionPage.Value;
+            MainPage = _pages[Pages.NoInternetConnectionPage];
         }
     }
 
