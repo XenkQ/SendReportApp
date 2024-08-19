@@ -2,6 +2,7 @@
 
 internal interface IProcessDataInBackground
 {
+    CancellationTokenSource CancellationTokenSource { get; }
     Task GetProcessedTask();
     void StartProcessingDataInBackground();
 }

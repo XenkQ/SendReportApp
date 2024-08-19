@@ -1,23 +1,6 @@
 ﻿using MauiApp1.GUI.FlowButtons;
-
-/* Unmerged change from project 'MauiApp1 (net8.0-ios)'
-Before:
-using MauiApp1.AppPages;
-After:
 using MauiApp1.AppPages;
 using MauiApp1.Data.Processors;
-*/
-
-/* Unmerged change from project 'MauiApp1 (net8.0-maccatalyst)'
-Before:
-using MauiApp1.AppPages;
-After:
-using MauiApp1.AppPages;
-using MauiApp1.Data.Processors;
-*/
-using MauiApp1.AppPages;
-using MauiApp1.Data.Processors;
-
 
 #if ANDROID
 using Android.Graphics;
@@ -33,11 +16,13 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
     private string _featuredPhotoPath = string.Empty;
     private string _base64Image = string.Empty;
     public Task<string> _processingTask { get; private set; }
+    public CancellationTokenSource CancellationTokenSource { get; private set; }
 
     public PhotoPage(IApp app)
 	{
 		InitializeComponent();
         _app = app;
+        CancellationTokenSource = new CancellationTokenSource();
     }
 
     public async void OnNextButtonClick(object sender, EventArgs e)
@@ -91,9 +76,17 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 
     public void StartProcessingDataInBackground()
     {
-#if ANDROID
+        if(_processingTask != default)
+        {
+            CancellationTokenSource.Cancel();
+            _processingTask.Wait();
+        }
+
+        CancellationTokenSource.TryReset();
+
+        #if ANDROID
         _processingTask = Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
-                Bitmap.CompressFormat.WebpLossless!, 100));
+                Bitmap.CompressFormat.WebpLossless!, 100), CancellationTokenSource.Token);
 #endif
     }
 }
