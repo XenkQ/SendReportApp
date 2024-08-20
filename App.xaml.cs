@@ -8,7 +8,7 @@ namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
-    public static string API_ENDPOINT = @"http://maluch3.mikr.us:20162";
+    public static string API_ENDPOINT = @"";
     public ISendDataHoldable UserDataToSend { get; private set; }
     private IServerConnectionChecker _serverConnectionChecker;
     private ReadOnlyDictionary<Pages, Page> _pages;
@@ -28,7 +28,8 @@ public partial class App : Application, IApp
 
         _pages = pagesPooler.PoolAllPages(this);
 
-        LoadAppContent();
+        MainPage = _pages[Pages.PhotoPage];
+        //LoadAppContent();
     }
 
     public void LoadPage(Pages page)
@@ -42,10 +43,7 @@ public partial class App : Application, IApp
     public void LoadAppContent()
     {
         bool isConnectedToNetwork = Connectivity.NetworkAccess == NetworkAccess.Internet;
-        bool isConnectedToServer = true;
-        
-        _serverConnectionChecker.IsConnectedAsync(API_ENDPOINT)
-            .ContinueWith(task => isConnectedToServer = task.Result);
+        bool isConnectedToServer = true; /*_serverConnectionChecker.IsConnected(API_ENDPOINT, "/status");*/
 
         if (isConnectedToNetwork && isConnectedToServer)
         {

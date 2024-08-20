@@ -1,6 +1,8 @@
 ﻿using MauiApp1.GUI.FlowButtons;
 using MauiApp1.AppPages;
 using MauiApp1.Data.Processors;
+using MauiApp1.Connection;
+
 
 #if ANDROID
 using Android.Graphics;
