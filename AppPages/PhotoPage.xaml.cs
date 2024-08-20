@@ -84,7 +84,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 
         CancellationTokenSource.TryReset();
 
-        #if ANDROID
+#if ANDROID
         _processingTask = Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
                 Bitmap.CompressFormat.WebpLossless!, 100), CancellationTokenSource.Token);
 #endif

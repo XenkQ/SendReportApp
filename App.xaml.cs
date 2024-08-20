@@ -8,11 +8,13 @@ namespace MauiApp1;
 
 public partial class App : Application, IApp
 {
+    public static string API_ENDPOINT = @"http://maluch3.mikr.us:20162";
     public ISendDataHoldable UserDataToSend { get; private set; }
+    private IServerConnectionChecker _serverConnectionChecker;
     private ReadOnlyDictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
 
-    public App(IPagesPooler pagesPooler, ISendDataHoldable userDataToSend,
+    public App(IServerConnectionChecker serverConnectionChecker, IPagesPooler pagesPooler, ISendDataHoldable userDataToSend,
         IDataSender dataSender)
     {
         InitializeComponent();
@@ -22,6 +24,7 @@ public partial class App : Application, IApp
 
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
+        _serverConnectionChecker = serverConnectionChecker;
 
         _pages = pagesPooler.PoolAllPages(this);
 
@@ -38,13 +41,28 @@ public partial class App : Application, IApp
 
     public void LoadAppContent()
     {
-        if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+        bool isConnectedToNetwork = Connectivity.NetworkAccess == NetworkAccess.Internet;
+        bool isConnectedToServer = true;
+        
+        _serverConnectionChecker.IsConnectedAsync(API_ENDPOINT)
+            .ContinueWith(task => isConnectedToServer = task.Result);
+
+        if (isConnectedToNetwork && isConnectedToServer)
         {
             MainPage = _pages[Pages.PhotoPage];
         }
         else
         {
-            MainPage = _pages[Pages.NoInternetConnectionPage];
+            MainPage = _pages[Pages.NoConnectionPage];
+
+            var connectionTextDisplay = MainPage as IDisplayConnectionInfo;
+
+            if (connectionTextDisplay == null) return;
+
+            if (isConnectedToServer)
+                connectionTextDisplay.DisplayConnectionText(Connection.NoConectionStates.NoInternetConnection);
+            else
+                connectionTextDisplay.DisplayConnectionText(Connection.NoConectionStates.NoServerConnection);
         }
     }
 

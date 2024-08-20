@@ -1,4 +1,5 @@
 ﻿using MauiApp1.AppPages;
+using MauiApp1.Connection;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp(serviceProvider => new App(
+                new ApiConnectionChecker(),
                 new PagesPooler(),
                 new SendDataHolder(),
                 new DataSender()
