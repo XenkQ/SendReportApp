@@ -12,7 +12,7 @@ public partial class App : Application, IApp
     public static string API_ENDPOINT = @"";
     public ISendDataHoldable UserDataToSend { get; private set; }
     private IServerConnectionChecker _serverConnectionChecker;
-    private ReadOnlyDictionary<Pages, Page> _pages;
+    private Dictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
     private IPagesPooler _pagesPooler;
     private Pages _startFormPage = Pages.PhotoPage;
@@ -34,26 +34,18 @@ public partial class App : Application, IApp
         DisplayPage(_startFormPage);
     }
 
+    public ReadOnlyDictionary<Pages, Page> GetLoadedPages()
+        => _pages.AsReadOnly();
+
     public void DisplayPage(Pages page)
     {
-        if (!_pages.ContainsKey(page))
-            throw new NullReferenceException($"{page} is not pooled");
+        if(!_pages.ContainsKey(page))
+            throw new ArgumentException($"Can't load {page} becouse this page is not pooled");
 
-        SetMainPage(_pages[page]);
+        if (_pages[page] is IMustPrepareAfterLoad)
+            ((IMustPrepareAfterLoad)_pages[page]).PrepareAfterLoad();
 
-        if (MainPage is IMustPrepareAfterLoad)
-            ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
-    }
-
-    public void DisplayPage(Page page)
-        => SetMainPage(page);
-
-    private void SetMainPage(Page page)
-    {
-        MainPage = page;
-
-        if (MainPage is IMustPrepareAfterLoad)
-            ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
+        MainPage = _pages[page];
     }
 
     public void LoadAllPagesIfConnection()
@@ -62,7 +54,7 @@ public partial class App : Application, IApp
         bool isConnectedToServer = true; /*_serverConnectionChecker.IsConnected(API_ENDPOINT, "/status");*/
 
         if (isConnectedToNetwork && isConnectedToServer)
-            _pages = _pagesPooler.PoolAllPages(this);
+            _pages = new (_pagesPooler.PoolAllPages(this));
         else if(isConnectedToNetwork && !isConnectedToServer)
             DisplayNoConnectionPage(Connection.NoConectionAnnouncements.NoServerConnection);
         else if(!isConnectedToNetwork && isConnectedToServer)
@@ -71,32 +63,15 @@ public partial class App : Application, IApp
 
     private void DisplayNoConnectionPage(Connection.NoConectionAnnouncements announcement)
     {
-        var connectionPage = _pages.ContainsKey(Pages.NoConnectionPage) 
-            ? _pages[Pages.NoConnectionPage]
-            : PageFactory.CreatePage(new PageConfiguration(Pages.NoConnectionPage, this));
-        
-        if (_pages.ContainsKey(Pages.NoConnectionPage))
-            DisplayPage(Pages.NoConnectionPage);
-        else
-            DisplayPage(connectionPage);
+        if(_pages.ContainsKey(Pages.NoConnectionPage))
+            PageFactory.CreatePage(new PageConfiguration(Pages.NoConnectionPage, this));
 
-        var connectionTextDisplay = connectionPage as IDisplayConnectionInfo;
+        DisplayPage(Pages.NoConnectionPage);
+
+        var connectionTextDisplay = _pages[Pages.NoConnectionPage] as IDisplayConnectionInfo;
 
         if (connectionTextDisplay == null) return;
         
         connectionTextDisplay.DisplayConnectionText(announcement);
-    }
-
-    public IEnumerable<Task> GetPagesTasks()
-    {
-        var tasks = new List<Task>();
-        foreach(var page in _pages)
-        {
-            var dataProcessor = page.Value as IProcessDataInBackground;
-            if(dataProcessor != null)
-                tasks.Add(dataProcessor.GetProcessedTask());
-        }
-
-        return tasks;
     }
 }

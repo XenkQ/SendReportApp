@@ -2,11 +2,11 @@ using MauiApp1.AppPages;
 
 namespace MauiApp1;
 
-public partial class LoadingPage : ContentPage, IMustPrepareAfterLoad
+public partial class FormSendLoadingPage : ContentPage, IMustPrepareAfterLoad
 {
 	private readonly IApp _app;
 
-	public LoadingPage(IApp app)
+	public FormSendLoadingPage(IApp app)
 	{
 		InitializeComponent();
 		_app = app;
@@ -14,8 +14,13 @@ public partial class LoadingPage : ContentPage, IMustPrepareAfterLoad
 
     public void PrepareAfterLoad()
     {
-        Task.Run(() => Task.WaitAll(_app.GetPagesTasks().ToArray()))
-		.ContinueWith(_ => Application.Current.Dispatcher.Dispatch(() =>
-		_app.DisplayPage(Pages.SendingCompletedPage)));
+        Task.Run(() => Task.WaitAll(GetAllTasksFromForms()))
+        .ContinueWith(_ => DisplaySendingResultPage());
     }
+
+    private Task[] GetAllTasksFromForms()
+        => PagesTasker.GetTasksFromPages(_app.GetLoadedPages().Values).ToArray();
+
+    private bool DisplaySendingResultPage()
+        => Application.Current.Dispatcher.Dispatch(() => _app.DisplayPage(Pages.SendingCompletedPage));
 }
