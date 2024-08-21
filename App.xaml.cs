@@ -1,11 +1,19 @@
 ﻿using MauiApp1.AppPages;
 using MauiApp1.AppPages.Creation;
-using MauiApp1.Data.Processors;
+using MauiApp1.Connection;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using System.Collections.ObjectModel;
 
 namespace MauiApp1;
+
+public interface IApp
+{
+    ISendDataHoldable UserDataToSend { get; }
+    ReadOnlyDictionary<Pages, Page> GetLoadedPages();
+    void DisplayPage(Pages page);
+    void ReloadPages();
+}
 
 public partial class App : Application, IApp
 {
@@ -30,8 +38,16 @@ public partial class App : Application, IApp
         _serverConnectionChecker = serverConnectionChecker;
         _pagesPooler = pagesPooler;
 
-        LoadAllPagesIfConnection();
-        DisplayPage(_startFormPage);
+        ReloadPages();
+    }
+
+    public void ReloadPages()
+    {
+        if (!NoConnectionDisplayer.DisplayIfNoConnection(this))
+        {
+            _pages = new(_pagesPooler.PoolAllPages(this));
+            DisplayPage(_startFormPage);
+        }
     }
 
     public ReadOnlyDictionary<Pages, Page> GetLoadedPages()
@@ -42,36 +58,9 @@ public partial class App : Application, IApp
         if(!_pages.ContainsKey(page))
             throw new ArgumentException($"Can't load {page} becouse this page is not pooled");
 
-        if (_pages[page] is IMustPrepareAfterLoad)
-            ((IMustPrepareAfterLoad)_pages[page]).PrepareAfterLoad();
+        if (_pages[page] is IMustPrepareBeforeDisplay)
+            ((IMustPrepareBeforeDisplay)_pages[page]).Prepare();
 
         MainPage = _pages[page];
-    }
-
-    public void LoadAllPagesIfConnection()
-    {
-        bool isConnectedToNetwork = Connectivity.NetworkAccess == NetworkAccess.Internet;
-        bool isConnectedToServer = true; /*_serverConnectionChecker.IsConnected(API_ENDPOINT, "/status");*/
-
-        if (isConnectedToNetwork && isConnectedToServer)
-            _pages = new (_pagesPooler.PoolAllPages(this));
-        else if(isConnectedToNetwork && !isConnectedToServer)
-            DisplayNoConnectionPage(Connection.NoConectionAnnouncements.NoServerConnection);
-        else if(!isConnectedToNetwork && isConnectedToServer)
-            DisplayNoConnectionPage(Connection.NoConectionAnnouncements.NoInternetConnection);
-    }
-
-    private void DisplayNoConnectionPage(Connection.NoConectionAnnouncements announcement)
-    {
-        if(_pages.ContainsKey(Pages.NoConnectionPage))
-            PageFactory.CreatePage(new PageConfiguration(Pages.NoConnectionPage, this));
-
-        DisplayPage(Pages.NoConnectionPage);
-
-        var connectionTextDisplay = _pages[Pages.NoConnectionPage] as IDisplayConnectionInfo;
-
-        if (connectionTextDisplay == null) return;
-        
-        connectionTextDisplay.DisplayConnectionText(announcement);
     }
 }

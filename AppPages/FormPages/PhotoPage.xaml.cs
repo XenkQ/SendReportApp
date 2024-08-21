@@ -12,7 +12,7 @@ using MauiApp1.Platforms.Android;
 namespace MauiApp1;
 
 public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
-    IMustPrepareAfterLoad, IProcessDataInBackground
+    IMustPrepareBeforeDisplay, IProcessDataInBackground
 {
     private readonly IApp _app;
     private string _featuredPhotoPath = string.Empty;
@@ -39,7 +39,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
         }
     }
 
-    public void PrepareAfterLoad()
+    public void Prepare()
     {
         if(_featuredPhotoPath != string.Empty)
             SetFeaturePhoto(_featuredPhotoPath);

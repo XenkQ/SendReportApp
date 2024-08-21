@@ -2,7 +2,7 @@ using MauiApp1.AppPages;
 
 namespace MauiApp1;
 
-public partial class FormSendLoadingPage : ContentPage, IMustPrepareAfterLoad
+public partial class FormSendLoadingPage : ContentPage, IMustPrepareBeforeDisplay
 {
 	private readonly IApp _app;
 
@@ -12,7 +12,7 @@ public partial class FormSendLoadingPage : ContentPage, IMustPrepareAfterLoad
 		_app = app;
 	}
 
-    public void PrepareAfterLoad()
+    public void Prepare()
     {
         Task.Run(() => Task.WaitAll(GetAllTasksFromForms()))
         .ContinueWith(_ => DisplaySendingResultPage());
