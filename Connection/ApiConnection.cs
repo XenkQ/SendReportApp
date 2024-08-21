@@ -1,25 +1,34 @@
-﻿public interface IServerConnectionChecker
+﻿using MauiApp1.DTOs;
+using Microsoft.Extensions.Options;
+
+namespace MauiApp1.Connection;
+
+public interface IServerConnectionChecker
 {
-    bool IsConnected(string apiEndpoint, string statusRoute);
+    bool IsConnected();
 }
 
-namespace MauiApp1.Connection
+internal class ApiConnection : IServerConnectionChecker
 {
-    internal class ApiConnection : IServerConnectionChecker
+    private readonly ApiSettings _apiSettings;
+
+    public ApiConnection(IOptions<ApiSettings> settings)
     {
-        public bool IsConnected(string apiEndpoint, string statusRoute)
+        _apiSettings = settings.Value;
+    }
+
+    public bool IsConnected()
+    {
+        try
         {
-            try
-            {
-                using HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(apiEndpoint);
-                var response = client.GetAsync(statusRoute).Result;
-                return response.IsSuccessStatusCode;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            using HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(_apiSettings.BaseUrl);
+            var response = client.GetAsync(_apiSettings.StatusPath).Result;
+            return response.IsSuccessStatusCode;
+        }
+        catch (Exception ex)
+        {
+            return false;
         }
     }
 }

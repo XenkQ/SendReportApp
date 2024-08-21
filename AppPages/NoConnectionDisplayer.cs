@@ -4,9 +4,9 @@ namespace MauiApp1.AppPages
 {
     internal static class NoConnectionDisplayer
     {
-        public static bool DisplayIfNoConnection(IApp app)
+        public static bool DisplayIfNoConnection(IApp app, IServerConnectionChecker serverConnectionChecker)
         {
-            switch (ConnectionStatus.Get())
+            switch (ConnectionStatus.Get(serverConnectionChecker))
             {
                 case ConectionStatuses.NoInternetConnection:
                     DisplayNoConnectionPage(app, ConectionStatuses.NoInternetConnection);

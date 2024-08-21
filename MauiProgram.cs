@@ -4,6 +4,10 @@ using MauiApp1.Data.Storing;
 using MauiApp1.AppPages.Creation;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+using MauiApp1.DTOs;
+using Microsoft.Extensions.Options;
 
 namespace MauiApp1;
 
@@ -13,9 +17,21 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
 
+        var assembly = Assembly.GetExecutingAssembly();
+        Console.WriteLine($"{assembly.GetName().Name}.appsettings.json");
+        using var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.appsettings.json");
+
+        var config = new ConfigurationBuilder()
+            .AddJsonStream(stream)
+            .Build();
+
+        builder.Configuration.AddConfiguration(config);
+
+        builder.Services.Configure<ApiSettings>(_ => config.GetSection("ApiSettings"));
+
         builder
             .UseMauiApp(serviceProvider => new App(
-                new ApiConnection(),
+                new ApiConnection(serviceProvider.GetRequiredService<IOptions<ApiSettings>>()),
                 new PagePooler(),
                 new SendDataHolder(),
                 new DataSender()

@@ -20,7 +20,7 @@ public partial class App : Application, IApp
     public static string API_ENDPOINT = @"";
     public ISendDataHoldable UserDataToSend { get; private set; }
     private IServerConnectionChecker _serverConnectionChecker;
-    private Dictionary<Pages, Page> _pages;
+    private Dictionary<Pages, Page> _pages = new ();
     private readonly IDataSender _dataSender;
     private IPagesPooler _pagesPooler;
     private Pages _startFormPage = Pages.PhotoPage;
@@ -43,7 +43,7 @@ public partial class App : Application, IApp
 
     public void ReloadPages()
     {
-        if (!NoConnectionDisplayer.DisplayIfNoConnection(this))
+        if (!NoConnectionDisplayer.DisplayIfNoConnection(this, _serverConnectionChecker))
         {
             _pages = new(_pagesPooler.PoolAllPages(this));
             DisplayPage(_startFormPage);
@@ -55,8 +55,8 @@ public partial class App : Application, IApp
 
     public void DisplayPage(Pages page)
     {
-        if(!_pages.ContainsKey(page))
-            throw new ArgumentException($"Can't load {page} becouse this page is not pooled");
+        if (!_pages.ContainsKey(page))
+            _pages.Add(page, PageFactory.CreatePage(new PageConfiguration(page, this)));
 
         if (_pages[page] is IMustPrepareBeforeDisplay)
             ((IMustPrepareBeforeDisplay)_pages[page]).Prepare();
