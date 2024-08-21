@@ -1,4 +1,3 @@
-﻿namespace MauiApp1.AppPages
-{
-    internal record PageConfiguration(Pages Page, IApp App);
-}
+﻿namespace MauiApp1.AppPages;
+
+internal record PageConfiguration(Pages Page, IApp App);

@@ -99,31 +99,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AppPages\CategoryPage.xaml.cs">
+	  <Compile Update="AppPages\FormPages\CategoryForm\CategoryPage.xaml.cs">
 	    <DependentUpon>CategoryPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AppPages\NoConnectionPage.xaml.cs">
+	  <Compile Update="AppPages\StatusPages\NoConnectionPage.xaml.cs">
 	    <DependentUpon>NoConnectionPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AppPages\DescriptionPage.xaml">
+	  <MauiXaml Update="AppPages\FormPages\DescriptionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\LoadingPage.xaml">
+	  <MauiXaml Update="AppPages\StatusPages\LoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\LocalizationPage.xaml">
+	  <MauiXaml Update="AppPages\FormPages\LocalizationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\NoConnectionPage.xaml">
+	  <MauiXaml Update="AppPages\StatusPages\NoConnectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\PhotoPage.xaml">
+	  <MauiXaml Update="AppPages\FormPages\PhotoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\SendingCompletedPage.xaml">
+	  <MauiXaml Update="AppPages\StatusPages\SendingCompletedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

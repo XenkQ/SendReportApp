@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace MauiApp1.AppPages
+namespace MauiApp1.AppPages.Creation
 {
     internal static class PageFactory
     {
