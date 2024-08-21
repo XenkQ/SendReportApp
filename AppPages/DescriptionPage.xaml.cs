@@ -15,7 +15,7 @@ public partial class DescriptionPage : ContentPage, IFlowButtonHolder
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        _app.LoadPage(Pages.CategoryPage);
+        _app.DisplayPage(Pages.CategoryPage);
     }
 
     public void OnNextButtonClick(object sender, EventArgs e)
@@ -23,6 +23,6 @@ public partial class DescriptionPage : ContentPage, IFlowButtonHolder
         if (DescriptionField.Text != string.Empty)
             _app.UserDataToSend.Message = DescriptionField.Text;
 
-        _app.LoadPage(Pages.LocalizationPage);
+        _app.DisplayPage(Pages.LocalizationPage);
     }
 }

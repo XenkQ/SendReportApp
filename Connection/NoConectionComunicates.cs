@@ -1,6 +1,6 @@
 ﻿namespace MauiApp1.Connection;
 
-public enum NoConectionStates
+public enum NoConectionAnnouncements
 {
     NoInternetConnection,
     NoServerConnection

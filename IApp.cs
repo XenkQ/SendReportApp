@@ -7,7 +7,7 @@ namespace MauiApp1
     {
         IEnumerable<Task> GetPagesTasks();
         ISendDataHoldable UserDataToSend { get; }
-        void LoadPage(Pages page);
-        void LoadAppContent();
+        void DisplayPage(Pages page);
+        void LoadAllPagesIfConnection();
     }
 }

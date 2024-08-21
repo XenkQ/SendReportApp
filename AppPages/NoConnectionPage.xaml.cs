@@ -4,7 +4,7 @@ namespace MauiApp1;
 
 internal interface IDisplayConnectionInfo
 {
-	void DisplayConnectionText(NoConectionStates noConectionStates);
+	void DisplayConnectionText(NoConectionAnnouncements noConectionStates);
 }
 
 public partial class NoConnectionPage : ContentPage, IDisplayConnectionInfo
@@ -18,21 +18,21 @@ public partial class NoConnectionPage : ContentPage, IDisplayConnectionInfo
 	}
 
 	private void OnReconnectButtonClick(object sender, EventArgs e)
-		=> _app.LoadAppContent();
+		=> _app.LoadAllPagesIfConnection();
 
 
     public void OnExitButtonClick(object sender, EventArgs e)
 		=> Application.Current.Quit();
 
-	public void DisplayConnectionText(NoConectionStates noConectionStates)
+	public void DisplayConnectionText(NoConectionAnnouncements noConectionStates)
 	{
 		switch(noConectionStates)
 		{
-			case NoConectionStates.NoInternetConnection:
+			case NoConectionAnnouncements.NoInternetConnection:
 				ConnectionInfoLabel.Text = "Brak po³¹czenia z internetem!";
 				break;
 
-            case NoConectionStates.NoServerConnection:
+            case NoConectionAnnouncements.NoServerConnection:
                 ConnectionInfoLabel.Text = "Brak po³¹czenia z serwerem. Spróbuj ponownie póŸniej.";
                 break;
         }

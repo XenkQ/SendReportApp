@@ -36,7 +36,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        _app.LoadPage(Pages.DescriptionPage);
+        _app.DisplayPage(Pages.DescriptionPage);
     }
 
     public async void OnSubmitButtonClick(object sender, EventArgs e)
@@ -44,7 +44,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         if(_app.UserDataToSend.Longitude != default
             && _app.UserDataToSend.Latitude != default)
         {
-            _app.LoadPage(Pages.LoadingPage);
+            _app.DisplayPage(Pages.LoadingPage);
         }
         else
         {

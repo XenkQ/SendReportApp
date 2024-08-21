@@ -16,6 +16,6 @@ public partial class LoadingPage : ContentPage, IMustPrepareAfterLoad
     {
         Task.Run(() => Task.WaitAll(_app.GetPagesTasks().ToArray()))
 		.ContinueWith(_ => Application.Current.Dispatcher.Dispatch(() =>
-		_app.LoadPage(Pages.SendingCompletedPage)));
+		_app.DisplayPage(Pages.SendingCompletedPage)));
     }
 }

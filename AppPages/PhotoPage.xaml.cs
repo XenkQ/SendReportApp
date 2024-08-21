@@ -31,7 +31,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
     {
         if (_featuredPhotoPath != string.Empty)
         {
-            _app.LoadPage(Pages.CategoryPage);
+            _app.DisplayPage(Pages.CategoryPage);
         }
         else
         {

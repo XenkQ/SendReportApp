@@ -13,9 +13,11 @@ public partial class App : Application, IApp
     private IServerConnectionChecker _serverConnectionChecker;
     private ReadOnlyDictionary<Pages, Page> _pages;
     private readonly IDataSender _dataSender;
+    private IPagesPooler _pagesPooler;
+    private Pages _startFormPage = Pages.PhotoPage;
 
-    public App(IServerConnectionChecker serverConnectionChecker, IPagesPooler pagesPooler, ISendDataHoldable userDataToSend,
-        IDataSender dataSender)
+    public App(IServerConnectionChecker serverConnectionChecker, IPagesPooler pagesPooler,
+        ISendDataHoldable userDataToSend, IDataSender dataSender)
     {
         InitializeComponent();
 
@@ -25,43 +27,63 @@ public partial class App : Application, IApp
         UserDataToSend = userDataToSend;
         _dataSender = dataSender;
         _serverConnectionChecker = serverConnectionChecker;
+        _pagesPooler = pagesPooler;
 
-        _pages = pagesPooler.PoolAllPages(this);
-
-        MainPage = _pages[Pages.PhotoPage];
-        //LoadAppContent();
+        LoadAllPagesIfConnection();
+        DisplayPage(_startFormPage);
     }
 
-    public void LoadPage(Pages page)
+    public void DisplayPage(Pages page)
     {
-        MainPage = _pages[page];
+        if (!_pages.ContainsKey(page))
+            throw new NullReferenceException($"{page} is not pooled");
+
+        SetMainPage(_pages[page]);
 
         if (MainPage is IMustPrepareAfterLoad)
             ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
     }
 
-    public void LoadAppContent()
+    public void DisplayPage(Page page)
+        => SetMainPage(page);
+
+    private void SetMainPage(Page page)
+    {
+        MainPage = page;
+
+        if (MainPage is IMustPrepareAfterLoad)
+            ((IMustPrepareAfterLoad)MainPage).PrepareAfterLoad();
+    }
+
+    public void LoadAllPagesIfConnection()
     {
         bool isConnectedToNetwork = Connectivity.NetworkAccess == NetworkAccess.Internet;
         bool isConnectedToServer = true; /*_serverConnectionChecker.IsConnected(API_ENDPOINT, "/status");*/
 
         if (isConnectedToNetwork && isConnectedToServer)
-        {
-            MainPage = _pages[Pages.PhotoPage];
-        }
+            _pages = _pagesPooler.PoolAllPages(this);
+        else if(isConnectedToNetwork && !isConnectedToServer)
+            DisplayNoConnectionPage(Connection.NoConectionAnnouncements.NoServerConnection);
+        else if(!isConnectedToNetwork && isConnectedToServer)
+            DisplayNoConnectionPage(Connection.NoConectionAnnouncements.NoInternetConnection);
+    }
+
+    private void DisplayNoConnectionPage(Connection.NoConectionAnnouncements announcement)
+    {
+        var connectionPage = _pages.ContainsKey(Pages.NoConnectionPage) 
+            ? _pages[Pages.NoConnectionPage]
+            : PageFactory.CreatePage(new PageConfiguration(Pages.NoConnectionPage, this));
+        
+        if (_pages.ContainsKey(Pages.NoConnectionPage))
+            DisplayPage(Pages.NoConnectionPage);
         else
-        {
-            MainPage = _pages[Pages.NoConnectionPage];
+            DisplayPage(connectionPage);
 
-            var connectionTextDisplay = MainPage as IDisplayConnectionInfo;
+        var connectionTextDisplay = connectionPage as IDisplayConnectionInfo;
 
-            if (connectionTextDisplay == null) return;
-
-            if (isConnectedToServer)
-                connectionTextDisplay.DisplayConnectionText(Connection.NoConectionStates.NoInternetConnection);
-            else
-                connectionTextDisplay.DisplayConnectionText(Connection.NoConectionStates.NoServerConnection);
-        }
+        if (connectionTextDisplay == null) return;
+        
+        connectionTextDisplay.DisplayConnectionText(announcement);
     }
 
     public IEnumerable<Task> GetPagesTasks()

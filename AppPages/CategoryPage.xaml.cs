@@ -18,7 +18,7 @@ public partial class CategoryPage : ContentPage, IFlowButtonHolder
     public void OnBackButtonClick(object sender, EventArgs e)
     {
         
-        _app.LoadPage(Pages.PhotoPage);
+        _app.DisplayPage(Pages.PhotoPage);
     }
 
     public async void OnNextButtonClick(object sender, EventArgs e)
@@ -26,7 +26,7 @@ public partial class CategoryPage : ContentPage, IFlowButtonHolder
         if(_userCategorChoice != null)
         {
             _app.UserDataToSend.Category = (int)_userCategorChoice;
-            _app.LoadPage(Pages.DescriptionPage);
+            _app.DisplayPage(Pages.DescriptionPage);
         }
         else
         {
