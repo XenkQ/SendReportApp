@@ -28,7 +28,7 @@ public static class MauiProgram
                 new ApiConnection(apiSettings.ApiSettings),
                 new PagePooler(),
                 new SendDataHolder(),
-                new DataSender()
+                new ApiDataSender()
             ))
             .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
