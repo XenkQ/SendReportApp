@@ -7,7 +7,6 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
 using System.Text.Json;
 using MauiApp1.DTOs;
-using Microsoft.Maui.Controls.Hosting;
 
 namespace MauiApp1;
 

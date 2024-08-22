@@ -1,13 +1,10 @@
 using Mapsui.Projections;
 using MauiApp1.GUI.FlowButtons;
 using Mapsui.Extensions;
-using Mapsui.Layers;
-using Mapsui.Styles;
-using Brush = Mapsui.Styles.Brush;
-using Color = Mapsui.Styles.Color;
 using Mapsui.UI.Maui;
 using Mapsui;
 using MauiApp1.AppPages;
+using MauiApp1.AppPages.Geolocation;
 
 namespace MauiApp1;
 
@@ -71,31 +68,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
                 _app.UserDataToSend.Longitude = location.Longitude;
                 _app.UserDataToSend.Latitude = location.Latitude;
 
-                var currentUserLocation = SphericalMercator.FromLonLat(
-                    location.Longitude, location.Latitude).ToMPoint();
-
-                _mapControl.Map.Navigator.PanLock = false;
-                _mapControl.Map.Navigator.CenterOnAndZoomTo(currentUserLocation, 0.5f);
-
-                var pinFeature = new PointFeature(currentUserLocation);
-                var pinStyle = new SymbolStyle
-                {
-                    SymbolType = SymbolType.Ellipse,
-                    Fill = new Brush(Color.Red),
-                    Outline = new Pen(Color.Black, 2),
-                    SymbolScale = 0.8
-                };
-
-                pinFeature.Styles.Add(pinStyle);
-                var pinLayer = new MemoryLayer
-                {
-                    Name = "Pin Layer",
-                    Features = [pinFeature]
-                };
-                _mapControl.Map.Layers.Add(pinLayer);
-
-                LocalizationMap.Content = _mapControl;
-                _mapControl.Map.Navigator.PanLock = true;
+                MapLocationDisplayer.DisplayLocationOnMap(LocalizationMap, _mapControl, location);
             }
         }
         else
