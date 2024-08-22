@@ -12,9 +12,9 @@ internal class ApiConnection : IServerConnectionChecker
 {
     private readonly ApiSettings _apiSettings;
 
-    public ApiConnection(IOptions<ApiSettings> settings)
+    public ApiConnection(ApiSettings apiSettings)
     {
-        _apiSettings = settings.Value;
+        _apiSettings = apiSettings;
     }
 
     public bool IsConnected()

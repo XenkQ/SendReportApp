@@ -17,7 +17,6 @@ public interface IApp
 
 public partial class App : Application, IApp
 {
-    public static string API_ENDPOINT = @"";
     public ISendDataHoldable UserDataToSend { get; private set; }
     private IServerConnectionChecker _serverConnectionChecker;
     private Dictionary<Pages, Page> _pages = new ();

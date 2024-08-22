@@ -4,10 +4,10 @@ using MauiApp1.Data.Storing;
 using MauiApp1.AppPages.Creation;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using System.Text.Json;
 using MauiApp1.DTOs;
-using Microsoft.Extensions.Options;
+using Microsoft.Maui.Controls.Hosting;
 
 namespace MauiApp1;
 
@@ -21,17 +21,11 @@ public static class MauiProgram
         Console.WriteLine($"{assembly.GetName().Name}.appsettings.json");
         using var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.appsettings.json");
 
-        var config = new ConfigurationBuilder()
-            .AddJsonStream(stream)
-            .Build();
-
-        builder.Configuration.AddConfiguration(config);
-
-        builder.Services.Configure<ApiSettings>(_ => config.GetSection("ApiSettings"));
+        var apiSettings = JsonSerializer.Deserialize<SettingsRoot>(stream);
 
         builder
             .UseMauiApp(serviceProvider => new App(
-                new ApiConnection(serviceProvider.GetRequiredService<IOptions<ApiSettings>>()),
+                new ApiConnection(apiSettings.ApiSettings),
                 new PagePooler(),
                 new SendDataHolder(),
                 new DataSender()
