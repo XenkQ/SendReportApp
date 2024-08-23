@@ -7,6 +7,7 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
 using System.Text.Json;
 using MauiApp1.DTOs;
+using CommunityToolkit.Maui;
 
 namespace MauiApp1;
 
@@ -26,9 +27,10 @@ public static class MauiProgram
             .UseMauiApp(serviceProvider => new App(
                 new ApiConnection(apiSettings.ApiSettings),
                 new PagePooler(),
-                new SendDataHolder(),
-                new ApiDataSender()
+                new AlertDataToSend(),
+                new ApiDataSender(apiSettings.ApiSettings)
             ))
+            .UseMauiCommunityToolkit()
             .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
             {
