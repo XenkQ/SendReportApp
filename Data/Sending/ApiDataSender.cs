@@ -7,15 +7,22 @@ namespace MauiApp1.Data.Sending;
 
 internal class ApiDataSender : IDataSender
 {
-    public async Task<HttpResponseMessage> SendDataAsync(ISendDataHoldable dataHolder, ApiSettings apiSettings)
+    private ApiSettings _apiSettings;
+
+    public ApiDataSender(ApiSettings apiSettings)
+    {
+        _apiSettings = apiSettings;
+    }
+
+    public async Task<HttpResponseMessage> SendDataAsync(IAlertDataToSend dataHolder)
     {
         try
         {
             string jsonData = JsonSerializer.Serialize(dataHolder);
             using HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(apiSettings.BaseUrl);
+            client.BaseAddress = new Uri(_apiSettings.BaseUrl);
             var content = new StringContent(jsonData, encoding: Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(apiSettings.UploadPath, content);
+            HttpResponseMessage response = await client.PostAsync(_apiSettings.UploadPath, content);
             response.EnsureSuccessStatusCode();
             return response;
         }

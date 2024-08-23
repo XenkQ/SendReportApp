@@ -15,7 +15,7 @@ public partial class FormSendLoadingPage : ContentPage, IMustPrepareBeforeDispla
     public void Prepare()
     {
         Task.Run(() => Task.WaitAll(GetAllTasksFromForms()))
-        .ContinueWith(_ => _app.DataSender.SendDataAsync(_app.UserDataToSend, _app.SettingsRoot.ApiSettings))
+        .ContinueWith(_ => _app.DataSender.SendDataAsync(_app.UserDataToSend))
         .ContinueWith(_ => DisplaySendingResultPage());
     }
 

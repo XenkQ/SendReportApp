@@ -1,10 +1,9 @@
 ﻿namespace MauiApp1.Data.Storing
 {
-    internal class SendDataHolder : ISendDataHoldable
+    internal class AlertDataToSend : IAlertDataToSend
     {
-        public string IMEI { get; set; } = string.Empty;
+        public string Id { get; set; } = "d4fb8586-101f-4dff-a91e-2488b8214ba3";
         public string Message { get; set; } = string.Empty;
-        public string Localization { get; set; } = string.Empty;
         public string Base64Image { get; set; } = string.Empty;
         public int Category { get; set; }
         public double Latitude { get; set; }

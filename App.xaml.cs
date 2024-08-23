@@ -5,12 +5,13 @@ using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using MauiApp1.DTOs;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace MauiApp1;
 
 public interface IApp
 {
-    ISendDataHoldable UserDataToSend { get; init; }
+    IAlertDataToSend UserDataToSend { get; init; }
     IDataSender DataSender { get; init; }
     SettingsRoot SettingsRoot { get; }
     ReadOnlyDictionary<Pages, Page> GetLoadedPages();
@@ -20,7 +21,7 @@ public interface IApp
 
 public partial class App : Application, IApp
 {
-    public ISendDataHoldable UserDataToSend { get; init; }
+    public IAlertDataToSend UserDataToSend { get; init; }
     public IDataSender DataSender { get; init; }
     public SettingsRoot SettingsRoot { get; private set; }
 
@@ -30,7 +31,7 @@ public partial class App : Application, IApp
     private readonly Pages _startFormPage = Pages.PhotoPage;
 
     public App(IServerConnectionChecker serverConnectionChecker, IPagesPooler pagesPooler,
-        ISendDataHoldable userDataToSend, IDataSender dataSender)
+        IAlertDataToSend userDataToSend, IDataSender dataSender)
     {
         InitializeComponent();
 
