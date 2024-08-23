@@ -3,6 +3,7 @@
     x:Class="MauiApp1.LocalizationPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviours="clr-namespace:MauiApp1.ElementsBehaviour"
     Title="LocalizationPage">
 
     <ScrollView VerticalOptions="Fill">
@@ -45,8 +46,15 @@
                 x:Name="LocalizationMap"
                 Grid.Row="2"
                 Margin="8,0"
+                BindingContext="Content"
+                BindingContextChanged="OnContentChange"
                 HorizontalOptions="Fill"
-                VerticalOptions="Fill" />
+                VerticalOptions="Fill">
+
+                <ContentView.Behaviors>
+                    <behaviours:ContentChangeBehavior x:Name="MapContentChangeBehavior" />
+                </ContentView.Behaviors>
+            </ContentView>
 
             <HorizontalStackLayout
                 Grid.Row="3"

@@ -5,6 +5,7 @@ using Mapsui.UI.Maui;
 using Mapsui;
 using MauiApp1.AppPages;
 using MauiApp1.AppPages.Geolocation;
+using CommunityToolkit.Maui.Views;
 
 namespace MauiApp1;
 
@@ -17,6 +18,9 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
     private readonly MapControl _mapControl;
     private readonly MPoint _startLocation;
 
+    private readonly LoadingPopup _loadingPopup;
+    private bool _IsLoading;
+
     public LocalizationPage(IApp app)
 	{
 		InitializeComponent();
@@ -27,8 +31,10 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         _startLocation = SphericalMercator.FromLonLat(STARTING_LONGITUDE, STARTING_LATITUDE).ToMPoint();
         _mapControl.Map.Navigator.CenterOnAndZoomTo(_startLocation, 2f);
         _mapControl.Map.Navigator.PanLock = true;
-
+        
         LocalizationMap.Content = _mapControl;
+        MapContentChangeBehavior.ContentChanged += OnContentChange!;
+        _loadingPopup = new LoadingPopup();
     }
 
     public void OnBackButtonClick(object sender, EventArgs e)
@@ -68,6 +74,9 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
                 _app.UserDataToSend.Longitude = location.Longitude;
                 _app.UserDataToSend.Latitude = location.Latitude;
 
+                _IsLoading = true;
+                this.ShowPopup(_loadingPopup);
+
                 MapLocationDisplayer.DisplayLocationOnMap(LocalizationMap, _mapControl, location);
             }
         }
@@ -75,6 +84,15 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         {
             await DisplayAlert("Nie mo¿na pobraæ lokalizacji urz¹dzenia!",
                 "Lokalizacja jest niezbêdna w celu potwierdzenia zg³oszenia. Upewnij siê czy aplikacja ma uprawnienia dostêpu do lokalizacji", "OK");
+        }
+    }
+
+    public void OnContentChange(object sender, EventArgs e)
+    {
+        if(_IsLoading)
+        {
+            _loadingPopup.Close();
+            _IsLoading = false;
         }
     }
 }
