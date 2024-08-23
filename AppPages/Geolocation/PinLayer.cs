@@ -6,9 +6,9 @@ using Color = Mapsui.Styles.Color;
 
 namespace MauiApp1.AppPages.Geolocation;
 
-internal static class Pin
+internal static class PinLayer
 {
-    private const string PIN_LAYER_NAME = "Pin Layer";
+    private const string PIN_LAYER_NAME = "PinLayer Layer";
     public readonly static SymbolStyle DefaultPinStyle = new SymbolStyle
     {
         SymbolType = SymbolType.Ellipse,
@@ -17,7 +17,7 @@ internal static class Pin
         SymbolScale = 0.8
     };
 
-    public static void AddToMap(Mapsui.Map map, MPoint locationOnMap, SymbolStyle pinStyle)
+    public static void DisplaySinglePinOnMap(Mapsui.Map map, MPoint locationOnMap, SymbolStyle pinStyle)
     {
         var pinFeature = new PointFeature(locationOnMap);
 
@@ -28,6 +28,7 @@ internal static class Pin
             Features = [pinFeature]
         };
 
+        map.Layers.Remove(c => c.Name == PIN_LAYER_NAME);
         map.Layers.Add(pinLayer);
     }
 }
