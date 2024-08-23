@@ -10,7 +10,7 @@ public enum ConectionStatuses
 
 internal static class ConnectionStatus
 {
-    public static ConectionStatuses Get(IServerConnectionChecker serverConnectionChecker)
+    public static ConectionStatuses GetCurrentStatus(IServerConnectionChecker serverConnectionChecker)
     {
         bool isConnectedToNetwork = Connectivity.NetworkAccess == NetworkAccess.Internet;
         bool isConnectedToServer = serverConnectionChecker.IsConnected();

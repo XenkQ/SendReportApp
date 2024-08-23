@@ -6,7 +6,7 @@ internal static class NoConnectionDisplayer
 {
     public static bool DisplayIfNoConnection(IApp app, IServerConnectionChecker serverConnectionChecker)
     {
-        switch (ConnectionStatus.Get(serverConnectionChecker))
+        switch (ConnectionStatus.GetCurrentStatus(serverConnectionChecker))
         {
             case ConectionStatuses.NoInternetConnection:
                 DisplayNoConnectionPage(app, ConectionStatuses.NoInternetConnection);
