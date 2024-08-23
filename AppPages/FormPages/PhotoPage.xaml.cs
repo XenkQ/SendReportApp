@@ -1,8 +1,6 @@
 ﻿using MauiApp1.GUI.FlowButtons;
 using MauiApp1.AppPages;
 using MauiApp1.Data.Processors;
-using MauiApp1.Connection;
-
 
 #if ANDROID
 using Android.Graphics;
@@ -16,8 +14,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 {
     private readonly IApp _app;
     private string _featuredPhotoPath = string.Empty;
-    private string _base64Image = string.Empty;
-    public Task<string> _processingTask { get; private set; }
+    public Task _processingTask { get; private set; }
     public CancellationTokenSource CancellationTokenSource { get; private set; }
 
     public PhotoPage(IApp app)
@@ -53,7 +50,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
         {
             _featuredPhotoPath = photoFile.FullPath;
             SetFeaturePhoto(_featuredPhotoPath);
-            StartProcessingDataInBackground();
+            _processingTask = StartProcessingDataInBackground();
         }
     }
 
@@ -76,7 +73,7 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
 
     public Task GetProcessedTask() => _processingTask;
 
-    public void StartProcessingDataInBackground()
+    public Task StartProcessingDataInBackground()
     {
         if(_processingTask != default)
         {
@@ -87,8 +84,11 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
         CancellationTokenSource.TryReset();
 
 #if ANDROID
-        _processingTask = Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
-                Bitmap.CompressFormat.WebpLossless!, 100), CancellationTokenSource.Token);
+        return Task.Run(() => ImageManipulator.GetImageResizedImageAsBase64(_featuredPhotoPath,
+                Bitmap.CompressFormat.Jpeg!, 100), CancellationTokenSource.Token)
+            .ContinueWith(task => _app.UserDataToSend.Base64Image = task.Result);
 #endif
+
+        return Task.CompletedTask;
     }
 }
