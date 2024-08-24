@@ -26,9 +26,9 @@ public static class MauiProgram
         builder
             .UseMauiApp(serviceProvider => new App(
                 new ApiConnection(apiSettings.ApiSettings),
+                new ApiDataSender(apiSettings.ApiSettings),
                 new PagePooler(),
-                new AlertDataToSend(),
-                new ApiDataSender(apiSettings.ApiSettings)
+                new AlertDataToSend()
             ))
             .UseMauiCommunityToolkit()
             .UseSkiaSharp(true)

@@ -5,15 +5,14 @@ using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using MauiApp1.DTOs;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 
 namespace MauiApp1;
 
 public interface IApp
 {
-    IAlertDataToSend UserDataToSend { get; init; }
     IDataSender DataSender { get; init; }
     SettingsRoot SettingsRoot { get; }
+    AlertDataToSend UserDataToSend { get; init; }
     ReadOnlyDictionary<Pages, Page> GetLoadedPages();
     void DisplayPage(Pages page);
     void ReloadPages();
@@ -21,27 +20,27 @@ public interface IApp
 
 public partial class App : Application, IApp
 {
-    public IAlertDataToSend UserDataToSend { get; init; }
     public IDataSender DataSender { get; init; }
     public SettingsRoot SettingsRoot { get; private set; }
+    public AlertDataToSend UserDataToSend { get; init; }
 
     private readonly IServerConnectionChecker _serverConnectionChecker;
     private readonly IPagesPooler _pagesPooler;
     private Dictionary<Pages, Page> _pages = new ();
     private readonly Pages _startFormPage = Pages.PhotoPage;
 
-    public App(IServerConnectionChecker serverConnectionChecker, IPagesPooler pagesPooler,
-        IAlertDataToSend userDataToSend, IDataSender dataSender)
+    public App(IServerConnectionChecker serverConnectionChecker, IDataSender dataSender,
+        IPagesPooler pagesPooler, AlertDataToSend alertDataToSend)
     {
         InitializeComponent();
 
         //Currently only light theme available
         UserAppTheme = AppTheme.Light;
 
-        UserDataToSend = userDataToSend;
         DataSender = dataSender;
         _serverConnectionChecker = serverConnectionChecker;
         _pagesPooler = pagesPooler;
+        UserDataToSend = alertDataToSend;
 
         ReloadPages();
     }

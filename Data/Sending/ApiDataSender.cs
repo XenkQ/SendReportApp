@@ -14,11 +14,11 @@ internal class ApiDataSender : IDataSender
         _apiSettings = apiSettings;
     }
 
-    public async Task<HttpResponseMessage> SendDataAsync(IAlertDataToSend dataHolder)
+    public async Task<HttpResponseMessage> SendDataAsync(AlertDataToSend alertDataToSend)
     {
         try
         {
-            string jsonData = JsonSerializer.Serialize(dataHolder);
+            string jsonData = JsonSerializer.Serialize(alertDataToSend);
             using HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(_apiSettings.BaseUrl);
             var content = new StringContent(jsonData, encoding: Encoding.UTF8, "application/json");
