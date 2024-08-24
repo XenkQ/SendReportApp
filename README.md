@@ -35,6 +35,6 @@ After writing report your data will be sended to combined location of api endpoi
 
 ## Roadmap
 
-- Currently only support for Polish language so 3 new leaguages support - Anglish, Deuth, Ukrainian
+- Currently only support for Polish language so 3 new leaguages support - Anglish, German, Ukrainian
 
 - More pleasing visual effects
