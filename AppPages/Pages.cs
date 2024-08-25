@@ -8,5 +8,5 @@ public enum Pages
     DescriptionPage,
     LocalizationPage,
     SendingCompletedPage,
-    FormSendLoadingPage
+    ReportSendLoadingPage
 }

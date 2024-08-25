@@ -2,11 +2,11 @@ using MauiApp1.AppPages;
 
 namespace MauiApp1;
 
-public partial class FormSendLoadingPage : ContentPage, IMustPrepareBeforeDisplay
+public partial class ReportSendLoadingPage : ContentPage, IMustPrepareBeforeDisplay
 {
 	private readonly IApp _app;
 
-	public FormSendLoadingPage(IApp app)
+	public ReportSendLoadingPage(IApp app)
 	{
 		InitializeComponent();
 		_app = app;
