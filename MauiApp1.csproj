@@ -108,6 +108,9 @@
 	  <Compile Update="AppPages\FormPages\CategoryForm\CategoryPage.xaml.cs">
 	    <DependentUpon>CategoryPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="AppPages\StatusPages\ReportSendLoadingPage.xaml.cs">
+	    <DependentUpon>ReportSendLoadingPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="AppPages\StatusPages\NoConnectionPage.xaml.cs">
 	    <DependentUpon>NoConnectionPage.xaml</DependentUpon>
 	  </Compile>
@@ -117,7 +120,7 @@
 	  <MauiXaml Update="AppPages\FormPages\DescriptionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\LoadingPage.xaml">
+	  <MauiXaml Update="AppPages\StatusPages\ReportSendLoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="AppPages\FormPages\LocalizationPage.xaml">
