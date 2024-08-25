@@ -46,7 +46,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         if(_app.UserDataToSend.Longitude != default
             && _app.UserDataToSend.Latitude != default)
         {
-            _app.DisplayPage(Pages.FormSendLoadingPage);
+            _app.DisplayPage(Pages.ReportSendLoadingPage);
         }
         else
         {
