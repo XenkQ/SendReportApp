@@ -107,7 +107,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AppPages\FormPages\CategoryForm\CategoryPage.xaml.cs">
+	  <Compile Update="AppPages\FormPages\Category\CategoryPage.xaml.cs">
 	    <DependentUpon>CategoryPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="AppPages\StatusPages\ReportSendLoadingPage.xaml.cs">

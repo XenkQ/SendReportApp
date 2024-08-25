@@ -1,5 +1,5 @@
 ﻿using MauiApp1.AppPages;
-using MauiApp1.AppPages.FormPages.CategoryForm;
+using MauiApp1.AppPages.FormPages.Category;
 using MauiApp1.GUI.FlowButtons;
 
 namespace MauiApp1;
