@@ -2,7 +2,7 @@
 
 public sealed class AlertDataToSend
 {
-    public string Id { get; set; } = "d4fb8586-101f-4dff-a91e-2488b8214ba3";
+    public string UserId { get; set; } = "d4fb8586-101f-4dff-a91e-2488b8214ba3";
     public string Message { get; set; } = string.Empty;
     public string Base64Image { get; set; } = string.Empty;
     public int Category { get; set; }
