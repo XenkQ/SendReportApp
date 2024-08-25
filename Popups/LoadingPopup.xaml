@@ -1,11 +1,31 @@
-<toolkit:Popup
+﻿<toolkit:Popup
     x:Class="MauiApp1.LoadingPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <VerticalStackLayout>
-        <Label Text="Loading..." />
-    </VerticalStackLayout>
+    <HorizontalStackLayout
+        Margin="8,0"
+        Padding="25"
+        BackgroundColor="White"
+        Spacing="15"
+        VerticalOptions="Center">
+
+        <ActivityIndicator
+            HeightRequest="40"
+            HorizontalOptions="End"
+            IsRunning="True"
+            IsVisible="True"
+            WidthRequest="40"
+            Color="{StaticResource My_DarkBlue}" />
+
+        <Label
+            HorizontalTextAlignment="Start"
+            Text="Proszę czekać..."
+            TextColor="Black"
+            VerticalOptions="Center"
+            VerticalTextAlignment="Center" />
+
+    </HorizontalStackLayout>
 
 </toolkit:Popup>

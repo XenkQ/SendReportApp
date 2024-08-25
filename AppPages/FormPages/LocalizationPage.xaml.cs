@@ -1,4 +1,4 @@
-using Mapsui.Projections;
+ï»¿using Mapsui.Projections;
 using MauiApp1.GUI.FlowButtons;
 using Mapsui.Extensions;
 using Mapsui.UI.Maui;
@@ -18,7 +18,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
     private readonly MapControl _mapControl;
     private readonly MPoint _startLocation;
 
-    private readonly LoadingPopup _loadingPopup;
+    private LoadingPopup _loadingPopup = new();
     private bool _IsLoading;
 
     public LocalizationPage(IApp app)
@@ -34,7 +34,6 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         
         LocalizationMap.Content = _mapControl;
         MapContentChangeBehavior.ContentChanged += OnContentChange!;
-        _loadingPopup = new LoadingPopup();
     }
 
     public void OnBackButtonClick(object sender, EventArgs e)
@@ -51,8 +50,9 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         }
         else
         {
-            await DisplayAlert("Nie posiadamy twojej lokalizacji", "Lokalizacja jest niezbêdna dla zg³oszenia." +
-                " Upewnij siê, ¿e wcisn¹³eœ przycisk \"Wyœlij lokalizacjê\"", "OK");
+            await DisplayAlert("Nie posiadamy twojej lokalizacji", "Lokalizacja jest niezbÄ™dna dla przyjÄ™cia zgÅ‚oszenia." +
+                " Upewnij siÄ™, Å¼e lokalizacja zostaÅ‚a udostÄ™pniona poprzez klikniÄ™cie przycisku \"WyÅ›lij LokalizacjÄ™\"" +
+                " i wyraÅ¼eniu zgody na dokÅ‚adnÄ… lokalizacjÄ™.", "OK");
         }
     }
 
@@ -67,6 +67,9 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         if (status == PermissionStatus.Granted)
         {
             GeolocationRequest geolocationRequest = new GeolocationRequest(GeolocationAccuracy.Best);
+
+            this.ShowPopup(_loadingPopup);
+
             var location = await Geolocation.GetLocationAsync(geolocationRequest);
 
             if (location != null)
@@ -75,15 +78,14 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
                 _app.UserDataToSend.Latitude = location.Latitude;
 
                 _IsLoading = true;
-                this.ShowPopup(_loadingPopup);
 
                 MapLocationDisplayer.DisplayLocationOnMap(LocalizationMap, _mapControl, location);
             }
         }
         else
         {
-            await DisplayAlert("Nie mo¿na pobraæ lokalizacji urz¹dzenia!",
-                "Lokalizacja jest niezbêdna w celu potwierdzenia zg³oszenia. Upewnij siê czy aplikacja ma uprawnienia dostêpu do lokalizacji", "OK");
+            await DisplayAlert("Nie moÅ¼na pobraÄ‡ lokalizacji urzÄ…dzenia!",
+                "Lokalizacja jest niezbÄ™dna w celu potwierdzenia zgÅ‚oszenia. Upewnij siÄ™ Å¼e aplikacja ma uprawnienia dostÄ™pu do lokalizacji", "OK");
         }
     }
 
@@ -93,6 +95,7 @@ public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISub
         {
             _loadingPopup.Close();
             _IsLoading = false;
+            _loadingPopup = new LoadingPopup();
         }
     }
 }
