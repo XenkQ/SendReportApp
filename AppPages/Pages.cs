@@ -7,6 +7,7 @@ public enum Pages
     CategoryPage,
     DescriptionPage,
     LocalizationPage,
-    SendingCompletedPage,
+    UnsuccessfulSendingPage,
+    SuccessfulSendingPage,
     ReportSendLoadingPage
 }

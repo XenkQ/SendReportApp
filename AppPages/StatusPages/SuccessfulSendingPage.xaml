@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.SendingCompletedPage"
+    x:Class="MauiApp1.SuccessfulSendingPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="SendingCompletedPage">
+    Title="SuccessfulSendingPage">
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
 
@@ -14,15 +14,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <VerticalStackLayout
+                Grid.Row="0"
                 Margin="8,0"
                 Spacing="25"
                 VerticalOptions="CenterAndExpand">
                 <Label
-                    Grid.Row="0"
                     HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"
                     SemanticProperties.HeadingLevel="Level1"
@@ -32,15 +31,12 @@
 
                 <Image
                     Aspect="AspectFit"
-                    MaximumHeightRequest="300"
-                    MaximumWidthRequest="300"
+                    MaximumHeightRequest="200"
+                    MaximumWidthRequest="200"
                     Source="check_circle" />
             </VerticalStackLayout>
 
-            <Grid
-                Grid.Row="1"
-                Margin="8,0,8,10"
-                ColumnSpacing="10">
+            <Grid Grid.Row="1" Margin="8,0,8,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -50,7 +46,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Clicked="OnExitButtonClick"
-                    SemanticProperties.Hint="Going Back To Last Page"
+                    SemanticProperties.Hint="Exit app"
                     Style="{StaticResource FlowButton}"
                     Text="Wyjdź" />
             </Grid>

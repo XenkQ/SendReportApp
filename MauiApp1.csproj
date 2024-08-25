@@ -78,8 +78,10 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\check_circle.svg" BaseSize="200,200" />
+		<MauiImage Include="Resources\Images\x_circle.svg" BaseSize="200,200" />
 		<MauiImage Include="Resources\Images\wifi_off.svg" BaseSize="200,200" />
 		<MauiImage Include="Resources\Images\no_photo.svg" BaseSize="300,300" />
+		
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -114,6 +116,9 @@
 	  <Compile Update="AppPages\StatusPages\NoConnectionPage.xaml.cs">
 	    <DependentUpon>NoConnectionPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="AppPages\StatusPages\UnsuccessfulSendingPage.xaml.cs">
+	    <DependentUpon>UnsuccessfulSendingPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -132,10 +137,13 @@
 	  <MauiXaml Update="AppPages\FormPages\PhotoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\SendingCompletedPage.xaml">
+	  <MauiXaml Update="AppPages\StatusPages\UnsuccessfulSendingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Popups\LoadingPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AppPages\StatusPages\SuccessfulSendingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

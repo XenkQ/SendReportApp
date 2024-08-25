@@ -1,10 +1,13 @@
+
+using MauiApp1.GUI.ButtonHolders;
+
 namespace MauiApp1;
 
-public partial class SendingCompletedPage : ContentPage
+public partial class SuccessfulSendingPage : ContentPage, IExitButtonHolder
 {
     private readonly IApp _app;
 
-    public SendingCompletedPage(IApp app)
+    public SuccessfulSendingPage(IApp app)
     {
         InitializeComponent();
         _app = app;
