@@ -20,7 +20,7 @@ public partial class DescriptionPage : ContentPage, IFlowButtonHolder
 
     public void OnNextButtonClick(object sender, EventArgs e)
     {
-        if (DescriptionField.Text != string.Empty)
+        if (!string.IsNullOrEmpty(DescriptionField.Text))
             _app.UserDataToSend.Message = DescriptionField.Text;
 
         _app.DisplayPage(Pages.LocalizationPage);
