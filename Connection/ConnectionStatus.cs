@@ -19,7 +19,7 @@ internal static class ConnectionStatus
             return ConectionStatuses.NoServerConnection;
         else if (!isConnectedToNetwork && isConnectedToServer)
             return ConectionStatuses.NoInternetConnection;
-        else if(isConnectedToNetwork && !isConnectedToServer)
+        else if(!isConnectedToNetwork && !isConnectedToServer)
             return ConectionStatuses.NoServerAndInternetConnection;
         else
             return ConectionStatuses.Connected;

@@ -15,6 +15,10 @@ internal static class NoConnectionDisplayer
             case ConectionStatuses.NoServerConnection:
                 DisplayNoConnectionPage(app, ConectionStatuses.NoServerConnection);
                 return true;
+
+            case ConectionStatuses.NoServerAndInternetConnection:
+                DisplayNoConnectionPage(app, ConectionStatuses.NoServerAndInternetConnection);
+                return true;
         }
 
         return false;
