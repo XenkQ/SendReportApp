@@ -18,7 +18,7 @@ public partial class NoConnectionPage : ContentPage, IDisplayConnectionInfo
 	}
 
 	private void OnReconnectButtonClick(object sender, EventArgs e)
-		=> _app.ReloadPages();
+		=> _app.RefreshPages();
 
 
     public void OnExitButtonClick(object sender, EventArgs e)

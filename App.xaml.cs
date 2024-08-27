@@ -4,6 +4,7 @@ using MauiApp1.Connection;
 using MauiApp1.Data.Sending;
 using MauiApp1.Data.Storing;
 using MauiApp1.DTOs;
+using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using System.Collections.ObjectModel;
 
 namespace MauiApp1;
@@ -15,7 +16,7 @@ public interface IApp
     AlertDataToSend UserDataToSend { get; init; }
     ReadOnlyDictionary<Pages, Page> GetLoadedPages();
     void DisplayPage(Pages page);
-    void ReloadPages();
+    void RefreshPages();
 }
 
 public partial class App : Application, IApp
@@ -26,7 +27,7 @@ public partial class App : Application, IApp
 
     private readonly IServerConnectionChecker _serverConnectionChecker;
     private readonly IPagesPooler _pagesPooler;
-    private Dictionary<Pages, Page> _pages = new ();
+    private Dictionary<Pages, Page> _pages = new();
     private readonly Pages _startFormPage = Pages.PhotoPage;
 
     public App(IServerConnectionChecker serverConnectionChecker, IDataSender dataSender,
@@ -42,16 +43,16 @@ public partial class App : Application, IApp
         _pagesPooler = pagesPooler;
         UserDataToSend = alertDataToSend;
 
-        ReloadPages();
+        RefreshPages();
     }
 
-    public void ReloadPages()
+    public void RefreshPages()
     {
-        if (!NoConnectionDisplayer.DisplayIfNoConnection(this, _serverConnectionChecker))
-        {
-            _pages = new(_pagesPooler.PoolAllPages(this));
-            DisplayPage(_startFormPage);
-        }
+        if (NoConnectionDisplayer.DisplayIfNoConnection(this, _serverConnectionChecker))
+            return;
+            
+        _pages = new(_pagesPooler.PoolAllPages(this));
+        DisplayPage(_startFormPage);
     }
 
     public ReadOnlyDictionary<Pages, Page> GetLoadedPages()
