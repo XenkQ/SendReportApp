@@ -2,9 +2,7 @@
 using MauiApp1.AppPages.Creation;
 using MauiApp1.Connection;
 using MauiApp1.Data.Sending;
-using MauiApp1.Data.Storing;
-using MauiApp1.DTOs;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+using MauiApp1.Model;
 using System.Collections.ObjectModel;
 
 namespace MauiApp1;

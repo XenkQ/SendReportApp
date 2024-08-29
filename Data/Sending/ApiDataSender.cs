@@ -1,5 +1,4 @@
-﻿using MauiApp1.Data.Storing;
-using MauiApp1.DTOs;
+﻿using MauiApp1.Model;
 using System.Text;
 using System.Text.Json;
 

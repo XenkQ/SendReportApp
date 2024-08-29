@@ -1,8 +1,7 @@
 ﻿using MauiApp1.AppPages;
-using MauiApp1.AppPages.FormPages.Category;
 using MauiApp1.GUI.FlowButtons;
 
-namespace MauiApp1;
+namespace MauiApp1.View.FormPages;
 
 //TODO: Can bind radio buttons value to categories enum
 public partial class CategoryPage : ContentPage, IFlowButtonHolder

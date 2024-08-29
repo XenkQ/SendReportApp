@@ -7,7 +7,7 @@ using Android.Graphics;
 using MauiApp1.Platforms.Android;
 #endif
 
-namespace MauiApp1;
+namespace MauiApp1.View.FormPages;
 
 public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
     IMustPrepareBeforeDisplay, IProcessDataInBackground

@@ -1,13 +1,13 @@
 ﻿using MauiApp1.Connection;
 using MauiApp1.Data.Sending;
-using MauiApp1.Data.Storing;
 using MauiApp1.AppPages.Creation;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
 using System.Text.Json;
-using MauiApp1.DTOs;
 using CommunityToolkit.Maui;
+using MauiApp1.Model;
+using MauiApp1.ViewModel.Forms;
 
 namespace MauiApp1;
 
@@ -37,6 +37,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        builder.Services.AddSingleton<AlertDataToSend>();
+        builder.Services.AddSingleton<FormDescriptionViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

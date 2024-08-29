@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.Data.Storing;
+﻿namespace MauiApp1.Model;
 
 public sealed class AlertDataToSend
 {

@@ -1,4 +1,4 @@
-﻿using MauiApp1.Data.Storing;
+﻿using MauiApp1.Model;
 
 namespace MauiApp1.Data.Sending;
 

@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.AppPages.FormPages.Category;
+﻿namespace MauiApp1;
 
 public enum Categories
 {

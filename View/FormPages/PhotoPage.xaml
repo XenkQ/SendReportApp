@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.DescriptionPage"
+    x:Class="MauiApp1.View.FormPages.PhotoPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="DescriptionPage">
+    Title="PhotoPage">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
@@ -18,6 +18,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label
@@ -28,7 +29,7 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Opis"
+                Text="Zdjęcie"
                 TextColor="White"
                 WidthRequest="-1" />
 
@@ -36,20 +37,15 @@
                 Grid.Row="1"
                 Margin="8,0"
                 Style="{StaticResource InfoBorder}">
-
-                <Label Text="(Opcjonalne) Możesz dodać opis zgłoszenia, który pomoże w sprawnej definicji problemu i przyśpieszy jego realizację. Twój opis nie może mieć więcej niż 1000 znaków." TextColor="{StaticResource My_Orange}" />
+                <Label Text="Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację." TextColor="{StaticResource My_Orange}" />
             </Border>
 
-            <Editor
-                x:Name="DescriptionField"
+            <Image
+                x:Name="photoResultImage"
                 Grid.Row="2"
                 Margin="8,0"
-                AutoSize="TextChanges"
-                FontSize="16"
-                HorizontalOptions="FillAndExpand"
-                MaxLength="1000"
-                Placeholder="(kliknij na ten napis aby zacząć pisać)"
-                VerticalOptions="FillAndExpand" />
+                Aspect="AspectFill"
+                Source="no_photo" />
 
             <HorizontalStackLayout
                 Grid.Row="3"
@@ -57,14 +53,23 @@
                 HorizontalOptions="Center"
                 Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
                 <Frame Style="{StaticResource CircleFrame}" />
             </HorizontalStackLayout>
 
+            <Button
+                x:Name="TakePhotoBtn"
+                Grid.Row="4"
+                Margin="8,0"
+                BackgroundColor="{StaticResource My_Green}"
+                Clicked="OnTakePhotoClick"
+                SemanticProperties.Hint="Opening camera to take a photo"
+                Style="{StaticResource WideButton}"
+                Text="Zrób Zdjęcie" />
 
             <Grid
-                Grid.Row="4"
+                Grid.Row="5"
                 Margin="8,0,8,10"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -76,13 +81,14 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Clicked="OnBackButtonClick"
+                    IsEnabled="False"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
 
                 <Button
                     x:Name="NextBtn"
+                    Grid.Row="0"
                     Grid.Column="1"
                     Clicked="OnNextButtonClick"
                     SemanticProperties.Hint="Next Page if exists"

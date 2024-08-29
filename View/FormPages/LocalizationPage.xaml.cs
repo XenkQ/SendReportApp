@@ -7,7 +7,7 @@ using MauiApp1.AppPages;
 using MauiApp1.AppPages.Geolocation;
 using CommunityToolkit.Maui.Views;
 
-namespace MauiApp1;
+namespace MauiApp1.View.FormPages;
 
 public partial class LocalizationPage : ContentPage, IFlowBackButtonHolder, ISubmitButtonHolder
 {

@@ -105,55 +105,63 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0" />
 		<PackageReference Include="Mapsui.Maui" Version="4.1.7" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AppPages\FormPages\Category\CategoryPage.xaml.cs">
+	  <Compile Update="View\FormPages\CategoryPage.xaml.cs">
 	    <DependentUpon>CategoryPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AppPages\StatusPages\ReportSendLoadingPage.xaml.cs">
+	  <Compile Update="View\StatusPages\ReportSendLoadingPage.xaml.cs">
 	    <DependentUpon>ReportSendLoadingPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AppPages\StatusPages\NoConnectionPage.xaml.cs">
+	  <Compile Update="View\StatusPages\NoConnectionPage.xaml.cs">
 	    <DependentUpon>NoConnectionPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="AppPages\StatusPages\UnsuccessfulSendingPage.xaml.cs">
+	  <Compile Update="View\StatusPages\UnsuccessfulSendingPage.xaml.cs">
 	    <DependentUpon>UnsuccessfulSendingPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AppPages\FormPages\DescriptionPage.xaml">
+	  <MauiXaml Update="AppShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\ReportSendLoadingPage.xaml">
+	  <MauiXaml Update="View\FormPages\DescriptionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\FormPages\LocalizationPage.xaml">
+	  <MauiXaml Update="View\StatusPages\ReportSendLoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\NoConnectionPage.xaml">
+	  <MauiXaml Update="View\FormPages\LocalizationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\FormPages\PhotoPage.xaml">
+	  <MauiXaml Update="View\StatusPages\NoConnectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\UnsuccessfulSendingPage.xaml">
+	  <MauiXaml Update="View\FormPages\PhotoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Popups\LoadingPopup.xaml">
+	  <MauiXaml Update="View\StatusPages\UnsuccessfulSendingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="AppPages\StatusPages\SuccessfulSendingPage.xaml">
+	  <MauiXaml Update="View\Popups\LoadingPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\StatusPages\SuccessfulSendingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.80" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Data\Storing\" />
 	</ItemGroup>
 
 </Project>
