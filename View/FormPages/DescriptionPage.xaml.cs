@@ -1,21 +1,20 @@
-﻿using MauiApp1.AppPages;
-using MauiApp1.GUI.FlowButtons;
+﻿using MauiApp1.ViewModel.Forms;
+using MonkeyFinder;
 
 namespace MauiApp1.View.FormPages;
 
 public partial class DescriptionPage : ContentPage
 {
-    private readonly IApp _app;
-
-    public DescriptionPage(IApp app)
+    public DescriptionPage(FormDescriptionViewModel viewModel)
 	{
 		InitializeComponent();
-        _app = app;
+        BindingContext = viewModel;
 	}
 
     public void OnBackButtonClick(object sender, EventArgs e)
     {
-        _app.DisplayPage(Pages.CategoryPage);
+        AppShell.Current.GoToAsync(nameof(PhotoPage), false);
+        //_app.DisplayPage(Pages.CategoryPage);
     }
 
     //public void OnNextButtonClick(object sender, EventArgs e)

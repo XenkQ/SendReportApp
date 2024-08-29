@@ -1,6 +1,6 @@
-using MauiApp1.Connection;
+using MauiApp1.Scripts.Connection;
 
-namespace MauiApp1;
+namespace MauiApp1.View.StatusPages;
 
 internal interface IDisplayConnectionInfo
 {

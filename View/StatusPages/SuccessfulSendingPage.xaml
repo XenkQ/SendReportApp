@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.SuccessfulSendingPage"
+    x:Class="MauiApp1.View.StatusPages.SuccessfulSendingPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="SuccessfulSendingPage">

@@ -1,5 +1,5 @@
-﻿using MauiApp1.AppPages;
-using MauiApp1.GUI.FlowButtons;
+﻿using MauiApp1.Scripts;
+using MauiApp1.Scripts.GUI.ButtonHolders;
 
 namespace MauiApp1.View.FormPages;
 

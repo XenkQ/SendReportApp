@@ -1,8 +1,9 @@
-﻿using MauiApp1.AppPages;
-using MauiApp1.AppPages.Creation;
-using MauiApp1.Connection;
-using MauiApp1.Data.Sending;
-using MauiApp1.Model;
+﻿using MauiApp1.Model;
+using MauiApp1.Scripts;
+using MauiApp1.Scripts.Connection;
+using MauiApp1.Scripts.Creation;
+using MauiApp1.Scripts.Data.Sending;
+using MonkeyFinder;
 using System.Collections.ObjectModel;
 
 namespace MauiApp1;
@@ -41,7 +42,8 @@ public partial class App : Application, IApp
         _pagesPooler = pagesPooler;
         UserDataToSend = alertDataToSend;
 
-        RefreshPages();
+        if(!NoConnectionDisplayer.DisplayIfNoConnection(this, _serverConnectionChecker))
+            MainPage = new AppShell();
     }
 
     public void RefreshPages()

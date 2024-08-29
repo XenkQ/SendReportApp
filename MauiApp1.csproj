@@ -133,6 +133,9 @@
 	  <MauiXaml Update="View\FormPages\DescriptionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\StatusPages\ReportSendLoadingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -161,7 +164,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Data\Storing\" />
+	  <Folder Include="Scripts\Data\Storing\" />
 	</ItemGroup>
 
 </Project>

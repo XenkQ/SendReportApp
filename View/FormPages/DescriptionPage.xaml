@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
     Title="{Binding Title}"
-    x:DataType="viewmodel:FormDescriptionViewModel">
+    x:DataType="viewmodel:FormDescriptionViewModel"
+    Shell.PresentationMode="ModalNotAnimated">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">

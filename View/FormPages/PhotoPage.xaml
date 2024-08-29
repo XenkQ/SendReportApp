@@ -3,7 +3,10 @@
     x:Class="MauiApp1.View.FormPages.PhotoPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="PhotoPage">
+    xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:FormPhotoViewModel"
+    Shell.PresentationMode="ModalNotAnimated">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
@@ -90,7 +93,7 @@
                     x:Name="NextBtn"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Clicked="OnNextButtonClick"
+                    Command="{Binding UpdateDataToSendCommand}"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
                     Text="Dalej" />

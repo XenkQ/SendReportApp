@@ -1,6 +1,8 @@
-﻿using MauiApp1.GUI.FlowButtons;
-using MauiApp1.AppPages;
-using MauiApp1.Data.Processors;
+﻿using MauiApp1.Model;
+using MauiApp1.Scripts;
+using MauiApp1.Scripts.Data.Processors;
+using MauiApp1.Scripts.GUI.ButtonHolders;
+using MauiApp1.ViewModel.Forms;
 
 #if ANDROID
 using Android.Graphics;
@@ -9,18 +11,16 @@ using MauiApp1.Platforms.Android;
 
 namespace MauiApp1.View.FormPages;
 
-public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
-    IMustPrepareBeforeDisplay, IProcessDataInBackground
+public partial class PhotoPage : ContentPage, IFlowNextButtonHolder
 {
-    private readonly IApp _app;
     private string _featuredPhotoPath = string.Empty;
     public Task _processingTask { get; private set; }
     public CancellationTokenSource CancellationTokenSource { get; private set; }
 
-    public PhotoPage(IApp app)
+    public PhotoPage(FormPhotoViewModel viewModel)
 	{
 		InitializeComponent();
-        _app = app;
+        BindingContext = viewModel;
         CancellationTokenSource = new CancellationTokenSource();
     }
 
@@ -28,67 +28,11 @@ public partial class PhotoPage : ContentPage, IFlowNextButtonHolder,
     {
         if (_featuredPhotoPath != string.Empty)
         {
-            _app.DisplayPage(Pages.CategoryPage);
+            await Shell.Current.GoToAsync(nameof(DescriptionPage));
         }
         else
         {
             await DisplayAlert("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
         }
-    }
-
-    public void Prepare()
-    {
-        if(_featuredPhotoPath != string.Empty)
-            SetFeaturePhoto(_featuredPhotoPath);
-    }
-
-    private async void OnTakePhotoClick(object sender, EventArgs e)
-    {
-        var photoFile = await TakePhoto();
-
-        if (photoFile != null)
-        {
-            _featuredPhotoPath = photoFile.FullPath;
-            SetFeaturePhoto(_featuredPhotoPath);
-            _processingTask = StartProcessingDataInBackground();
-        }
-    }
-
-    private async Task<FileResult?> TakePhoto()
-    {
-        try
-        {
-            return await MediaPicker.CapturePhotoAsync();
-        }
-        catch (Exception)
-        {
-            await DisplayAlert("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
-        }
-
-        return null;
-    }
-
-    private void SetFeaturePhoto(string path)
-       => photoResultImage.Source = ImageSource.FromFile(path);
-
-    public Task GetProcessedTask() => _processingTask;
-
-    public Task StartProcessingDataInBackground()
-    {
-        if(_processingTask != default)
-        {
-            CancellationTokenSource.Cancel();
-            _processingTask.Wait();
-        }
-
-        CancellationTokenSource.TryReset();
-
-#if ANDROID
-        return Task.Run(() => ImageManipulator.GetImageAsBase64(_featuredPhotoPath,
-                Bitmap.CompressFormat.Jpeg!, 100), CancellationTokenSource.Token)
-            .ContinueWith(task => _app.UserDataToSend.Base64Image = task.Result);
-#endif
-
-        return Task.CompletedTask;
     }
 }

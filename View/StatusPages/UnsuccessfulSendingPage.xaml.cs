@@ -1,7 +1,7 @@
-using MauiApp1.AppPages;
-using MauiApp1.GUI.ButtonHolders;
+using MauiApp1.Scripts;
+using MauiApp1.Scripts.GUI.ButtonHolders;
 
-namespace MauiApp1;
+namespace MauiApp1.View.StatusPages;
 
 public partial class UnsuccessfulSendingPage : ContentPage, IExitButtonHolder
 {

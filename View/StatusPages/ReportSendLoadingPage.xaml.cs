@@ -1,6 +1,6 @@
-using MauiApp1.AppPages;
+using MauiApp1.Scripts;
 
-namespace MauiApp1;
+namespace MauiApp1.View.StatusPages;
 
 public partial class ReportSendLoadingPage : ContentPage, IMustPrepareBeforeDisplay
 {

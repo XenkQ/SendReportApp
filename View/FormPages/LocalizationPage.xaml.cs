@@ -1,11 +1,11 @@
 ﻿using Mapsui.Projections;
-using MauiApp1.GUI.FlowButtons;
 using Mapsui.Extensions;
 using Mapsui.UI.Maui;
 using Mapsui;
-using MauiApp1.AppPages;
-using MauiApp1.AppPages.Geolocation;
 using CommunityToolkit.Maui.Views;
+using MauiApp1.Scripts;
+using MauiApp1.Scripts.Geolocation;
+using MauiApp1.Scripts.GUI.ButtonHolders;
 
 namespace MauiApp1.View.FormPages;
 

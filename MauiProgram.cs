@@ -1,6 +1,6 @@
-﻿using MauiApp1.Connection;
-using MauiApp1.Data.Sending;
-using MauiApp1.AppPages.Creation;
+﻿using MauiApp1.Scripts.Connection;
+using MauiApp1.Scripts.Data.Sending;
+using MauiApp1.Scripts.Creation;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
@@ -8,6 +8,8 @@ using System.Text.Json;
 using CommunityToolkit.Maui;
 using MauiApp1.Model;
 using MauiApp1.ViewModel.Forms;
+using MauiApp1.View.FormPages;
+using MauiApp1.View;
 
 namespace MauiApp1;
 
@@ -39,7 +41,14 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<AlertDataToSend>();
+
         builder.Services.AddSingleton<FormDescriptionViewModel>();
+        builder.Services.AddSingleton<DescriptionPage>();
+
+        builder.Services.AddSingleton<FormPhotoViewModel>();
+        builder.Services.AddSingleton<PhotoPage>();
+
+        builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
