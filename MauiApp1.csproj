@@ -121,9 +121,6 @@
 	  <Compile Update="View\StatusPages\NoConnectionPage.xaml.cs">
 	    <DependentUpon>NoConnectionPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\StatusPages\UnsuccessfulSendingPage.xaml.cs">
-	    <DependentUpon>UnsuccessfulSendingPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -148,23 +145,16 @@
 	  <MauiXaml Update="View\FormPages\PhotoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\StatusPages\UnsuccessfulSendingPage.xaml">
+	  <MauiXaml Update="View\StatusPages\SendingResultPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Popups\LoadingPopup.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\StatusPages\SuccessfulSendingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.80" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Scripts\Data\Storing\" />
 	</ItemGroup>
 
 </Project>

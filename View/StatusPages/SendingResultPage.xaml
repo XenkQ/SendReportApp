@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="MauiApp1.View.StatusPages.SuccessfulSendingPage"
+    x:Class="MauiApp1.View.StatusPages.SendingResultPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="SuccessfulSendingPage">
+    xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Status"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:SendingResultViewModel"
+    Shell.PresentationMode="ModalNotAnimated">
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
 
@@ -17,35 +20,53 @@
             </Grid.RowDefinitions>
 
             <VerticalStackLayout
-                Grid.Row="0"
                 Margin="8,0"
                 Spacing="25"
                 VerticalOptions="CenterAndExpand">
                 <Label
+                    x:Name="TitleInfo"
+                    Grid.Row="0"
                     HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"
                     SemanticProperties.HeadingLevel="Level1"
                     Style="{StaticResource Headline}"
-                    Text="Zgłoszenie zostało wysłane!"
+                    Text="Zgłosznie nie zostało wysłane!"
                     TextColor="Black" />
 
                 <Image
+                    x:Name="Graphic"
                     Aspect="AspectFit"
                     MaximumHeightRequest="200"
-                    MaximumWidthRequest="200"
-                    Source="check_circle" />
+                    MaximumWidthRequest="200" />
             </VerticalStackLayout>
 
-            <Grid Grid.Row="1" Margin="8,0,8,10">
+            <Grid
+                Grid.Row="1"
+                Margin="8,0,8,10"
+                RowSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Button
+                    x:Name="TryAgainBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="{StaticResource My_Green}"
+                    Command="{Binding TrySendingAgainCommand}"
+                    SemanticProperties.Hint="Try send again"
+                    Style="{StaticResource FlowButton}"
+                    Text="Spróbuj ponownie" />
 
                 <Button
                     x:Name="ExitBtn"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Grid.Column="0"
-                    Clicked="OnExitButtonClick"
+                    Command="{Binding ExitCommand}"
                     SemanticProperties.Hint="Exit app"
                     Style="{StaticResource FlowButton}"
                     Text="Wyjdź" />

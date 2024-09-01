@@ -1,48 +1,21 @@
-﻿using MauiApp1.Scripts;
-using MauiApp1.Scripts.GUI.ButtonHolders;
+﻿using MauiApp1.ViewModel.Forms;
 
 namespace MauiApp1.View.FormPages;
 
-//TODO: Can bind radio buttons value to categories enum
-public partial class CategoryPage : ContentPage, IFlowButtonHolder
+//TODO: Reading radio buttons from api
+public partial class CategoryPage : ContentPage
 {
-    private readonly IApp _app;
-    private Categories? _userCategorChoice;
+    private readonly FormCategoryViewModel _viewModel;
 
-    public CategoryPage(IApp app)
+    public CategoryPage(FormCategoryViewModel viewModel)
     {
         InitializeComponent();
-        _app = app;
-    }
-
-    public void OnBackButtonClick(object sender, EventArgs e)
-    {
-        
-        _app.DisplayPage(Pages.PhotoPage);
-    }
-
-    public async void OnNextButtonClick(object sender, EventArgs e)
-    {
-        if(_userCategorChoice != null)
-        {
-            _app.UserDataToSend.Category = (int)_userCategorChoice;
-            _app.DisplayPage(Pages.DescriptionPage);
-        }
-        else
-        {
-            await DisplayAlert("Nie wybrano kategorii!", "Wybierz kategorię najlepiej pasującą do zgłoszenia.", "OK");
-        }
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
     }
 
     private void OnCategoryChange(object sender, EventArgs e)
     {
-        var radioButton = sender as RadioButton;
-
-        if (radioButton == null) 
-            throw new ArgumentException("Sender is not of object type");
-
-        int categoryAsInt = int.Parse(radioButton.Value.ToString()!);
-
-        _userCategorChoice = (Categories)categoryAsInt;
+        _viewModel.OnCategoryChange(sender, e);
     }
 }

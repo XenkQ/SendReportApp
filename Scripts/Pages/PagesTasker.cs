@@ -1,4 +1,4 @@
-﻿using MauiApp1.Scripts.Data.Processors;
+﻿using MauiApp1.Scripts.Processors;
 
 namespace MauiApp1.Scripts;
 

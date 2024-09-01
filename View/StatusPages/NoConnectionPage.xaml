@@ -3,7 +3,8 @@
     x:Class="MauiApp1.View.StatusPages.NoConnectionPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="NoConnectionPage">
+    Title="NoConnectionPage"
+    Shell.PresentationMode="ModalNotAnimated">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">

@@ -1,5 +1,4 @@
 ﻿using MauiApp1.Scripts.Connection;
-using MauiApp1.Scripts.Data.Sending;
 using MauiApp1.Scripts.Creation;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -10,6 +9,9 @@ using MauiApp1.Model;
 using MauiApp1.ViewModel.Forms;
 using MauiApp1.View.FormPages;
 using MauiApp1.View;
+using MauiApp1.Services;
+using MauiApp1.View.StatusPages;
+using MauiApp1.ViewModel.Status;
 
 namespace MauiApp1;
 
@@ -28,7 +30,7 @@ public static class MauiProgram
         builder
             .UseMauiApp(serviceProvider => new App(
                 new ApiConnection(apiSettings.ApiSettings),
-                new ApiDataSender(apiSettings.ApiSettings),
+                new AlertDataSender(apiSettings.ApiSettings),
                 new PagePooler(),
                 new AlertDataToSend()
             ))
@@ -40,13 +42,30 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Services.AddSingleton<IDialogService, DialogService>();
+        builder.Services.AddSingleton<ILoadingPopupService, LoadingPopupService>();
+        builder.Services.AddSingleton<IFormBackgroundTaskObserver, FormBackgroundTaskObserver>();
+        builder.Services.AddSingleton<IAlertDataSender>(new AlertDataSender(apiSettings.ApiSettings));
+
         builder.Services.AddSingleton<AlertDataToSend>();
+
+        builder.Services.AddSingleton<FormPhotoViewModel>();
+        builder.Services.AddSingleton<PhotoPage>();
+
+        builder.Services.AddSingleton<FormCategoryViewModel>();
+        builder.Services.AddSingleton<CategoryPage>();
+
+        builder.Services.AddSingleton<FormLocalizationViewModel>();
+        builder.Services.AddSingleton<LocalizationPage>();
 
         builder.Services.AddSingleton<FormDescriptionViewModel>();
         builder.Services.AddSingleton<DescriptionPage>();
 
-        builder.Services.AddSingleton<FormPhotoViewModel>();
-        builder.Services.AddSingleton<PhotoPage>();
+        builder.Services.AddTransient<ReportSendLoadingViewModel>();
+        builder.Services.AddTransient<ReportSendLoadingPage>();
+
+        builder.Services.AddTransient<SendingResultViewModel>();
+        builder.Services.AddTransient<SendingResultPage>();
 
         builder.Services.AddSingleton<MainPage>();
 

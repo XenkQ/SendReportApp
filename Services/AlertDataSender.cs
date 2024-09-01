@@ -2,13 +2,18 @@
 using System.Text;
 using System.Text.Json;
 
-namespace MauiApp1.Scripts.Data.Sending;
+namespace MauiApp1.Services;
 
-internal class ApiDataSender : IDataSender
+public interface IAlertDataSender
 {
-    private ApiSettings _apiSettings;
+    Task<HttpResponseMessage> SendDataAsync(AlertDataToSend dataHolder);
+}
 
-    public ApiDataSender(ApiSettings apiSettings)
+internal class AlertDataSender : IAlertDataSender
+{
+    private readonly ApiSettings _apiSettings;
+
+    public AlertDataSender(ApiSettings apiSettings)
     {
         _apiSettings = apiSettings;
     }

@@ -4,7 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviours="clr-namespace:MauiApp1.ElementsBehaviour"
-    Title="LocalizationPage">
+    xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:FormLocalizationViewModel"
+    Shell.PresentationMode="ModalNotAnimated">
 
     <ScrollView VerticalOptions="Fill">
         <Grid RowSpacing="15" VerticalOptions="Fill">
@@ -47,7 +50,7 @@
                 Grid.Row="2"
                 Margin="8,0"
                 BindingContext="Content"
-                BindingContextChanged="OnContentChange"
+                Content="{Binding LocalizationMapControl}"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill">
 
@@ -72,7 +75,7 @@
                 Grid.Row="4"
                 Margin="8,0"
                 BackgroundColor="{StaticResource My_Green}"
-                Clicked="OnGetLocalizationBtnClick"
+                Command="{Binding SendLocalizationCommand}"
                 SemanticProperties.Hint="Getting user localization and inserting it into map."
                 Style="{StaticResource WideButton}"
                 Text="Udostępnij lokalizację" />
@@ -90,7 +93,7 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Clicked="OnBackButtonClick"
+                    Command="{Binding ToPreviousFormCommand}"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
@@ -99,7 +102,7 @@
                     x:Name="SubmitButton"
                     Grid.Column="1"
                     Background="{StaticResource My_Orange}"
-                    Clicked="OnSubmitButtonClick"
+                    Command="{Binding ToNextFormCommand}"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
                     Text="Wyślij" />

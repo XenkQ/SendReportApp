@@ -6,8 +6,8 @@ namespace MauiApp1.Scripts.Geolocation;
 
 internal static class MapLocationDisplayer
 {
-    public static void DisplayLocationOnMap(ContentView viewDisplayingMap, MapControl mapControl,
-        Location? locationToDisplay, float zoomOnLocation = 0.5f)
+    public static void DisplayLocationOnMap(MapControl mapControl, Location? locationToDisplay,
+        float zoomOnLocation = 0.5f)
     {
         var locationOnMap = SphericalMercator.FromLonLat(
             locationToDisplay.Longitude, locationToDisplay.Latitude).ToMPoint();
@@ -17,8 +17,8 @@ internal static class MapLocationDisplayer
 
         PinLayer.DisplaySinglePinOnMap(mapControl.Map, locationOnMap, PinLayer.DefaultPinStyle);
 
-        viewDisplayingMap.Content = null; //detaching content for event to be called
-        viewDisplayingMap.Content = mapControl;
+        //viewDisplayingMap.Content = null; //detaching content for event to be called
+        //viewDisplayingMap.Content = mapControl;
 
         mapControl.Map.Navigator.PanLock = true;
     }

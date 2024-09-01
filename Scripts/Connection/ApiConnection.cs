@@ -1,4 +1,6 @@
-﻿namespace MauiApp1.Scripts.Connection;
+﻿using MauiApp1.Model;
+
+namespace MauiApp1.Scripts.Connection;
 
 public interface IServerConnectionChecker
 {

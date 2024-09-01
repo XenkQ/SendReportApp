@@ -8,6 +8,6 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-		Shell.Current.GoToAsync(nameof(DescriptionPage), false);
+		Shell.Current.GoToAsync(nameof(PhotoPage), false);
 	}
 }

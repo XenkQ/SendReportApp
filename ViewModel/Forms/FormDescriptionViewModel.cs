@@ -1,14 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MauiApp1.Model;
+using MauiApp1.Scripts.Processors;
+using MauiApp1.View.FormPages;
 
 namespace MauiApp1.ViewModel.Forms;
 
-public partial class FormDescriptionViewModel : FormBaseViewModel
+public partial class FormDescriptionViewModel : FormBaseViewModel, IUpdateAlertData<string>
 {
+    private readonly AlertDataToSend _alertDataToSend;
+
     [ObservableProperty]
     private string descriptionText;
-
-    private AlertDataToSend _alertDataToSend;
 
     public FormDescriptionViewModel(AlertDataToSend alertDataToSend)
     {
@@ -16,9 +18,19 @@ public partial class FormDescriptionViewModel : FormBaseViewModel
         _alertDataToSend = alertDataToSend;
     }
 
-    protected override void UpdateDataToSend()
+    protected override async Task ToNextFormAsync()
     {
-        if (!string.IsNullOrEmpty(descriptionText))
-            _alertDataToSend.Message = descriptionText;
+        UpdateAlertData(descriptionText);
+
+        await Shell.Current.GoToAsync(nameof(LocalizationPage));
+    }
+
+    protected override async Task ToPreviousFormAsync()
+        => await Shell.Current.GoToAsync(nameof(CategoryPage));
+
+    public void UpdateAlertData(in string input)
+    {
+        if (!string.IsNullOrEmpty(input))
+            _alertDataToSend.Message = input;
     }
 }

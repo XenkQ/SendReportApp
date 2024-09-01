@@ -44,11 +44,11 @@
             </Border>
 
             <Image
-                x:Name="photoResultImage"
+                x:Name="FeaturedImage"
                 Grid.Row="2"
                 Margin="8,0"
                 Aspect="AspectFill"
-                Source="no_photo" />
+                Source="{Binding FeaturedImageSource}" />
 
             <HorizontalStackLayout
                 Grid.Row="3"
@@ -66,7 +66,7 @@
                 Grid.Row="4"
                 Margin="8,0"
                 BackgroundColor="{StaticResource My_Green}"
-                Clicked="OnTakePhotoClick"
+                Command="{Binding TakePhotoCommand}"
                 SemanticProperties.Hint="Opening camera to take a photo"
                 Style="{StaticResource WideButton}"
                 Text="Zrób Zdjęcie" />
@@ -93,7 +93,7 @@
                     x:Name="NextBtn"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Command="{Binding UpdateDataToSendCommand}"
+                    Command="{Binding ToNextFormCommand}"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
                     Text="Dalej" />

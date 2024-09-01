@@ -1,6 +1,6 @@
-﻿namespace MauiApp1.Scripts.Data.Processors;
+﻿namespace MauiApp1.Scripts.Processors;
 
-internal interface IProcessDataInBackground
+public interface IProcessDataInBackground
 {
     CancellationTokenSource CancellationTokenSource { get; }
     Task GetProcessedTask();

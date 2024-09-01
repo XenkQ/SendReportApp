@@ -1,10 +1,10 @@
 ﻿using MauiApp1.Model;
-using MauiApp1.Scripts;
-using MauiApp1.Scripts.Data.Processors;
-using MauiApp1.Scripts.GUI.ButtonHolders;
-using MauiApp1.ViewModel.Forms;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using MauiApp1.View.FormPages;
+using MauiApp1.Services;
 
+using MauiApp1.Scripts.Processors;
 
 #if ANDROID
 using Android.Graphics;
@@ -13,42 +13,41 @@ using MauiApp1.Platforms.Android;
 
 namespace MauiApp1.ViewModel.Forms;
 
-public partial class FormPhotoViewModel : FormBaseViewModel
+public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackground,
+    IUpdateAlertData<string>
 {
-    private string _featuredPhotoPath = string.Empty;
     public Task _processingTask { get; private set; }
     public CancellationTokenSource CancellationTokenSource { get; private set; }
-
-    private AlertDataToSend _alertDataToSend;
+    private string _featuredPhotoPath = string.Empty;
+    private readonly AlertDataToSend _alertDataToSend;
+    private readonly IDialogService _dialogService;
 
     [ObservableProperty]
     private ImageSource _featuredImageSource;
 
-    public FormPhotoViewModel(AlertDataToSend alertDataToSend)
+    public FormPhotoViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
+        IFormBackgroundTaskObserver formBackgroundTaskObserver)
     {
         _alertDataToSend = alertDataToSend;
-        //Do sprawdzenia
-        FeaturedImageSource = ImageSource.FromFile("./Resources/no_photo.svg");
+        _dialogService = dialogService;
+        formBackgroundTaskObserver.Subscribe(this);
+        CancellationTokenSource = new CancellationTokenSource();
+        FeaturedImageSource = ImageSource.FromFile("no_photo.png");
     }
 
-    protected override void UpdateDataToSend()
+    [RelayCommand]
+    private async void TakePhoto()
     {
-        _alertDataToSend.Base64Image = "New Image";
-    }
-
-    private async void OnTakePhotoClick(object sender, EventArgs e)
-    {
-        var photoFile = await TakePhoto();
+        var photoFile = await CapturePhotoFromDevice();
 
         if (photoFile != null)
         {
             _featuredPhotoPath = photoFile.FullPath;
             FeaturedImageSource = ImageSource.FromFile(_featuredPhotoPath);
-            _processingTask = StartProcessingDataInBackground();
         }
     }
 
-    private async Task<FileResult?> TakePhoto()
+    private async Task<FileResult?> CapturePhotoFromDevice()
     {
         try
         {
@@ -77,9 +76,28 @@ public partial class FormPhotoViewModel : FormBaseViewModel
 #if ANDROID
         return Task.Run(() => ImageManipulator.GetImageAsBase64(_featuredPhotoPath,
                 Bitmap.CompressFormat.Jpeg!, 100), CancellationTokenSource.Token)
-            .ContinueWith(task => _alertDataToSend.Base64Image = task.Result);
+            .ContinueWith(task => UpdateAlertData(task.Result));
 #endif
 
         return Task.CompletedTask;
     }
+
+    protected override async Task ToNextFormAsync()
+    {
+        if (_featuredPhotoPath != string.Empty)
+        {
+            _processingTask = StartProcessingDataInBackground();
+            await Shell.Current.GoToAsync(nameof(CategoryPage));
+        }
+        else
+        {
+            await _dialogService.ShowAlertAsync("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
+        }
+    }
+
+    protected override async Task ToPreviousFormAsync()
+        => await Task.CompletedTask;
+
+    public void UpdateAlertData(in string input)
+        => _alertDataToSend.Base64Image = input;
 }

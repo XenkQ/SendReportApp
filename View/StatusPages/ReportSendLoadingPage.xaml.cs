@@ -1,33 +1,21 @@
-using MauiApp1.Scripts;
+using MauiApp1.ViewModel.Status;
 
 namespace MauiApp1.View.StatusPages;
 
-public partial class ReportSendLoadingPage : ContentPage, IMustPrepareBeforeDisplay
+public partial class ReportSendLoadingPage : ContentPage
 {
-	private readonly IApp _app;
+    private readonly ReportSendLoadingViewModel _viewModel;
 
-	public ReportSendLoadingPage(IApp app)
+    public ReportSendLoadingPage(ReportSendLoadingViewModel viewModel)
 	{
 		InitializeComponent();
-		_app = app;
-	}
-
-    public void Prepare()
-    {
-        Task.Run(() => Task.WaitAll(GetAllTasksFromForms()))
-        .ContinueWith(_ => _app.DataSender.SendDataAsync(_app.UserDataToSend))
-        .ContinueWith(task => DisplaySendingResultPage(task.Result.Result));
+        BindingContext = viewModel;
+        _viewModel = viewModel;
     }
 
-    private Task[] GetAllTasksFromForms()
-        => PagesTasker.GetTasksFromPages(_app.GetLoadedPages().Values).ToArray();
-
-    private void DisplaySendingResultPage(HttpResponseMessage sendingRequestMessage)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        var appDispather = Application.Current.Dispatcher;
-        if (sendingRequestMessage.IsSuccessStatusCode)
-            appDispather.Dispatch(() => _app.DisplayPage(Pages.SuccessfulSendingPage));
-        else
-            appDispather.Dispatch(() => _app.DisplayPage(Pages.UnsuccessfulSendingPage));
+        base.OnNavigatedTo(args);
+        _viewModel.NavigateToResultPageAfterBackgroundDataWasProcessed();
     }
 }

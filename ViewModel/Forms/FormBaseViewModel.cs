@@ -1,24 +1,20 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using MauiApp1.ViewModel.Forms;
 using System.Windows.Input;
 
 namespace MauiApp1.ViewModel;
 
-public abstract partial class FormBaseViewModel : ObservableObject
-{   
-    [ObservableProperty]
-    private string _title;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-    private bool _isBusy;
-
-    public bool IsNotBusy => !IsBusy;
-    public ICommand UpdateDataToSendCommand { get; }
+public abstract class FormBaseViewModel : BaseViewModel
+{
+    public ICommand ToNextFormCommand { get; }
+    public ICommand ToPreviousFormCommand { get; }
 
     public FormBaseViewModel()
     {
-        UpdateDataToSendCommand = new Command(UpdateDataToSend);
+        ToNextFormCommand = new Command(async () => await ToNextFormAsync());
+        ToPreviousFormCommand = new Command(async () => await ToPreviousFormAsync());
     }
 
-    protected abstract void UpdateDataToSend();
+    protected abstract Task ToNextFormAsync();
+
+    protected abstract Task ToPreviousFormAsync();
 }

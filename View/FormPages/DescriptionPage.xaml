@@ -80,7 +80,7 @@
                     x:Name="BackBtn"
                     Grid.Row="0"
                     Grid.Column="0"
-                    Clicked="OnBackButtonClick"
+                    Command="{Binding ToPreviousFormCommand}"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
                     Text="Cofnij" />
@@ -88,7 +88,7 @@
                 <Button
                     x:Name="NextBtn"
                     Grid.Column="1"
-                    Command="{Binding UpdateDataToSendCommand}"
+                    Command="{Binding ToNextFormCommand}"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
                     Text="Dalej" />
