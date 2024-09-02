@@ -1,13 +1,15 @@
+using MauiApp1.Services;
 using MauiApp1.View.FormPages;
 
 namespace MauiApp1.View;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+	public MainPage(INoConnectionDisplayer noConnectionDisplayer)
 	{
 		InitializeComponent();
 
-		Shell.Current.GoToAsync(nameof(PhotoPage), false);
+		if (!noConnectionDisplayer.DisplayIfNoConnection())
+			Shell.Current.GoToAsync(nameof(PhotoPage), false);
 	}
 }
