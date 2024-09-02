@@ -16,7 +16,7 @@ namespace MauiApp1.ViewModel.Forms;
 public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackground,
     IUpdateAlertData<string>
 {
-    public Task _processingTask { get; private set; }
+    public Task ProcessedTask { get; private set; }
     public CancellationTokenSource CancellationTokenSource { get; private set; }
     private string _featuredPhotoPath = string.Empty;
     private readonly AlertDataToSend _alertDataToSend;
@@ -61,22 +61,22 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
         return null;
     }
 
-    public Task GetProcessedTask() => _processingTask;
+    public Task GetProcessedTask() => ProcessedTask;
 
     public Task StartProcessingDataInBackground()
     {
-        if (_processingTask != default)
+        if (ProcessedTask != default)
         {
             CancellationTokenSource.Cancel();
-            _processingTask.Wait();
+            ProcessedTask.Wait();
         }
 
-        CancellationTokenSource.TryReset();
+        CancellationTokenSource = new CancellationTokenSource();
 
 #if ANDROID
         return Task.Run(() => ImageManipulator.GetImageAsBase64(_featuredPhotoPath,
                 Bitmap.CompressFormat.Jpeg!, 100), CancellationTokenSource.Token)
-            .ContinueWith(task => UpdateAlertData(task.Result));
+            .ContinueWith(task => UpdateAlertData(task.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
 #endif
 
         return Task.CompletedTask;
@@ -86,7 +86,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
     {
         if (_featuredPhotoPath != string.Empty)
         {
-            _processingTask = StartProcessingDataInBackground();
+            ProcessedTask = StartProcessingDataInBackground();
             await Shell.Current.GoToAsync(nameof(CategoryPage));
         }
         else
