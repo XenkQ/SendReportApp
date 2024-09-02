@@ -98,6 +98,6 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
     protected override async Task ToPreviousFormAsync()
         => await Task.CompletedTask;
 
-    public void UpdateAlertData(in string input)
+    public void UpdateAlertData(string input)
         => _alertDataToSend.Base64Image = input;
 }

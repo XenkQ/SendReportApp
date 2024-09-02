@@ -20,7 +20,7 @@ public partial class FormDescriptionViewModel : FormBaseViewModel, IUpdateAlertD
 
     protected override async Task ToNextFormAsync()
     {
-        UpdateAlertData(descriptionText);
+        UpdateAlertData(DescriptionText);
 
         await Shell.Current.GoToAsync(nameof(LocalizationPage));
     }
@@ -28,7 +28,7 @@ public partial class FormDescriptionViewModel : FormBaseViewModel, IUpdateAlertD
     protected override async Task ToPreviousFormAsync()
         => await Shell.Current.GoToAsync(nameof(CategoryPage));
 
-    public void UpdateAlertData(in string input)
+    public void UpdateAlertData(string input)
     {
         if (!string.IsNullOrEmpty(input))
             _alertDataToSend.Message = input;

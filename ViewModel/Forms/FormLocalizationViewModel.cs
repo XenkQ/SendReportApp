@@ -122,7 +122,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
         _loadingPopupService.CloseLoadingPopup();
     }
 
-    public void UpdateAlertData(in (double longitude, double latitude) input)
+    public void UpdateAlertData((double longitude, double latitude) input)
     {
         _alertDataToSend.Longitude = input.longitude;
         _alertDataToSend.Latitude = input.latitude;

@@ -2,5 +2,5 @@
 
 public interface IUpdateAlertData<T>
 {
-    void UpdateAlertData(in T input);
+    void UpdateAlertData(T input);
 }
