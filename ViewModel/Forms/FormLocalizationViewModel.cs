@@ -23,19 +23,19 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
     private readonly AlertDataToSend _alertDataToSend;
     private readonly IDialogService _dialogService;
     private readonly ILoadingPopupService _loadingPopupService;
-
+    private readonly INoConnectionDisplayer _noConnectionDisplayer;
     private readonly MPoint _startLocation;
 
     [ObservableProperty]
     private MapControl _localizationMapControl;
 
     public FormLocalizationViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
-        ILoadingPopupService loadingPopupService)
+        ILoadingPopupService loadingPopupService, INoConnectionDisplayer noConnectionDisplayer)
     {
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         _loadingPopupService = loadingPopupService;
-
+        _noConnectionDisplayer = noConnectionDisplayer;
         _startLocation = SphericalMercator.FromLonLat(START_LONGITUDE, START_LATITUDE).ToMPoint();
 
         LocalizationMapControl = CreateStartMapControl();
@@ -57,6 +57,8 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
 
     protected override async Task ToNextFormAsync()
     {
+        if (_noConnectionDisplayer.DisplayIfNoConnection()) return;
+
         if (_alertDataToSend.Longitude != default
             && _alertDataToSend.Latitude != default)
         {

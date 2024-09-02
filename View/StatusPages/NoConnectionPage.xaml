@@ -30,7 +30,7 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="{Binding ConnectionStatus}"
+                Text="{Binding ConnectionInfo}"
                 TextColor="Black" />
 
             <Image

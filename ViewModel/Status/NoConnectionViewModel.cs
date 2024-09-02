@@ -14,6 +14,9 @@ public partial class NoConnectionViewModel : BaseViewModel
     [ObservableProperty]
     private string _connectionStatus;
 
+    [ObservableProperty]
+    private string _connectionInfo;
+
     public NoConnectionViewModel(IConnectionStatusService connectionStatusService)
     {
         _connectionStatusService = connectionStatusService;
@@ -30,17 +33,18 @@ public partial class NoConnectionViewModel : BaseViewModel
     [RelayCommand]
     public void Exit() => Application.Current.Quit();
 
+    //TODO: Make some kind of converter for connection info
     public void SetConnectionInfo(ConnectionStatuses conectionStatus)
     {
         switch (conectionStatus)
         {
             case ConnectionStatuses.NoInternetConnection:
-                ConnectionStatus = "Brak połączenia z internetem!";
+                ConnectionInfo = "Brak połączenia z internetem!";
                 break;
 
             case ConnectionStatuses.NoServerConnection:
             case ConnectionStatuses.NoServerAndInternetConnection:
-                ConnectionStatus = "Brak połączenia z serwerem. Spróbuj ponownie później.";
+                ConnectionInfo = "Brak połączenia z serwerem. Spróbuj ponownie później.";
                 break;
         }
     }
