@@ -10,19 +10,20 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
     IUpdateAlertData<int>
 {
     private readonly AlertDataToSend _alertDataToSend;
-    private readonly DialogService _dialogService;
+    private readonly IDialogService _dialogService;
 
     [ObservableProperty]
-    private Categories _userCategorChoice;
+    private Categories _userCategorChoice = Categories.NONE;
 
     public FormCategoryViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService)
     {
         _alertDataToSend = alertDataToSend;
+        _dialogService = dialogService;
     }
 
     protected override async Task ToNextFormAsync()
     {
-        if (UserCategorChoice != default)
+        if (UserCategorChoice != Categories.NONE)
         {
             UpdateAlertData((int)UserCategorChoice);
             await Shell.Current.GoToAsync(nameof(DescriptionPage));
@@ -50,7 +51,7 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
         UserCategorChoice = (Categories)categoryAsInt;
     }
 
-    public void UpdateAlertData(in int input)
+    public void UpdateAlertData(int input)
     {
         _alertDataToSend.Category = input;
     }
