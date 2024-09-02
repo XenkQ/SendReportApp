@@ -2,7 +2,8 @@
 
 public enum Categories
 {
-    UszkodzonieInfrastruktury = 1,
+    NONE,
+    UszkodzonieInfrastruktury,
     ZleZnakiDrogowe,
     UszkodzonaJezdnia,
     Wandalizm,
