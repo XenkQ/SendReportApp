@@ -7,70 +7,68 @@
     Title="{Binding Title}"
     x:DataType="viewmodel:SendingResultViewModel"
     Shell.PresentationMode="ModalNotAnimated">
-    <ScrollView VerticalOptions="Fill">
-        <Grid RowSpacing="15" VerticalOptions="Fill">
+    <Grid RowSpacing="15" VerticalOptions="Fill">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Margin="8,0"
+            Spacing="25"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                x:Name="TitleInfo"
+                Grid.Row="0"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Zgłosznie nie zostało wysłane!"
+                TextColor="Black" />
+
+            <Image
+                x:Name="Graphic"
+                Aspect="AspectFit"
+                MaximumHeightRequest="200"
+                MaximumWidthRequest="200" />
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            Margin="8,0,8,10"
+            RowSpacing="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <VerticalStackLayout
-                Margin="8,0"
-                Spacing="25"
-                VerticalOptions="CenterAndExpand">
-                <Label
-                    x:Name="TitleInfo"
-                    Grid.Row="0"
-                    HorizontalOptions="CenterAndExpand"
-                    HorizontalTextAlignment="Center"
-                    SemanticProperties.HeadingLevel="Level1"
-                    Style="{StaticResource Headline}"
-                    Text="Zgłosznie nie zostało wysłane!"
-                    TextColor="Black" />
+            <Button
+                x:Name="TryAgainBtn"
+                Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="{StaticResource My_Green}"
+                Command="{Binding TrySendingAgainCommand}"
+                SemanticProperties.Hint="Try send again"
+                Style="{StaticResource FlowButton}"
+                Text="Spróbuj ponownie" />
 
-                <Image
-                    x:Name="Graphic"
-                    Aspect="AspectFit"
-                    MaximumHeightRequest="200"
-                    MaximumWidthRequest="200" />
-            </VerticalStackLayout>
-
-            <Grid
+            <Button
+                x:Name="ExitBtn"
                 Grid.Row="1"
-                Margin="8,0,8,10"
-                RowSpacing="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <Button
-                    x:Name="TryAgainBtn"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    BackgroundColor="{StaticResource My_Green}"
-                    Command="{Binding TrySendingAgainCommand}"
-                    SemanticProperties.Hint="Try send again"
-                    Style="{StaticResource FlowButton}"
-                    Text="Spróbuj ponownie" />
-
-                <Button
-                    x:Name="ExitBtn"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Command="{Binding ExitCommand}"
-                    SemanticProperties.Hint="Exit app"
-                    Style="{StaticResource FlowButton}"
-                    Text="Wyjdź" />
-            </Grid>
+                Grid.Column="0"
+                Command="{Binding ExitCommand}"
+                SemanticProperties.Hint="Exit app"
+                Style="{StaticResource FlowButton}"
+                Text="Wyjdź" />
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>

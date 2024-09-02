@@ -8,99 +8,97 @@
     x:DataType="viewmodel:FormLocalizationViewModel"
     Shell.PresentationMode="ModalNotAnimated">
 
-    <ScrollView VerticalOptions="Fill">
-        <Grid RowSpacing="15" VerticalOptions="Fill">
+    <Grid RowSpacing="15" VerticalOptions="Fill">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Padding="8"
+            BackgroundColor="{StaticResource My_DarkBlue}"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Center"
+            SemanticProperties.HeadingLevel="Level1"
+            Style="{StaticResource Headline}"
+            Text="Lokalizacja"
+            TextColor="White"
+            WidthRequest="-1" />
+
+        <Border
+            Grid.Row="1"
+            Margin="8,0"
+            Style="{StaticResource InfoBorder}">
+
+            <Label Text="Zgłoszenie wymaga twojej lokalizacji. Wciśnij przycisk udostępnij lokalizację i wybierz opcję precyzyjną." TextColor="{StaticResource My_Orange}" />
+        </Border>
+
+        <ContentView
+            x:Name="LocalizationMap"
+            Grid.Row="2"
+            Margin="8,0"
+            Content="{Binding LocalizationMapControl}"
+            HorizontalOptions="Fill"
+            IsVisible="{Binding IsNotBusy}"
+            VerticalOptions="Fill" />
+
+        <HorizontalStackLayout
+            Grid.Row="3"
+            Margin="5,5,5,0"
+            HorizontalOptions="Center"
+            Spacing="10">
+            <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+            <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+            <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+            <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+        </HorizontalStackLayout>
+
+        <Button
+            x:Name="GetLocalizationBtn"
+            Grid.Row="4"
+            Margin="8,0"
+            BackgroundColor="{StaticResource My_Green}"
+            Command="{Binding SendLocalizationCommand}"
+            SemanticProperties.Hint="Getting user localization and inserting it into map."
+            Style="{StaticResource WideButton}"
+            Text="Udostępnij lokalizację" />
+
+        <Grid
+            Grid.Row="5"
+            Margin="8,0,8,10"
+            ColumnSpacing="10">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Label
+            <Button
+                x:Name="BackBtn"
                 Grid.Row="0"
-                Padding="8"
-                BackgroundColor="{StaticResource My_DarkBlue}"
-                HorizontalOptions="FillAndExpand"
-                HorizontalTextAlignment="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="Lokalizacja"
-                TextColor="White"
-                WidthRequest="-1" />
-
-            <Border
-                Grid.Row="1"
-                Margin="8,0"
-                Style="{StaticResource InfoBorder}">
-
-                <Label Text="Zgłoszenie wymaga twojej lokalizacji. Wciśnij przycisk udostępnij lokalizację i wybierz opcję precyzyjną." TextColor="{StaticResource My_Orange}" />
-            </Border>
-
-            <ContentView
-                x:Name="LocalizationMap"
-                Grid.Row="2"
-                Margin="8,0"
-                Content="{Binding LocalizationMapControl}"
-                HorizontalOptions="Fill"
-                IsVisible="{Binding IsNotBusy}"
-                VerticalOptions="Fill" />
-
-            <HorizontalStackLayout
-                Grid.Row="3"
-                Margin="5,5,5,0"
-                HorizontalOptions="Center"
-                Spacing="10">
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-            </HorizontalStackLayout>
+                Grid.Column="0"
+                Command="{Binding ToPreviousFormCommand}"
+                SemanticProperties.Hint="Going Back To Last Page"
+                Style="{StaticResource FlowButton}"
+                Text="Cofnij" />
 
             <Button
-                x:Name="GetLocalizationBtn"
-                Grid.Row="4"
-                Margin="8,0"
-                BackgroundColor="{StaticResource My_Green}"
-                Command="{Binding SendLocalizationCommand}"
-                SemanticProperties.Hint="Getting user localization and inserting it into map."
-                Style="{StaticResource WideButton}"
-                Text="Udostępnij lokalizację" />
-
-            <Grid
-                Grid.Row="5"
-                Margin="8,0,8,10"
-                ColumnSpacing="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button
-                    x:Name="BackBtn"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Command="{Binding ToPreviousFormCommand}"
-                    SemanticProperties.Hint="Going Back To Last Page"
-                    Style="{StaticResource FlowButton}"
-                    Text="Cofnij" />
-
-                <Button
-                    x:Name="SubmitButton"
-                    Grid.Column="1"
-                    Background="{StaticResource My_Orange}"
-                    Command="{Binding ToNextFormCommand}"
-                    SemanticProperties.Hint="Next Page if exists"
-                    Style="{StaticResource FlowButton}"
-                    Text="Wyślij" />
-            </Grid>
+                x:Name="SubmitButton"
+                Grid.Column="1"
+                Background="{StaticResource My_Orange}"
+                Command="{Binding ToNextFormCommand}"
+                SemanticProperties.Hint="Next Page if exists"
+                Style="{StaticResource FlowButton}"
+                Text="Wyślij" />
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>

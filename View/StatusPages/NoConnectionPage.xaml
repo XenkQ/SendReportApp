@@ -8,71 +8,69 @@
     x:DataType="viewmodel:NoConnectionViewModel"
     Shell.PresentationMode="ModalNotAnimated">
 
-    <ScrollView VerticalOptions="Fill">
-        <Grid RowSpacing="15" VerticalOptions="Fill">
+    <Grid RowSpacing="15" VerticalOptions="Fill">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Margin="8,0"
+            Spacing="25"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                x:Name="ConnectionInfoLabel"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="{Binding ConnectionStatus}"
+                TextColor="Black" />
+
+            <Image
+                Aspect="AspectFit"
+                MaximumHeightRequest="300"
+                MaximumWidthRequest="300"
+                Source="wifi_off" />
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            Margin="8,0,8,10"
+            RowSpacing="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <VerticalStackLayout
+            <Button
+                x:Name="ReconnectBtn"
                 Grid.Row="0"
-                Margin="8,0"
-                Spacing="25"
-                VerticalOptions="CenterAndExpand">
-                <Label
-                    x:Name="ConnectionInfoLabel"
-                    HorizontalOptions="CenterAndExpand"
-                    HorizontalTextAlignment="Center"
-                    SemanticProperties.HeadingLevel="Level1"
-                    Style="{StaticResource Headline}"
-                    Text="{Binding ConnectionStatus}"
-                    TextColor="Black" />
+                Grid.Column="0"
+                BackgroundColor="{StaticResource My_Green}"
+                Command="{Binding TryReconnectCommand}"
+                SemanticProperties.Hint="Going Back To Last Page"
+                Style="{StaticResource WideButton}"
+                Text="Spróbuj ponownie" />
 
-                <Image
-                    Aspect="AspectFit"
-                    MaximumHeightRequest="300"
-                    MaximumWidthRequest="300"
-                    Source="wifi_off" />
-            </VerticalStackLayout>
-
-            <Grid
+            <Button
+                x:Name="ExitBtn"
                 Grid.Row="1"
-                Margin="8,0,8,10"
-                RowSpacing="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Button
-                    x:Name="ReconnectBtn"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    BackgroundColor="{StaticResource My_Green}"
-                    Command="{Binding TryReconnectCommand}"
-                    SemanticProperties.Hint="Going Back To Last Page"
-                    Style="{StaticResource WideButton}"
-                    Text="Spróbuj ponownie" />
-
-                <Button
-                    x:Name="ExitBtn"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    BackgroundColor="{StaticResource My_DarkBlue}"
-                    Command="{Binding ExitCommand}"
-                    SemanticProperties.Hint="Going Back To Last Page"
-                    Style="{StaticResource WideButton}"
-                    Text="Wyjdź" />
-            </Grid>
+                Grid.Column="0"
+                BackgroundColor="{StaticResource My_DarkBlue}"
+                Command="{Binding ExitCommand}"
+                SemanticProperties.Hint="Going Back To Last Page"
+                Style="{StaticResource WideButton}"
+                Text="Wyjdź" />
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>
