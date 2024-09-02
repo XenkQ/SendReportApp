@@ -16,8 +16,9 @@ namespace MauiApp1.ViewModel.Forms;
 public partial class FormLocalizationViewModel : FormBaseViewModel,
     IUpdateAlertData<(double longitude, double latitude)>
 {
-    private const double STARTING_LATITUDE = 54.75851040001975;
-    private const double STARTING_LONGITUDE = 17.55495071411133;
+    private const double START_LATITUDE = 54.75851040001975;
+    private const double START_LONGITUDE = 17.55495071411133;
+    private const float START_ZOOM = 2f;
 
     private readonly AlertDataToSend _alertDataToSend;
     private readonly IDialogService _dialogService;
@@ -35,7 +36,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
         _dialogService = dialogService;
         _loadingPopupService = loadingPopupService;
 
-        _startLocation = SphericalMercator.FromLonLat(STARTING_LONGITUDE, STARTING_LATITUDE).ToMPoint();
+        _startLocation = SphericalMercator.FromLonLat(START_LONGITUDE, START_LATITUDE).ToMPoint();
 
         LocalizationMapControl = CreateStartMapControl();
     }
@@ -44,7 +45,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
     {
         var mapControl = new MapControl();
         mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        mapControl.Map.Navigator.CenterOnAndZoomTo(_startLocation, 2f);
+        mapControl.Map.Navigator.CenterOnAndZoomTo(_startLocation, START_ZOOM);
         mapControl.Map.Navigator.PanLock = true;
         return mapControl;
     }

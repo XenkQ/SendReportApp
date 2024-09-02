@@ -8,6 +8,5 @@ public partial class LocalizationPage : ContentPage
     {
         InitializeComponent();
         BindingContext = viewModel;
-        //MapContentChangeBehavior.ContentChanged += OnContentChange!;
     }
 }
