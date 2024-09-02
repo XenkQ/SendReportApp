@@ -3,7 +3,9 @@
     x:Class="MauiApp1.View.StatusPages.NoConnectionPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Status"
     Title="NoConnectionPage"
+    x:DataType="viewmodel:NoConnectionViewModel"
     Shell.PresentationMode="ModalNotAnimated">
 
     <ScrollView VerticalOptions="Fill">
@@ -29,7 +31,7 @@
                     HorizontalTextAlignment="Center"
                     SemanticProperties.HeadingLevel="Level1"
                     Style="{StaticResource Headline}"
-                    Text=""
+                    Text="{Binding ConnectionStatus}"
                     TextColor="Black" />
 
                 <Image
@@ -56,7 +58,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     BackgroundColor="{StaticResource My_Green}"
-                    Clicked="OnReconnectButtonClick"
+                    Command="{Binding TryReconnectCommand}"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource WideButton}"
                     Text="Spróbuj ponownie" />
@@ -66,7 +68,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     BackgroundColor="{StaticResource My_DarkBlue}"
-                    Clicked="OnExitButtonClick"
+                    Command="{Binding ExitCommand}"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource WideButton}"
                     Text="Wyjdź" />

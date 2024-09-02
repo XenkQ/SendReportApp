@@ -1,6 +1,4 @@
-﻿using MauiApp1.Scripts.Connection;
-using MauiApp1.Scripts.Creation;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
 using System.Text.Json;
@@ -12,6 +10,7 @@ using MauiApp1.View;
 using MauiApp1.Services;
 using MauiApp1.View.StatusPages;
 using MauiApp1.ViewModel.Status;
+using MauiApp1.Scripts.Connection;
 
 namespace MauiApp1;
 
@@ -28,12 +27,7 @@ public static class MauiProgram
         var apiSettings = JsonSerializer.Deserialize<SettingsRoot>(stream);
 
         builder
-            .UseMauiApp(serviceProvider => new App(
-                new ApiConnection(apiSettings.ApiSettings),
-                new AlertDataSender(apiSettings.ApiSettings),
-                new PagePooler(),
-                new AlertDataToSend()
-            ))
+            .UseMauiApp(serviceProvider => new App())
             .UseMauiCommunityToolkit()
             .UseSkiaSharp(true)
             .ConfigureFonts(fonts =>
@@ -42,10 +36,12 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Services.AddSingleton<IConnectionStatusService>(new ConnectionStatusService(new ApiConnection(apiSettings.ApiSettings)));
         builder.Services.AddSingleton<IDialogService, DialogService>();
         builder.Services.AddSingleton<ILoadingPopupService, LoadingPopupService>();
         builder.Services.AddSingleton<IFormBackgroundTaskObserver, FormBackgroundTaskObserver>();
         builder.Services.AddSingleton<IAlertDataSender>(new AlertDataSender(apiSettings.ApiSettings));
+        builder.Services.AddSingleton<INoConnectionDisplayer, NoConnectionDisplayer>();
 
         builder.Services.AddSingleton<AlertDataToSend>();
 
@@ -66,6 +62,9 @@ public static class MauiProgram
 
         builder.Services.AddTransient<SendingResultViewModel>();
         builder.Services.AddTransient<SendingResultPage>();
+
+        builder.Services.AddTransient<NoConnectionViewModel>();
+        builder.Services.AddTransient<NoConnectionPage>();
 
         builder.Services.AddSingleton<MainPage>();
 

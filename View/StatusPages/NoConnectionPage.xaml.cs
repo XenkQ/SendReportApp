@@ -1,41 +1,18 @@
-using MauiApp1.Scripts.Connection;
+using MauiApp1.Services;
+using MauiApp1.ViewModel.Status;
 
 namespace MauiApp1.View.StatusPages;
 
 internal interface IDisplayConnectionInfo
 {
-	void DisplayConnectionText(ConectionStatuses conectionStatus);
+	void DisplayConnectionText(ConnectionStatuses conectionStatus);
 }
 
-public partial class NoConnectionPage : ContentPage, IDisplayConnectionInfo
+public partial class NoConnectionPage : ContentPage
 {
-    private readonly IApp _app;
-
-    public NoConnectionPage(IApp app)
+    public NoConnectionPage(NoConnectionViewModel viewModel)
 	{
 		InitializeComponent();
-		_app = app;
-	}
-
-	private void OnReconnectButtonClick(object sender, EventArgs e)
-		=> _app.RefreshPages();
-
-
-    public void OnExitButtonClick(object sender, EventArgs e)
-		=> Application.Current.Quit();
-
-	public void DisplayConnectionText(ConectionStatuses conectionStatus)
-	{
-		switch(conectionStatus)
-		{
-			case ConectionStatuses.NoInternetConnection:
-				ConnectionInfoLabel.Text = "Brak po³¹czenia z internetem!";
-				break;
-
-			case ConectionStatuses.NoServerConnection:
-            case ConectionStatuses.NoServerAndInternetConnection:
-                ConnectionInfoLabel.Text = "Brak po³¹czenia z serwerem. Spróbuj ponownie póŸniej.";
-                break;
-        }
+		BindingContext = viewModel;
 	}
 }
