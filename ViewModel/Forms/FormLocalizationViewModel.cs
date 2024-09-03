@@ -32,12 +32,12 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
     public FormLocalizationViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
         ILoadingPopupService loadingPopupService, INoConnectionDisplayer noConnectionDisplayer)
     {
+        Title = "Lokalizacja";
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         _loadingPopupService = loadingPopupService;
         _noConnectionDisplayer = noConnectionDisplayer;
         _startLocation = SphericalMercator.FromLonLat(START_LONGITUDE, START_LATITUDE).ToMPoint();
-
         LocalizationMapControl = CreateStartMapControl();
     }
 

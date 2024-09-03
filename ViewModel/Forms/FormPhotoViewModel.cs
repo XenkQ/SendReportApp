@@ -28,6 +28,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
     public FormPhotoViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
         IFormBackgroundTaskObserver formBackgroundTaskObserver)
     {
+        Title = "Zdjęcie";
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         formBackgroundTaskObserver.Subscribe(this);

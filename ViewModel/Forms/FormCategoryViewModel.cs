@@ -17,6 +17,7 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
 
     public FormCategoryViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService)
     {
+        Title = "Kategoria";
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
     }
