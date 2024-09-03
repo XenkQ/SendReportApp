@@ -1,4 +1,4 @@
-﻿namespace MauiApp1;
+﻿namespace MauiApp1.Helpers;
 
 public enum Categories
 {

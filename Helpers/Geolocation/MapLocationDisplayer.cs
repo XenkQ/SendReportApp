@@ -17,9 +17,6 @@ internal static class MapLocationDisplayer
 
         PinLayer.DisplaySinglePinOnMap(mapControl.Map, locationOnMap, PinLayer.DefaultPinStyle);
 
-        //viewDisplayingMap.Content = null; //detaching content for event to be called
-        //viewDisplayingMap.Content = mapControl;
-
         mapControl.Map.Navigator.PanLock = true;
     }
 }
