@@ -3,10 +3,13 @@
     x:Class="MauiApp1.View.FormPages.DescriptionPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
     Title="{Binding Title}"
+    android:Application.WindowSoftInputModeAdjust="Resize"
     x:DataType="viewmodel:FormDescriptionViewModel"
-    Shell.PresentationMode="ModalNotAnimated">
+    Shell.NavBarIsVisible="False"
+    Shell.PresentationMode="NotAnimated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
 
@@ -46,7 +49,6 @@
             x:Name="DescriptionField"
             Grid.Row="2"
             Margin="8,0"
-            AutoSize="TextChanges"
             FontSize="16"
             HorizontalOptions="FillAndExpand"
             MaxLength="1000"
@@ -65,8 +67,8 @@
             <Frame Style="{StaticResource CircleFrame}" />
         </HorizontalStackLayout>
 
-
         <Grid
+            x:Name="FlowButtonsContainer"
             Grid.Row="4"
             Margin="8,0,8,10"
             ColumnSpacing="10">
