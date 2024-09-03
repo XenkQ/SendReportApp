@@ -50,11 +50,6 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
         return mapControl;
     }
 
-    protected override async Task ToPreviousFormAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(DescriptionPage));
-    }
-
     protected override async Task ToNextFormAsync()
     {
         if (_noConnectionDisplayer.DisplayIfNoConnection()) return;

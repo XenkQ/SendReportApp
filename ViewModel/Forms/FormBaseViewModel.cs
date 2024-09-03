@@ -16,5 +16,6 @@ public abstract class FormBaseViewModel : BaseViewModel
 
     protected abstract Task ToNextFormAsync();
 
-    protected abstract Task ToPreviousFormAsync();
+    protected virtual async Task ToPreviousFormAsync()
+        => await Shell.Current.GoToAsync("..");
 }

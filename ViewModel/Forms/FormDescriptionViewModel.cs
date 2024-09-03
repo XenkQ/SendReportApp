@@ -25,9 +25,6 @@ public partial class FormDescriptionViewModel : FormBaseViewModel, IUpdateAlertD
         await Shell.Current.GoToAsync(nameof(LocalizationPage));
     }
 
-    protected override async Task ToPreviousFormAsync()
-        => await Shell.Current.GoToAsync(nameof(CategoryPage));
-
     public void UpdateAlertData(string input)
     {
         if (!string.IsNullOrEmpty(input))

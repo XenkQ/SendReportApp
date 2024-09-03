@@ -34,11 +34,6 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
         }
     }
 
-    protected override async Task ToPreviousFormAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(PhotoPage));
-    }
-
     public void OnCategoryChange(object sender, EventArgs e)
     {
         var radioButton = sender as RadioButton;
