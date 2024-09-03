@@ -6,7 +6,8 @@
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
     Title="{Binding Title}"
     x:DataType="viewmodel:FormLocalizationViewModel"
-    Shell.PresentationMode="ModalNotAnimated">
+    Shell.NavBarIsVisible="False"
+    Shell.PresentationMode="NotAnimated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
 
