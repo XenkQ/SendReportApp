@@ -12,7 +12,7 @@ public partial class NoConnectionViewModel : BaseViewModel
     private readonly IConnectionStatusService _connectionStatusService;
 
     [ObservableProperty]
-    private string _connectionStatus;
+    private ConnectionStatuses _connectionStatus;
 
     [ObservableProperty]
     private string _connectionInfo;
@@ -33,10 +33,9 @@ public partial class NoConnectionViewModel : BaseViewModel
     [RelayCommand]
     public void Exit() => Application.Current.Quit();
 
-    //TODO: Make some kind of converter for connection info
-    public void SetConnectionInfo(ConnectionStatuses conectionStatus)
+    partial void OnConnectionStatusChanged(ConnectionStatuses value)
     {
-        switch (conectionStatus)
+        switch (ConnectionStatus)
         {
             case ConnectionStatuses.NoInternetConnection:
                 ConnectionInfo = "Brak połączenia z internetem!";

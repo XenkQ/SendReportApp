@@ -37,5 +37,8 @@ public class NoConnectionDisplayer : INoConnectionDisplayer
     }
 
     private static void DisplayNoConnectionPage(ConnectionStatuses status)
-        => Shell.Current.GoToAsync($"{nameof(NoConnectionPage)}?connection_status={status}");
+        => Shell.Current.GoToAsync(nameof(NoConnectionPage), false, new Dictionary<string, object>
+        {
+            { "connection_status", status}
+        });
 }
