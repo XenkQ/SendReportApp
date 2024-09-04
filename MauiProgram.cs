@@ -23,9 +23,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
 
         var assembly = Assembly.GetExecutingAssembly();
-        Console.WriteLine($"{assembly.GetName().Name}.appsettings.json");
         using var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.appsettings.json");
-
         var apiSettings = JsonSerializer.Deserialize<SettingsRoot>(stream);
 
         builder
