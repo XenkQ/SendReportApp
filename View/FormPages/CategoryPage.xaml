@@ -3,6 +3,7 @@
     x:Class="MauiApp1.View.FormPages.CategoryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MauiApp1.Model.Categories"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
     Title="{Binding Title}"
@@ -28,131 +29,65 @@
                 TextColor="White"
                 WidthRequest="-1" />
 
-            <VerticalStackLayout Margin="8,0" Spacing="15">
+            <Border Margin="8,0" Style="{StaticResource InfoBorder}">
+                <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
+            </Border>
 
-                <Border Style="{StaticResource InfoBorder}">
-                    <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
-                </Border>
-
-                <VerticalStackLayout>
-                    <Frame Style="{StaticResource CategoryFrame}">
-                        <Label Style="{StaticResource CategoryLabel}" Text="Infrastruktura" />
-                    </Frame>
-                    <Frame Margin="30,0">
-                        <VerticalStackLayout>
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Uszkodzonie infrastruktury"
-                                GroupName="CategoryChoices"
-                                Value="1" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Złe znaki drogowe"
-                                GroupName="CategoryChoices"
-                                Value="2" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Uszkodzona jezdnia"
-                                GroupName="CategoryChoices"
-                                Value="3" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Wandalizm"
-                                GroupName="CategoryChoices"
-                                Value="4" />
+            <CollectionView ItemsSource="{Binding ListOfCategories}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CategoryGroup">
+                        <VerticalStackLayout Margin="0,0,0,10" Spacing="10">
+                            <Frame Margin="8,0" Style="{StaticResource CategoryFrame}">
+                                <Label Style="{StaticResource CategoryLabel}" Text="{Binding Group}" />
+                            </Frame>
+                            <Frame Margin="30,0">
+                                <CollectionView ItemsSource="{Binding Categories}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Category">
+                                            <RadioButton
+                                                CheckedChanged="OnCategoryChange"
+                                                Content="{Binding Name}"
+                                                GroupName="CategoryChoices"
+                                                Value="{Binding Id}" />
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Frame>
                         </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                <VerticalStackLayout>
-                    <Frame Style="{StaticResource CategoryFrame}">
-                        <Label Style="{StaticResource CategoryLabel}" Text="Bezpieczeństwo" />
-                    </Frame>
-                    <Frame Margin="30,0">
-                        <VerticalStackLayout>
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Niezabezpieczone otoczenie"
-                                GroupName="CategoryChoices"
-                                Value="5" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Niebezpieczeństwo dla osób niepełnosprawnych"
-                                GroupName="CategoryChoices"
-                                Value="6" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Inne niebezpieczeństwa"
-                                GroupName="CategoryChoices"
-                                Value="7" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
+                <Frame Style="{StaticResource CircleFrame}" />
+            </HorizontalStackLayout>
 
-                <VerticalStackLayout>
-                    <Frame Style="{StaticResource CategoryFrame}">
-                        <Label Style="{StaticResource CategoryLabel}" Text="Przyroda" />
-                    </Frame>
-                    <Frame Margin="30,0">
-                        <VerticalStackLayout>
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Martwe zwierzę"
-                                GroupName="CategoryChoices"
-                                Value="8" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Porzucone śmieci"
-                                GroupName="CategoryChoices"
-                                Value="9" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Spalanie śmieci"
-                                GroupName="CategoryChoices"
-                                Value="10" />
-                            <RadioButton
-                                CheckedChanged="OnCategoryChange"
-                                Content="Dewastacja przyrody"
-                                GroupName="CategoryChoices"
-                                Value="11" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
+            <Grid Margin="8,0,8,10" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                <HorizontalStackLayout
-                    Margin="0,5,0,0"
-                    HorizontalOptions="Center"
-                    Spacing="10">
-                    <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                    <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
-                    <Frame Style="{StaticResource CircleFrame}" />
-                    <Frame Style="{StaticResource CircleFrame}" />
-                </HorizontalStackLayout>
+                <Button
+                    x:Name="BackBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding ToPreviousFormCommand}"
+                    SemanticProperties.Hint="Going Back To Last Page"
+                    Style="{StaticResource FlowButton}"
+                    Text="Cofnij" />
 
-                <Grid Margin="0,0,0,10" ColumnSpacing="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Button
-                        x:Name="BackBtn"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Command="{Binding ToPreviousFormCommand}"
-                        SemanticProperties.Hint="Going Back To Last Page"
-                        Style="{StaticResource FlowButton}"
-                        Text="Cofnij" />
-
-                    <Button
-                        x:Name="NextBtn"
-                        Grid.Column="1"
-                        Command="{Binding ToNextFormCommand}"
-                        SemanticProperties.Hint="Next Page if exists"
-                        Style="{StaticResource FlowButton}"
-                        Text="Dalej" />
-                </Grid>
-            </VerticalStackLayout>
+                <Button
+                    x:Name="NextBtn"
+                    Grid.Column="1"
+                    Command="{Binding ToNextFormCommand}"
+                    SemanticProperties.Hint="Next Page if exists"
+                    Style="{StaticResource FlowButton}"
+                    Text="Dalej" />
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

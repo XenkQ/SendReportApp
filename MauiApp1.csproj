@@ -96,11 +96,13 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="MockData\Categories.json" />
 	  <None Remove="Resources\Images\check_circle.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="appsettings.json" />
+	  <EmbeddedResource Include="MockData\categories.json" />
 	</ItemGroup>
 
 	<ItemGroup>

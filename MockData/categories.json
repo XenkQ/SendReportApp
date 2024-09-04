@@ -1,0 +1,84 @@
+{
+  "category_groups": [
+    {
+      "group": "Infrastruktura",
+      "categories": [
+        {
+          "id": 1,
+          "icon": "bridge-circle-exclamation",
+          "name": "Uszkodzonie infrastruktury"
+        },
+        {
+          "id": 2,
+          "icon": "signs-post",
+          "name": "Złe znaki drogowe"
+        },
+        {
+          "id": 3,
+          "icon": "map-signs",
+          "name": "Uszkodzona jezdnia"
+        },
+        {
+          "id": 4,
+          "icon": "hand-fist",
+          "name": "Wandalizm"
+        }
+      ]
+    },
+    {
+      "group": "Bezpieczeństwo",
+      "categories": [
+        {
+          "id": 5,
+          "icon": "person-falling-burst",
+          "name": "Niezabezpieczone otoczenie"
+        },
+        {
+          "id": 6,
+          "icon": "wheelchair-move",
+          "name": "Niebezpieczeństwo dla osób niepełnosprawnych"
+        },
+        {
+          "id": 7,
+          "icon": "triangle-exclamation",
+          "name": "Inne niebezpieczeństwa"
+        }
+      ]
+    },
+    {
+      "group": "Przyroda",
+      "categories": [
+        {
+          "id": 8,
+          "icon": "paw",
+          "name": "Martwe zwierzę"
+        },
+        {
+          "id": 9,
+          "icon": "trash-arrow-up",
+          "name": "Porzucone śmieci"
+        },
+        {
+          "id": 10,
+          "icon": "dumpster-fire",
+          "name": "Spalanie śmieci"
+        },
+        {
+          "id": 11,
+          "icon": "wheat-awn-circle-exclamation",
+          "name": "Dewastacja przyrody"
+        }
+      ]
+    },
+    {
+      "group": "Inne",
+      "categories": [
+        {
+          "id": 99,
+          "icon": "circle-plus",
+          "name": "Inne"
+        }
+      ]
+    }
+  ]
+}
