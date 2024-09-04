@@ -3,7 +3,7 @@ using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Reflection;
 using System.Text.Json;
 using CommunityToolkit.Maui;
-using MauiApp1.Model;
+using MauiApp1.Model.Settings;
 using MauiApp1.ViewModel.Forms;
 using MauiApp1.View.FormPages;
 using MauiApp1.View;
@@ -12,6 +12,7 @@ using MauiApp1.View.StatusPages;
 using MauiApp1.ViewModel.Status;
 using MauiApp1.Scripts.Connection;
 using MauiApp1.ViewModel;
+using MauiApp1.Model;
 
 namespace MauiApp1;
 

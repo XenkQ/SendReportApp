@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Model;
+using MauiApp1.Model.Settings;
 
 namespace MauiApp1.Scripts.Connection;
 
