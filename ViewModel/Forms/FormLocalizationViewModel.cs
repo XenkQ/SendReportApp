@@ -3,7 +3,6 @@ using Mapsui;
 using MauiApp1.Model;
 using MauiApp1.Scripts.Geolocation;
 using MauiApp1.Services;
-using MauiApp1.View.FormPages;
 using MauiApp1.View.StatusPages;
 using Mapsui.Projections;
 using Mapsui.Extensions;

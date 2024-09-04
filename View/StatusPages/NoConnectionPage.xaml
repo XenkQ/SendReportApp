@@ -6,7 +6,7 @@
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Status"
     Title="NoConnectionPage"
     x:DataType="viewmodel:NoConnectionViewModel"
-    Shell.PresentationMode="ModalNotAnimated">
+    Shell.PresentationMode="ModalAnimated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
 

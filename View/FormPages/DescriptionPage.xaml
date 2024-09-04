@@ -9,7 +9,7 @@
     android:Application.WindowSoftInputModeAdjust="Resize"
     x:DataType="viewmodel:FormDescriptionViewModel"
     Shell.NavBarIsVisible="False"
-    Shell.PresentationMode="NotAnimated">
+    Shell.PresentationMode="Animated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
 

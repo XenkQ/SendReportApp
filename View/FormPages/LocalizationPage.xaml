@@ -7,7 +7,7 @@
     Title="{Binding Title}"
     x:DataType="viewmodel:FormLocalizationViewModel"
     Shell.NavBarIsVisible="False"
-    Shell.PresentationMode="NotAnimated">
+    Shell.PresentationMode="Animated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
 
