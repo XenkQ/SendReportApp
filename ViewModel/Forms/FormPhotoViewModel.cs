@@ -56,7 +56,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
         }
         catch (Exception)
         {
-            await Shell.Current.DisplayAlert("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
+            await _dialogService.ShowAlertAsync("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
         }
 
         return null;
