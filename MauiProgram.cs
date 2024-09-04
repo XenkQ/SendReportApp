@@ -11,6 +11,7 @@ using MauiApp1.Services;
 using MauiApp1.View.StatusPages;
 using MauiApp1.ViewModel.Status;
 using MauiApp1.Scripts.Connection;
+using MauiApp1.ViewModel;
 
 namespace MauiApp1;
 
@@ -66,6 +67,7 @@ public static class MauiProgram
         builder.Services.AddTransient<NoConnectionViewModel>();
         builder.Services.AddTransient<NoConnectionPage>();
 
+        builder.Services.AddSingleton<MainPageViewModel>();
         builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
