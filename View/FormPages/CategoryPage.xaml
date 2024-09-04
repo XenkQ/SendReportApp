@@ -12,6 +12,11 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="15">
+            <VerticalStackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Command="{Binding ToNextFormCommand}" Direction="Left" />
+                <SwipeGestureRecognizer Command="{Binding ToPreviousFormCommand}" Direction="Right" />
+            </VerticalStackLayout.GestureRecognizers>
+
             <Label
                 Padding="8"
                 BackgroundColor="{StaticResource My_DarkBlue}"

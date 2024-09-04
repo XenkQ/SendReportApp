@@ -10,6 +10,9 @@
     Shell.PresentationMode="Animated">
 
     <Grid RowSpacing="15" VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Command="{Binding ToPreviousFormCommand}" Direction="Right" />
+        </Grid.GestureRecognizers>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
