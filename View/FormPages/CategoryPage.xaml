@@ -34,8 +34,6 @@
                 <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
             </Border>
 
-            <!--<local:CategoriesControl CategoriesRoot="{Binding CategoriesRoot}" OnRadioButtonSelected="OnCategorySelect" />-->
-
             <VerticalStackLayout
                 x:Name="CategoriesView"
                 BindableLayout.ItemsSource="{Binding CategoryGroups}"
@@ -63,43 +61,6 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
-
-            <!--<CollectionView
-                x:Name="CategoriesView"
-                ItemsLayout="VerticalList"
-                ItemsSource="{Binding Categories}"
-                ItemsUpdatingScrollMode="KeepLastItemInView"
-                SelectionMode="None"
-                VerticalOptions="FillAndExpand">
-                <CollectionView.EmptyView>
-                    <IndicatorView IndicatorColor="{StaticResource My_DarkBlue}" VerticalOptions="CenterAndExpand" />
-                </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:CategoryGroup">
-                        <VerticalStackLayout Margin="0,0,0,10" Spacing="10">
-                            <Border Margin="8,0" Style="{StaticResource CategoryBorder}">
-                                <Label Style="{StaticResource CategoryLabel}" Text="{Binding Group}" />
-                            </Border>
-                            <Border Style="{StaticResource CategoryRadioButtonsBorder}">
-                                <CollectionView
-                                    ItemsLayout="VerticalList"
-                                    ItemsSource="{Binding Categories}"
-                                    ItemsUpdatingScrollMode="KeepLastItemInView">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:Category">
-                                            <RadioButton
-                                                CheckedChanged="OnCategoryChange"
-                                                Content="{Binding Name}"
-                                                GroupName="CategoryChoices"
-                                                Value="{Binding Id}" />
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </Border>
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
