@@ -2,7 +2,6 @@
 
 namespace MauiApp1.View.FormPages;
 
-//TODO: Reading radio buttons from api
 public partial class CategoryPage : ContentPage
 {
     private readonly FormCategoryViewModel _viewModel;
@@ -14,8 +13,8 @@ public partial class CategoryPage : ContentPage
         BindingContext = _viewModel;
     }
 
-    private void OnCategoryChange(object sender, EventArgs e)
+    public void OnCategorySelect(object sender, EventArgs e)
     {
-        _viewModel.OnCategoryChange(sender, e);
+        _viewModel.OnCategorySelect(sender, e);
     }
 }

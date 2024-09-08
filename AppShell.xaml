@@ -7,7 +7,7 @@
     FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Monkeys"
+        Title="MainPage"
         ContentTemplate="{DataTemplate view:MainPage}"
         Route="MainPage"
         Shell.NavBarIsVisible="False" />

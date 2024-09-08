@@ -14,9 +14,10 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
 {
     private readonly AlertDataToSend _alertDataToSend;
     private readonly IDialogService _dialogService;
+    private int _categoryStartId;
 
     [ObservableProperty]
-    private IReadOnlyList<CategoryGroup> _listOfCategories;
+    private IReadOnlyList<CategoryGroup> _categoryGroups;
 
     [ObservableProperty]
     private int _categoryChoiceId = 0;
@@ -26,13 +27,17 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
         Title = "Kategoria";
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
+        LoadCategories();
+    }
 
-        var assembly = Assembly.GetExecutingAssembly();
-        using var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.MockData.categories.json");
-        //bool exists = File.Exists($"{assembly.GetName().Name}.Categories.json");
+    public void OnCategorySelect(object sender, EventArgs e)
+    {
+        var radioButton = sender as RadioButton;
 
-        var categoriesRoot = JsonSerializer.Deserialize<CategoriesRoot>(stream);
-        _listOfCategories = categoriesRoot.CategoryGroups;
+        if (radioButton == null)
+            throw new ArgumentException("Sender is not of object type");
+
+        CategoryChoiceId = int.Parse(radioButton.Value.ToString()!);
     }
 
     protected override async Task ToNextFormAsync()
@@ -48,14 +53,11 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
         }
     }
 
-    public void OnCategoryChange(object sender, EventArgs e)
+    public void LoadCategories()
     {
-        var radioButton = sender as RadioButton;
-
-        if (radioButton == null)
-            throw new ArgumentException("Sender is not of object type");
-
-        CategoryChoiceId = int.Parse(radioButton.Value.ToString()!);
+        var assembly = Assembly.GetExecutingAssembly();
+        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.MockData.categories.json");
+        CategoryGroups = JsonSerializer.Deserialize<CategoriesRoot>(stream).CategoryGroups;
     }
 
     public void UpdateAlertData(int input)

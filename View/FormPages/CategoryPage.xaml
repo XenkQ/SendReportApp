@@ -3,6 +3,7 @@
     x:Class="MauiApp1.View.FormPages.CategoryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiApp1.View"
     xmlns:models="clr-namespace:MauiApp1.Model.Categories"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Forms"
@@ -33,11 +34,46 @@
                 <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
             </Border>
 
-            <CollectionView
+            <!--<local:CategoriesControl CategoriesRoot="{Binding CategoriesRoot}" OnRadioButtonSelected="OnCategorySelect" />-->
+
+            <VerticalStackLayout
+                x:Name="CategoriesView"
+                BindableLayout.ItemsSource="{Binding CategoryGroups}"
+                VerticalOptions="FillAndExpand">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:CategoryGroup">
+                        <VerticalStackLayout Margin="0,0,0,10" Spacing="10">
+                            <Border Margin="8,0" Style="{StaticResource CategoryBorder}">
+                                <Label Style="{StaticResource CategoryLabel}" Text="{Binding Group}" />
+                            </Border>
+                            <Border Style="{StaticResource CategoryRadioButtonsBorder}">
+                                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Categories}" VerticalOptions="FillAndExpand">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Category">
+                                            <RadioButton
+                                                CheckedChanged="OnCategorySelect"
+                                                Content="{Binding Name}"
+                                                GroupName="CategoryChoices"
+                                                Value="{Binding Id}" />
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </Border>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <!--<CollectionView
+                x:Name="CategoriesView"
                 ItemsLayout="VerticalList"
-                ItemsSource="{Binding ListOfCategories}"
+                ItemsSource="{Binding Categories}"
                 ItemsUpdatingScrollMode="KeepLastItemInView"
-                SelectionMode="None">
+                SelectionMode="None"
+                VerticalOptions="FillAndExpand">
+                <CollectionView.EmptyView>
+                    <IndicatorView IndicatorColor="{StaticResource My_DarkBlue}" VerticalOptions="CenterAndExpand" />
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:CategoryGroup">
                         <VerticalStackLayout Margin="0,0,0,10" Spacing="10">
@@ -63,7 +99,7 @@
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
                 <Frame Background="{StaticResource My_Yellow}" Style="{StaticResource CircleFrame}" />
