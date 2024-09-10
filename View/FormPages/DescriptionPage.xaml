@@ -53,6 +53,7 @@
             x:Name="DescriptionField"
             Grid.Row="2"
             Margin="8,0"
+            CursorPosition="0"
             FontSize="16"
             HorizontalOptions="FillAndExpand"
             MaxLength="1000"

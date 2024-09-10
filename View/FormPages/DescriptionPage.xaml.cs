@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui.Core.Platform;
 using MauiApp1.ViewModel.Forms;
+
+#if ANDROID
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
+#endif
 
 namespace MauiApp1.View.FormPages;
 
@@ -10,6 +13,13 @@ public partial class DescriptionPage : ContentPage
 	{
 		InitializeComponent();
         BindingContext = viewModel;
+
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("CursorColor", (handler, view) =>
+        {
+#if IOS
+            handler.PlatformView.TintColor = UIKit.UIColor.Green;
+#endif
+        });
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
