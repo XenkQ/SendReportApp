@@ -147,9 +147,6 @@
   <data name="Photo" xml:space="preserve">
     <value>Photo</value>
   </data>
-  <data name="TakePhotoMessage" xml:space="preserve">
-    <value>Take a photo of the incident that clearly shows what the report is about. Remember to agree to use the camera to take a photo via the application.</value>
-  </data>
   <data name="TakePhoto" xml:space="preserve">
     <value>Take a photo</value>
   </data>
@@ -227,5 +224,8 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
+  </data>
+  <data name="TakePhotoInfo" xml:space="preserve">
+    <value>Take a photo of the incident that clearly shows what the report is about. Remember to agree to use the camera to take a photo via the application.</value>
   </data>
 </root>

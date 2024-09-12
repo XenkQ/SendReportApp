@@ -351,9 +351,9 @@ namespace MauiApp1.Resources.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Take a photo of the incident that clearly shows what the report is about. Remember to agree to use the camera to take a photo via the application..
         /// </summary>
-        internal static string TakePhotoMessage {
+        internal static string TakePhotoInfo {
             get {
-                return ResourceManager.GetString("TakePhotoMessage", resourceCulture);
+                return ResourceManager.GetString("TakePhotoInfo", resourceCulture);
             }
         }
         

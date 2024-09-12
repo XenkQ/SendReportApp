@@ -45,7 +45,7 @@
             Grid.Row="1"
             Margin="8,0"
             Style="{StaticResource InfoBorder}">
-            <Label Text="{Static lang:AppResources.TakePhotoMessage}" TextColor="{StaticResource My_Orange}" />
+            <Label Text="{Static lang:AppResources.TakePhotoInfo}" TextColor="{StaticResource My_Orange}" />
         </Border>
 
         <Image

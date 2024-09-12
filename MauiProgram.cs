@@ -13,6 +13,7 @@ using MauiApp1.ViewModel.Status;
 using MauiApp1.Scripts.Connection;
 using MauiApp1.ViewModel;
 using MauiApp1.Model;
+using System.Globalization;
 
 namespace MauiApp1;
 

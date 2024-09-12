@@ -147,9 +147,6 @@
   <data name="Photo" xml:space="preserve">
     <value>Zdjęcie</value>
   </data>
-  <data name="MakePhotoMessage" xml:space="preserve">
-    <value>Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację.</value>
-  </data>
   <data name="TakePhoto" xml:space="preserve">
     <value>Zrób zdjęcie</value>
   </data>
@@ -227,5 +224,8 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
+  </data>
+  <data name="TakePhotoInfo" xml:space="preserve">
+    <value>Zrób zdjęcie zdarzenia, na którym wyraźnie widać czego dotyczy zgłoszenie. Pamiętaj o tym aby zgodzić się na korzystanie z aparatu w celu zrobienia zdjęcia przez aplikację.</value>
   </data>
 </root>
