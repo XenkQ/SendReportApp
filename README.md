@@ -31,10 +31,12 @@ After writing report your data will be sended to combined location of api endpoi
 ## Tech
 
 **Multi platform app framework** - .NET MAUI \
-**Street view map implementation in .NET MAUI** - <a href="https://mapsui.com/">Mapsui<a>
+**Street view map implementation** - <a href="https://mapsui.com/">Mapsui<a>
 
 ## Roadmap
 
-- Currently only support for Polish language so 3 new leaguages support - Anglish, German, Ukrainian
+- Make it IOS compatible
+
+- Currently only support for 2 new leaguages - German, Ukrainian
 
 - More pleasing visual effects
