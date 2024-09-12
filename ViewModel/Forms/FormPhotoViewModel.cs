@@ -5,6 +5,8 @@ using MauiApp1.View.FormPages;
 using MauiApp1.Services;
 
 using MauiApp1.Scripts.Processors;
+using MauiApp1.Resources.Languages;
+
 
 #if ANDROID
 using Android.Graphics;
@@ -28,7 +30,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
     public FormPhotoViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
         IFormBackgroundTaskObserver formBackgroundTaskObserver)
     {
-        Title = "Zdjęcie";
+        Title = AppResources.Photo;
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         formBackgroundTaskObserver.Subscribe(this);
@@ -56,7 +58,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Error", $"Nie można zrobić zdjęcia! Upewnij się czy aplikacja ma uprawnienia do robienia zdjęć", "OK");
+            await _dialogService.ShowAlertAsync(AppResources.Error, AppResources.CantTakePhoto, AppResources.OK);
         }
 
         return null;
@@ -92,7 +94,7 @@ public partial class FormPhotoViewModel : FormBaseViewModel, IProcessDataInBackg
         }
         else
         {
-            await _dialogService.ShowAlertAsync("Brak zdjęcia!", "Prosimy o zrobienie zdjęcia, gdyż jest ono podstawą zgłoszenia.", "OK");
+            await _dialogService.ShowAlertAsync(AppResources.NoPhoto, AppResources.PhotoMessage, AppResources.OK);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MauiApp1.Model;
 using MauiApp1.Model.Categories;
+using MauiApp1.Resources.Languages;
 using MauiApp1.Scripts.Processors;
 using MauiApp1.Services;
 using MauiApp1.View.FormPages;
@@ -24,7 +25,7 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
 
     public FormCategoryViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService)
     {
-        Title = "Kategoria";
+        Title = AppResources.Category;
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         LoadCategories();
@@ -49,7 +50,7 @@ public partial class FormCategoryViewModel : FormBaseViewModel,
         }
         else
         {
-            await _dialogService.ShowAlertAsync("Nie wybrano kategorii!", "Wybierz kategorię najlepiej pasującą do zgłoszenia.", "OK");
+            await _dialogService.ShowAlertAsync(AppResources.CategoryNotChosen, AppResources.ChoseCategoryMessage, AppResources.OK);
         }
     }
 

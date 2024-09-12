@@ -3,6 +3,7 @@
     x:Class="MauiApp1.View.StatusPages.SendingResultPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lang="clr-namespace:MauiApp1.Resources.Languages"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Status"
     Title="{Binding Title}"
     x:DataType="viewmodel:SendingResultViewModel"
@@ -29,7 +30,6 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Zgłosznie nie zostało wysłane!"
                 TextColor="Black" />
 
             <Image
@@ -59,7 +59,7 @@
                 Command="{Binding TrySendingAgainCommand}"
                 SemanticProperties.Hint="Try send again"
                 Style="{StaticResource FlowButton}"
-                Text="Spróbuj ponownie" />
+                Text="{Static lang:AppResources.TryAgain}" />
 
             <Button
                 x:Name="ExitBtn"
@@ -68,7 +68,7 @@
                 Command="{Binding ExitCommand}"
                 SemanticProperties.Hint="Exit app"
                 Style="{StaticResource FlowButton}"
-                Text="Wyjdź" />
+                Text="{Static lang:AppResources.Exit}" />
         </Grid>
     </Grid>
 </ContentPage>

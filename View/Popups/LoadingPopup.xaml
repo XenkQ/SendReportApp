@@ -2,6 +2,7 @@
     x:Class="MauiApp1.LoadingPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lang="clr-namespace:MauiApp1.Resources.Languages"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
     <HorizontalStackLayout
@@ -21,7 +22,7 @@
 
         <Label
             HorizontalTextAlignment="Start"
-            Text="Proszę czekać..."
+            Text="{Static lang:AppResources.Wait}"
             TextColor="Black"
             VerticalOptions="Center"
             VerticalTextAlignment="Center" />

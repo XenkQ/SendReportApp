@@ -3,6 +3,7 @@
     x:Class="MauiApp1.View.FormPages.CategoryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lang="clr-namespace:MauiApp1.Resources.Languages"
     xmlns:local="clr-namespace:MauiApp1.View"
     xmlns:models="clr-namespace:MauiApp1.Model.Categories"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -26,12 +27,12 @@
                 HorizontalTextAlignment="Center"
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
-                Text="Kategoria"
+                Text="{Binding Title}"
                 TextColor="White"
                 WidthRequest="-1" />
 
             <Border Margin="8,0" Style="{StaticResource InfoBorder}">
-                <Label Text="Wybierz najlepiej pasującą kategorię do zgłoszenia. Kategorie są tylko poglądowe, a szczegółowy opis zgłoszenia będzie można dodać na końcu procesu wysyłania." TextColor="{StaticResource My_Orange}" />
+                <Label Text="{Static lang:AppResources.ChoseCategoryMessage}" TextColor="{StaticResource My_Orange}" />
             </Border>
 
             <VerticalStackLayout
@@ -82,7 +83,7 @@
                     Command="{Binding ToPreviousFormCommand}"
                     SemanticProperties.Hint="Going Back To Last Page"
                     Style="{StaticResource FlowButton}"
-                    Text="Cofnij" />
+                    Text="{Static lang:AppResources.Back}" />
 
                 <Button
                     x:Name="NextBtn"
@@ -90,7 +91,7 @@
                     Command="{Binding ToNextFormCommand}"
                     SemanticProperties.Hint="Next Page if exists"
                     Style="{StaticResource FlowButton}"
-                    Text="Dalej" />
+                    Text="{Static lang:AppResources.Next}" />
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

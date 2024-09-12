@@ -9,6 +9,7 @@ using Mapsui.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Scripts.Processors;
+using MauiApp1.Resources.Languages;
 
 namespace MauiApp1.ViewModel.Forms;
 
@@ -31,7 +32,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
     public FormLocalizationViewModel(AlertDataToSend alertDataToSend, IDialogService dialogService,
         ILoadingPopupService loadingPopupService, INoConnectionDisplayer noConnectionDisplayer)
     {
-        Title = "Lokalizacja";
+        Title = AppResources.Localization;
         _alertDataToSend = alertDataToSend;
         _dialogService = dialogService;
         _loadingPopupService = loadingPopupService;
@@ -60,9 +61,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
         }
         else
         {
-            await _dialogService.ShowAlertAsync("Nie posiadamy twojej lokalizacji", "Lokalizacja jest niezbędna dla przyjęcia zgłoszenia." +
-                " Upewnij się, że lokalizacja została udostępniona poprzez kliknięcie przycisku \"Wyślij Lokalizację\"" +
-                " i wyrażeniu zgody na dokładną lokalizację.", "OK");
+            await _dialogService.ShowAlertAsync(AppResources.NoLocalization, AppResources.LocalizationMessage, AppResources.OK);
         }
     }
 
@@ -79,7 +78,7 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
             {
                 GeolocationRequest geolocationRequest = new GeolocationRequest(GeolocationAccuracy.Best);
 
-                _loadingPopupService.ShowLoadingPopup("Proszę czekać...");
+                _loadingPopupService.ShowLoadingPopup(AppResources.Wait);
 
                 var location = await Geolocation.GetLocationAsync(geolocationRequest);
 
@@ -93,24 +92,24 @@ public partial class FormLocalizationViewModel : FormBaseViewModel,
             }
             catch (PermissionException ex)
             {
-                await _dialogService.ShowAlertAsync("Nie można pobrać lokalizacji urządzenia!",
-                    "Lokalizacja jest niezbędna w celu potwierdzenia zgłoszenia. Upewnij się że aplikacja ma uprawnienia dostępu do lokalizacji", "OK");
+                await _dialogService.ShowAlertAsync(AppResources.CantGetLocalization,
+                    AppResources.LocalizationIsRequired, AppResources.OK);
             }
             catch (FeatureNotEnabledException ex)
             {
-                await _dialogService.ShowAlertAsync("Lokalizacja jest wyłączona!",
-                    "Włącz lokalizację w urządzeniu", "OK");
+                await _dialogService.ShowAlertAsync(AppResources.LocalizadionIsDisabled,
+                    AppResources.EnableLocalization, AppResources.OK);
             }
             catch (Exception ex)
             {
-                await _dialogService.ShowAlertAsync("Nastąpił nieoczekiwany problem!",
-                    "Spróbuj zrestartować aplikację", "OK");
+                await _dialogService.ShowAlertAsync(AppResources.UnsuportedErrorOccured,
+                    AppResources.TryRestartApp, AppResources.OK);
             }
         }
         else
         {
-            await _dialogService.ShowAlertAsync("Nie można pobrać lokalizacji urządzenia!",
-                "Lokalizacja jest niezbędna w celu potwierdzenia zgłoszenia. Upewnij się że aplikacja ma uprawnienia dostępu do lokalizacji", "OK");
+            await _dialogService.ShowAlertAsync(AppResources.CantGetLocalization,
+                AppResources.LocalizationIsRequired, AppResources.OK);
         }
 
         _loadingPopupService.CloseLoadingPopup();

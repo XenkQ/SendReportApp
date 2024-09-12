@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MauiApp1.Model;
+using MauiApp1.Resources.Languages;
 using MauiApp1.Scripts.Processors;
 using MauiApp1.View.FormPages;
 
@@ -14,7 +15,7 @@ public partial class FormDescriptionViewModel : FormBaseViewModel, IUpdateAlertD
 
     public FormDescriptionViewModel(AlertDataToSend alertDataToSend)
     {
-        Title = "Opis";
+        Title = AppResources.Description;
         _alertDataToSend = alertDataToSend;
     }
 

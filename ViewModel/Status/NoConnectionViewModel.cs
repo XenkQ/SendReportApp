@@ -43,7 +43,7 @@ public partial class NoConnectionViewModel : BaseViewModel
 
             case ConnectionStatuses.NoServerConnection:
             case ConnectionStatuses.NoServerAndInternetConnection:
-                ConnectionInfo = "Brak połączenia z serwerem. Spróbuj ponownie później.";
+                ConnectionInfo = "Brak połączenia z serwerem! Spróbuj ponownie później.";
                 break;
         }
     }

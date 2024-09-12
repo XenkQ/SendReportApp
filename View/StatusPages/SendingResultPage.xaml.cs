@@ -1,4 +1,5 @@
-﻿using MauiApp1.ViewModel.Status;
+﻿using MauiApp1.Resources.Languages;
+using MauiApp1.ViewModel.Status;
 
 namespace MauiApp1.View.StatusPages;
 
@@ -26,14 +27,14 @@ public partial class SendingResultPage : ContentPage
     private void DisplaySuccessfulContent()
     {
         TryAgainBtn.IsVisible = false;
-        TitleInfo.Text = "Zgłosznie zostało wysłane!";
+        TitleInfo.Text = AppResources.ReportSended;
         Graphic.Source = "check_circle.png";
     }
 
     private void DisplayUnsuccessfulContent()
     {
         TryAgainBtn.IsVisible = true;
-        TitleInfo.Text = "Zgłosznie nie zostało wysłane!";
+        TitleInfo.Text = AppResources.ReportNotSended;
         Graphic.Source = "x_circle.png";
     }
 }

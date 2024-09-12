@@ -3,8 +3,9 @@
     x:Class="MauiApp1.View.StatusPages.NoConnectionPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lang="clr-namespace:MauiApp1.Resources.Languages"
     xmlns:viewmodel="clr-namespace:MauiApp1.ViewModel.Status"
-    Title="NoConnectionPage"
+    Title="{Binding Title}"
     x:DataType="viewmodel:NoConnectionViewModel"
     Shell.PresentationMode="ModalAnimated">
 
@@ -58,9 +59,9 @@
                 Grid.Column="0"
                 BackgroundColor="{StaticResource My_Green}"
                 Command="{Binding TryReconnectCommand}"
-                SemanticProperties.Hint="Going Back To Last Page"
+                SemanticProperties.Hint="Try reconnect"
                 Style="{StaticResource WideButton}"
-                Text="Spróbuj ponownie" />
+                Text="{Static lang:AppResources.TryAgain}" />
 
             <Button
                 x:Name="ExitBtn"
@@ -68,9 +69,9 @@
                 Grid.Column="0"
                 BackgroundColor="{StaticResource My_DarkBlue}"
                 Command="{Binding ExitCommand}"
-                SemanticProperties.Hint="Going Back To Last Page"
+                SemanticProperties.Hint="Exit app"
                 Style="{StaticResource WideButton}"
-                Text="Wyjdź" />
+                Text="{Static lang:AppResources.Exit}" />
         </Grid>
     </Grid>
 </ContentPage>
